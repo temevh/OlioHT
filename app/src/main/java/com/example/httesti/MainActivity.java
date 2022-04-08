@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         readJSON();
         //Moi matias
 
+        System.out.println("Hello I am Matias");
+
     }
 
     public void useJSON(String result){
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         return response;
 
     }
+
+
 
 
 
