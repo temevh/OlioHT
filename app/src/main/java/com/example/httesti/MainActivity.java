@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         liikuntapaikat teemuTrial = new liikuntapaikat();
         teemuTrial.runLuokka();
-        WeatherData alluTrial = new WeatherData();
-        alluTrial.getWeatherData();
+        WeatherData w = new WeatherData();
+        w.getWeatherData();
     }
 
 }
