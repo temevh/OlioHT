@@ -1,5 +1,6 @@
 package com.example.httesti;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,12 +16,22 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class liikuntapaikat {
+    ArrayList<String> cities = new ArrayList<String>();
+    ArrayList<String> places = new ArrayList<String>();
+    ArrayList<Integer> placeIdArray = new ArrayList<Integer>();
+    private String json = null;
 
-    public void runLuokka(){
-
-
+    public ArrayList getCitiesArray(){
+        return cities;
     }
 
+
+    public void runLuokka(){
+        addCitiesToArray();
+        json = getCitySportsPlaceIDs();
+        addSportsPlacesToArray(json);
+
+    }
 
     public void useJSON(String result){
         JSONObject jObject = null;
@@ -36,8 +47,6 @@ public class liikuntapaikat {
     }
 
 
-    ArrayList<String> cities = new ArrayList<String>();
-    ArrayList<String> places = new ArrayList<String>();
 
     public void addCitiesToArray(){
         cities.add("Helsinki");
@@ -62,11 +71,23 @@ public class liikuntapaikat {
         String url = "http://lipas.cc.jyu.fi/api/sports-places?searchString=";
         String searchUrl = url + city;
         String json = getJSON(searchUrl);
-        System.out.println("########JSON " + json);
+        System.out.println(json);
         return json;
     }
 
     public void addSportsPlacesToArray(String json){
+        JSONArray jArray = null;    //Initialize jsonarray
+        String handle = null;       //Used to remove the sportsPlaceId part from the line
+        try {
+            jArray = new JSONArray(json);
+            for (int i=0; i<jArray.length(); i++){
+                //handle = new JSONObject
+                //System.out.println("ID ON " + jArray.get(i));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
