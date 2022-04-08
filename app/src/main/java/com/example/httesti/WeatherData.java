@@ -16,13 +16,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class WeatherData {
+    private String place;
+    private String params;
 
     public WeatherData(){
     }
 
     public void getWeatherData(){
         try {
-            String url = "https://opendata.fmi.fi/wfs/fin?service=WFS&version=2.0.0&request=GetFeature&storedquery_id=fmi::observations::weather::timevaluepair&place=Helsinki&maxlocations=1&";
+            String url = "https://opendata.fmi.fi/wfs/fin?service=WFS&version=2.0.0&request=GetFeature&storedquery_id=fmi::observations::weather::timevaluepair&place="+place+"&parameters="+params+"&";
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -30,7 +32,7 @@ public class WeatherData {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(url);
             doc.getDocumentElement().normalize();
-            NodeList nodeList = doc.getDocumentElement().getElementsByTagName("om:result");
+            NodeList nodeList = doc.getDocumentElement().getElementsByTagName("wml2:point");
             for(int i = 0; i<nodeList.getLength();i++){
                 Node measure = nodeList.item(i);
                 if(measure.getNodeType() == measure.ELEMENT_NODE){
@@ -53,5 +55,21 @@ public class WeatherData {
         finally{
             System.out.println("DONE!");
         }
+    }
+
+    public String getParams() {
+        return this.params;
+    }
+
+    public String getPlace() {
+        return this.place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
     }
 }
