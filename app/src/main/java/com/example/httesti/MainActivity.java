@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         liikuntapaikat testi = new liikuntapaikat();
         testi.readJSON();
 
+        System.out.println("Hello I am Matias");
+
     }
 
     public void useJSON(String result){
@@ -83,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         return response;
 
     }
+
+
 
 
 
