@@ -16,8 +16,15 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class liikuntapaikat {
-
+    ArrayList<String> cities = new ArrayList<String>();
+    ArrayList<String> places = new ArrayList<String>();
+    ArrayList<Integer> placeIdArray = new ArrayList<Integer>();
     private String json = null;
+
+    public ArrayList getCitiesArray(){
+        return cities;
+    }
+
 
     public void runLuokka(){
         addCitiesToArray();
@@ -40,9 +47,6 @@ public class liikuntapaikat {
     }
 
 
-    ArrayList<String> cities = new ArrayList<String>();
-    ArrayList<String> places = new ArrayList<String>();
-    ArrayList<Integer> placeIdArray = new ArrayList<Integer>();
 
     public void addCitiesToArray(){
         cities.add("Helsinki");
@@ -72,11 +76,13 @@ public class liikuntapaikat {
     }
 
     public void addSportsPlacesToArray(String json){
-        JSONArray jArray = null;
+        JSONArray jArray = null;    //Initialize jsonarray
+        String handle = null;       //Used to remove the sportsPlaceId part from the line
         try {
             jArray = new JSONArray(json);
             for (int i=0; i<jArray.length(); i++){
-                System.out.println("ID ON " + jArray.get(i));
+                //handle = new JSONObject
+                //System.out.println("ID ON " + jArray.get(i));
             }
 
         } catch (JSONException e) {
