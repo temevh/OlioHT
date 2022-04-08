@@ -1,5 +1,7 @@
 package com.example.httesti;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +24,7 @@ public class liikuntapaikat {
 
     private String json = null;
 
+
     public ArrayList getCitiesArray(){  //Used to send the city arraylist to MainClass
         return cities;
     }
@@ -37,23 +40,34 @@ public class liikuntapaikat {
     public void addPlaceNamesToArray(){
         String url = null;
         String response = null;
+        String name = null;
+        JSONObject jObject = null;
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
             response = getJSON(url);
-            getPlaceName(response);
+            jObject = convertJson(response);
+            name = getPlaceName(jObject);
 
         }
 
     }
 
-    public String getPlaceName(String response){
+    public String getPlaceName(JSONObject jObject){
         String name = null;
-        name = response.
 
 
 
-        return "";
+
+        return name;
+    }
+
+    public JSONObject convertJson(String json){
+        JSONObject convertedJson = null;
+        Gson g = new Gson();
+        convertedJson = g.fromJson(json, JSONObject.class);
+        System.out.println(convertedJson.toString());
+        return convertedJson;
     }
 
 
@@ -101,7 +115,6 @@ public class liikuntapaikat {
 
     public String getJSON(String searchUrl){
         String response = null;
-        //JSONObject response = null;
         try{
             URL url = new URL(searchUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -122,7 +135,6 @@ public class liikuntapaikat {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return response;
 
     }
