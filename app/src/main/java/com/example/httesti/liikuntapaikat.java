@@ -17,13 +17,14 @@ import java.util.ArrayList;
 
 public class liikuntapaikat {
 
+    private String json = null;
+
     public void runLuokka(){
         addCitiesToArray();
-        getCitySportsPlaceIDs();
-
+        json = getCitySportsPlaceIDs();
+        addSportsPlacesToArray(json);
 
     }
-
 
     public void useJSON(String result){
         JSONObject jObject = null;
@@ -41,6 +42,7 @@ public class liikuntapaikat {
 
     ArrayList<String> cities = new ArrayList<String>();
     ArrayList<String> places = new ArrayList<String>();
+    ArrayList<Integer> placeIdArray = new ArrayList<Integer>();
 
     public void addCitiesToArray(){
         cities.add("Helsinki");
@@ -73,13 +75,13 @@ public class liikuntapaikat {
         JSONArray jArray = null;
         try {
             jArray = new JSONArray(json);
-
-
+            for (int i=0; i<jArray.length(); i++){
+                System.out.println("ID ON " + jArray.get(i));
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
     }
 
