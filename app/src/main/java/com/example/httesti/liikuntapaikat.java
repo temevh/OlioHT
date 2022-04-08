@@ -31,6 +31,7 @@ public class liikuntapaikat {
 
 
     ArrayList<String> cities = new ArrayList<String>();
+    ArrayList<String> places = new ArrayList<String>();
 
     public void addCitiesToArray(){
         cities.add("Helsinki");
@@ -48,9 +49,6 @@ public class liikuntapaikat {
         cities.add("Lappeenranta");
         cities.add("Hämeenlinna");
         cities.add("Vaasa");
-
-        getCitySportsPlaceIDs();
-
     }
 
     public String getCitySportsPlaceIDs(){
@@ -60,6 +58,10 @@ public class liikuntapaikat {
         String json = getJSON(searchUrl);
         System.out.println("########JSON " + json);
         return json;
+    }
+
+    public void addSportsPlacesToArray(String json){
+
     }
 
 

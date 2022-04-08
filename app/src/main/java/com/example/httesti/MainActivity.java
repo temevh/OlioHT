@@ -20,6 +20,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String json = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         liikuntapaikat testi = new liikuntapaikat();
         testi.addCitiesToArray();
-
+        json = testi.getCitySportsPlaceIDs();
+        testi.addSportsPlacesToArray(json);
     }
 
 
