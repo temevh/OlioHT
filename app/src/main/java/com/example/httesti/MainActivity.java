@@ -2,8 +2,11 @@ package com.example.httesti;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         readJSON();
         //Moi matias
+        TextView Tittle = findViewById(R.id.Tittle);
+        Tittle.setTextColor(Color.rgb(64,224,208));
 
         System.out.println("Hello I am Matias");
 
@@ -44,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
 
