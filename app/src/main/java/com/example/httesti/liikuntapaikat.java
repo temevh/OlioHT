@@ -1,10 +1,5 @@
 package com.example.httesti;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.os.StrictMode;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,20 +12,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        liikuntapaikat testi = new liikuntapaikat();
-        testi.readJSON();
-
-    }
+public class liikuntapaikat {
 
     public void useJSON(String result){
         JSONObject jObject = null;
@@ -39,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
             jObject = new JSONObject(result);
             properties = new JSONObject(jObject.getString("properties"));
             boolean toilet = properties.getBoolean("kiosk");
-            System.out.println("############TOILET " + toilet);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -47,11 +30,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    ArrayList<String> kaupungit = new ArrayList<String>();
+
+    public void lisaaKaupungitListaan(){
+        kaupungit.add("Helsinki");
+        kaupungit.add("Espoo");
+        kaupungit.add("Tampere");
+        kaupungit.add("Vantaa");
+        kaupungit.add("Oulu");
+        kaupungit.add("Turku");
+        kaupungit.add("Jyväskylä");
+        kaupungit.add("Kuopio");
+        kaupungit.add("Lahti");
+        kaupungit.add("Pori");
+        kaupungit.add("Kouvola");
+        kaupungit.add("Joensuu");
+        kaupungit.add("Lappeenranta");
+        kaupungit.add("Hämeenlinna");
+        kaupungit.add("Vaasa");
+
+    }
+
+
+
     public void readJSON(){
         String json = getJSON();
         System.out.println(json);
         useJSON(json);
-
+        lisaaKaupungitListaan();
     }
 
     public String getJSON(){
@@ -83,9 +89,4 @@ public class MainActivity extends AppCompatActivity {
         return response;
 
     }
-
-
-
-
 }
-
