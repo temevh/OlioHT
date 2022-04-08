@@ -16,6 +16,12 @@ import java.util.ArrayList;
 
 public class liikuntapaikat {
 
+    public void runLuokka(){
+
+
+    }
+
+
     public void useJSON(String result){
         JSONObject jObject = null;
         JSONObject properties = null;
