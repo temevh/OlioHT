@@ -30,42 +30,43 @@ public class liikuntapaikat {
     }
 
 
-    ArrayList<String> kaupungit = new ArrayList<String>();
+    ArrayList<String> cities = new ArrayList<String>();
 
-    public void lisaaKaupungitListaan(){
-        kaupungit.add("Helsinki");
-        kaupungit.add("Espoo");
-        kaupungit.add("Tampere");
-        kaupungit.add("Vantaa");
-        kaupungit.add("Oulu");
-        kaupungit.add("Turku");
-        kaupungit.add("Jyväskylä");
-        kaupungit.add("Kuopio");
-        kaupungit.add("Lahti");
-        kaupungit.add("Pori");
-        kaupungit.add("Kouvola");
-        kaupungit.add("Joensuu");
-        kaupungit.add("Lappeenranta");
-        kaupungit.add("Hämeenlinna");
-        kaupungit.add("Vaasa");
+    public void addCitiesToArray(){
+        cities.add("Helsinki");
+        cities.add("Espoo");
+        cities.add("Tampere");
+        cities.add("Vantaa");
+        cities.add("Oulu");
+        cities.add("Turku");
+        cities.add("Jyväskylä");
+        cities.add("Kuopio");
+        cities.add("Lahti");
+        cities.add("Pori");
+        cities.add("Kouvola");
+        cities.add("Joensuu");
+        cities.add("Lappeenranta");
+        cities.add("Hämeenlinna");
+        cities.add("Vaasa");
+
+        getCitySportsPlaceIDs();
 
     }
 
-
-
-    public void readJSON(){
-        String json = getJSON();
-        System.out.println(json);
-        useJSON(json);
-        lisaaKaupungitListaan();
+    public String getCitySportsPlaceIDs(){
+        String city = "Vaasa";
+        String url = "http://lipas.cc.jyu.fi/api/sports-places?searchString=";
+        String searchUrl = url + city;
+        String json = getJSON(searchUrl);
+        System.out.println("########JSON " + json);
+        return json;
     }
 
-    public String getJSON(){
+
+    public String getJSON(String searchUrl){
         String response = null;
-        String urlid = "601699";
         try{
-            URL url = new URL("http://lipas.cc.jyu.fi/api/sports-places/"+urlid);
-            //URL url = new URL("http://lipas.cc.jyu.fi/api/sports-places?searchString=Lappeenranta\n");
+            URL url = new URL(searchUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             InputStream in = new BufferedInputStream(conn.getInputStream());
@@ -77,7 +78,6 @@ public class liikuntapaikat {
             }
             response = sb.toString();
             in.close();
-
         } catch (ProtocolException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
