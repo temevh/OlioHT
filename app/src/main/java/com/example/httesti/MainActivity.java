@@ -17,8 +17,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<String> cities = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         liikuntapaikat teemuTrial = new liikuntapaikat();
         teemuTrial.runLuokka();
-        WeatherData w = new WeatherData();
-        w.getWeatherData();
+        teemuTrial.getCitiesArray();
+
+        //WeatherData w = new WeatherData();
+        //w.getWeatherData();
     }
 
 }
