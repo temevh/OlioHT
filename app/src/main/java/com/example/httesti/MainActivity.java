@@ -2,11 +2,8 @@ package com.example.httesti;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.View;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,68 +26,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        readJSON();
-        //Moi matias
-        TextView Tittle = findViewById(R.id.Tittle);
-        Tittle.setTextColor(Color.rgb(64,224,208));
 
-        System.out.println("Hello I am Matias");
+        liikuntapaikat testi = new liikuntapaikat();
+        testi.addCitiesToArray();
 
     }
-
-    public void useJSON(String result){
-        JSONObject jObject = null;
-        JSONObject properties = null;
-        try {
-            jObject = new JSONObject(result);
-            properties = new JSONObject(jObject.getString("properties"));
-            boolean toilet = properties.getBoolean("kiosk");
-            System.out.println("############TOILET " + toilet);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void readJSON(){
-        String json = getJSON();
-        System.out.println(json);
-        useJSON(json);
-
-    }
-
-    public String getJSON(){
-        String response = null;
-        String urlid = "601699";
-        try{
-            URL url = new URL("http://lipas.cc.jyu.fi/api/sports-places/"+urlid);
-            //URL url = new URL("http://lipas.cc.jyu.fi/api/sports-places?searchString=Lappeenranta\n");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            InputStream in = new BufferedInputStream(conn.getInputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = br.readLine()) != null){
-                sb.append(line).append("\n");
-            }
-            response = sb.toString();
-            in.close();
-
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return response;
-
-    }
-
-
-
 
 
 
