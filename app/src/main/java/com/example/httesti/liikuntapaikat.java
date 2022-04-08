@@ -1,5 +1,6 @@
 package com.example.httesti;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 public class liikuntapaikat {
 
     public void runLuokka(){
+        addCitiesToArray();
+        getCitySportsPlaceIDs();
 
 
     }
@@ -62,11 +65,21 @@ public class liikuntapaikat {
         String url = "http://lipas.cc.jyu.fi/api/sports-places?searchString=";
         String searchUrl = url + city;
         String json = getJSON(searchUrl);
-        System.out.println("########JSON " + json);
+        System.out.println(json);
         return json;
     }
 
     public void addSportsPlacesToArray(String json){
+        JSONArray jArray = null;
+        try {
+            jArray = new JSONArray(json);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
