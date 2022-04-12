@@ -32,15 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         liikuntapaikat teemuTrial = new liikuntapaikat();
         teemuTrial.runLuokka();
-<<<<<<<<< Temporary merge branch 1
+
         cities = teemuTrial.getCitiesArray();
 
 
-
-=========
         WeatherData w = new WeatherData();
         w.getWeatherData();
->>>>>>>>> Temporary merge branch 2
+
     }
 
 }
