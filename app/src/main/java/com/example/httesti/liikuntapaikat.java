@@ -1,5 +1,7 @@
 package com.example.httesti;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,34 +18,56 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class liikuntapaikat {
-    ArrayList<String> cities = new ArrayList<String>();
-    ArrayList<String> places = new ArrayList<String>();
-    ArrayList<Integer> placeIdArray = new ArrayList<Integer>();
+    ArrayList<String> cities = new ArrayList<String>();    //List of cities
+    ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
+    ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
+
     private String json = null;
 
-    public ArrayList getCitiesArray(){
+
+    public ArrayList getCitiesArray(){  //Used to send the city arraylist to MainClass
         return cities;
     }
 
-
-    public void runLuokka(){
+    public void runLuokka(){       //wannabe MainClass for this class, used to call the methods/functions
         addCitiesToArray();
         json = getCitySportsPlaceIDs();
-        addSportsPlacesToArray(json);
+        addSportsPlaceIDtoArray(json);
+        addPlaceNamesToArray();
 
     }
 
-    public void useJSON(String result){
+    public void addPlaceNamesToArray(){
+        String url = null;
+        String response = null;
+        String name = null;
         JSONObject jObject = null;
-        JSONObject properties = null;
-        try {
-            jObject = new JSONObject(result);
-            properties = new JSONObject(jObject.getString("properties"));
-            boolean toilet = properties.getBoolean("kiosk");
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+        for (int i = 0; i< placeIdArray.size(); i++){
+            url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
+            response = getJSON(url);
+            jObject = convertJson(response);
+            name = getPlaceName(jObject);
+
         }
 
+    }
+
+    public String getPlaceName(JSONObject jObject){
+        String name = null;
+
+
+
+
+        return name;
+    }
+
+    public JSONObject convertJson(String json){
+        JSONObject convertedJson = null;
+        Gson g = new Gson();
+        convertedJson = g.fromJson(json, JSONObject.class);
+        System.out.println(convertedJson.toString());
+        return convertedJson;
     }
 
 
@@ -71,26 +95,23 @@ public class liikuntapaikat {
         String url = "http://lipas.cc.jyu.fi/api/sports-places?searchString=";
         String searchUrl = url + city;
         String json = getJSON(searchUrl);
-        System.out.println(json);
         return json;
     }
 
-    public void addSportsPlacesToArray(String json){
+    public void addSportsPlaceIDtoArray(String json){ //Add the IDs of sport places to an arraylist
         JSONArray jArray = null;    //Initialize jsonarray
-        String handle = null;       //Used to remove the sportsPlaceId part from the line
+        JSONObject handle = null;       //Used to remove the sportsPlaceId part from the line
         try {
             jArray = new JSONArray(json);
             for (int i=0; i<jArray.length(); i++){
-                //handle = new JSONObject
-                //System.out.println("ID ON " + jArray.get(i));
+                handle = jArray.getJSONObject(i);
+                int id = handle.getInt("sportsPlaceId");  //ID without sportsPlaceId
+                placeIdArray.add(id);
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
-
 
     public String getJSON(String searchUrl){
         String response = null;
@@ -114,7 +135,6 @@ public class liikuntapaikat {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return response;
 
     }
