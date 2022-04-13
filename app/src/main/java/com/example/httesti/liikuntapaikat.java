@@ -22,10 +22,16 @@ public class liikuntapaikat {
     ArrayList<String> cities = new ArrayList<String>();    //List of cities
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
-    ArrayList<String> placeInfo = new ArrayList<String>();
+    ArrayList<String> placeInfoArray = new ArrayList<String>();
+    /*placeInfo array contains (by index)
+    0 = location/address
+    1 = owner
+    2 = contact info
+    3 = additional info
+    4 = changing rooms
+     */
 
     private String json = null;
-
 
     public ArrayList getCitiesArray(){  //Used to send the city arraylist to MainClass
         return cities;
@@ -34,7 +40,6 @@ public class liikuntapaikat {
     public ArrayList getPlaceNamesArray(){  //Used to send the city arraylist to MainClass
         return placeNames;
     }
-
 
     public void runLuokka(){       //wannabe MainClass for this class, used to call the methods/functions
         addCitiesToArray();
@@ -45,24 +50,29 @@ public class liikuntapaikat {
 
     }
 
-
     public void selection(){
-        for (int i = 0; i< placeNames.size(); i++){
-            System.out.println(placeNames.get(i));
-        }
-        String select = "\"Elisa stadion\"";
+        String select = "Elisa stadion";
         int index = 0;
         index = placeNames.indexOf(select);
         addPlaceInfoToArray(index);
     }
 
     public void addPlaceInfoToArray(int index){
+        int placeId = placeIdArray.get(index);
+        JsonObject jObject = null;
+        String url =  "http://lipas.cc.jyu.fi/api/sports-places/" + placeId;
+        String response = getJSON(url);
+        jObject = convertJson(response);
 
+        placeInfoArray.add(0,jObject.get("location").toString());
+        placeInfoArray.add(1,jObject.get("admin").toString());
+        placeInfoArray.add(2,jObject.get("www").toString());
 
+        System.out.println("Osoite on: " + placeInfoArray.get(0));
+        System.out.println("admin on: " + placeInfoArray.get(1));
+        System.out.println("nettisivut: " + placeInfoArray.get(2));
 
     }
-
-
 
     public void addPlaceNamesToArray(){
         String url = null;
@@ -76,8 +86,9 @@ public class liikuntapaikat {
 
             jObject = convertJson(response);
             name = getPlaceName(jObject);
+            name = name.substring(1, name.length()-1);
+            System.out.println(name);
             placeNames.add(name);
-            //System.out.println("PAIKAN NIMI: " + name);
         }
 
     }
@@ -88,7 +99,7 @@ public class liikuntapaikat {
         return name;
     }
 
-    public JsonObject convertJson(String json){    //Convert json string to a JsonObject, not sure if this method really is necessary
+    public JsonObject convertJson(String json){    //Convert string to a JsonObject
         JsonObject convertedJson = null;
         Gson g = new Gson();
         convertedJson = g.fromJson(json, JsonObject.class);
