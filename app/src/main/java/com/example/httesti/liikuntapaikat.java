@@ -36,9 +36,9 @@ public class liikuntapaikat {
     }
 
 
-    public void runLuokka(){       //wannabe MainClass for this class, used to call the methods/functions
+    public void runLuokka(String n){       //wannabe MainClass for this class, used to call the methods/functions
         addCitiesToArray();
-        json = getCitySportsPlaceIDs();
+        json = getCitySportsPlaceIDs(n);
         addSportsPlaceIDtoArray(json);
         addPlaceNamesToArray();
         selection();
@@ -76,6 +76,7 @@ public class liikuntapaikat {
 
             jObject = convertJson(response);
             name = getPlaceName(jObject);
+            name = name.substring(1, name.length()-1);
             placeNames.add(name);
             //System.out.println("PAIKAN NIMI: " + name);
         }
@@ -113,8 +114,8 @@ public class liikuntapaikat {
         cities.add("Vaasa");
     }
 
-    public String getCitySportsPlaceIDs(){
-        String city = "Vaasa";
+    public String getCitySportsPlaceIDs(String cityChoice){
+        String city = cityChoice;
         String url = "http://lipas.cc.jyu.fi/api/sports-places?searchString=";
         String searchUrl = url + city;
         String json = getJSON(searchUrl);

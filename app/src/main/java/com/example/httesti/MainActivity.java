@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         liikuntapaikat teemuTrial = new liikuntapaikat();
-        teemuTrial.runLuokka();
+        //teemuTrial.runLuokka("Helsinki");
+        teemuTrial.addCitiesToArray();
 
         cities = teemuTrial.getCitiesArray();
         places = teemuTrial.getPlaceNamesArray();
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String tutorialsName = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + tutorialsName,Toast.LENGTH_LONG).show();
+                teemuTrial.runLuokka(tutorialsName);
                 //w.setPlace(tutorialsName);
                 //w.getWeatherData();
             }
