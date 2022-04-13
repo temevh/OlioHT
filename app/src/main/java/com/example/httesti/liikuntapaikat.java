@@ -22,6 +22,7 @@ public class liikuntapaikat {
     ArrayList<String> cities = new ArrayList<String>();    //List of cities
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
+    ArrayList<String> placeInfo = new ArrayList<String>();
 
     private String json = null;
 
@@ -49,14 +50,19 @@ public class liikuntapaikat {
         for (int i = 0; i< placeNames.size(); i++){
             System.out.println(placeNames.get(i));
         }
-        String select = "Elisa stadion";
+        String select = "\"Elisa stadion\"";
         int index = 0;
         index = placeNames.indexOf(select);
-        System.out.println("INDEX ON " + index);
-        System.out.println("PAIKAN " + select + " ID ON " + placeIdArray.get(index));
+        addPlaceInfoToArray(index);
+    }
+
+    public void addPlaceInfoToArray(int index){
+
 
 
     }
+
+
 
     public void addPlaceNamesToArray(){
         String url = null;
