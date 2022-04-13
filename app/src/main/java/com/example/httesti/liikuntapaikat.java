@@ -1,6 +1,7 @@
 package com.example.httesti;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,32 +42,30 @@ public class liikuntapaikat {
         String url = null;
         String response = null;
         String name = null;
-        JSONObject jObject = null;
+        JsonObject jObject = null;
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
             response = getJSON(url);
+
             jObject = convertJson(response);
             name = getPlaceName(jObject);
-
+            placeNames.add(name);
+            System.out.println("PAIKAN NIMI: " + name);
         }
 
     }
 
-    public String getPlaceName(JSONObject jObject){
+    public String getPlaceName(JsonObject jObject){
         String name = null;
-
-
-
-
+        name = jObject.get("name").toString();
         return name;
     }
 
-    public JSONObject convertJson(String json){
-        JSONObject convertedJson = null;
+    public JsonObject convertJson(String json){
+        JsonObject convertedJson = null;
         Gson g = new Gson();
-        convertedJson = g.fromJson(json, JSONObject.class);
-        System.out.println(convertedJson.toString());
+        convertedJson = g.fromJson(json, JsonObject.class);
         return convertedJson;
     }
 

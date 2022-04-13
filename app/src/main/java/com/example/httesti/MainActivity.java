@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         cities = teemuTrial.getCitiesArray();
 
 
-        WeatherData w = new WeatherData();
+        //WeatherData w = new WeatherData();
 
 
         Spinner spin = findViewById(R.id.spinnerCities);
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String tutorialsName = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + tutorialsName,Toast.LENGTH_LONG).show();
-                w.setPlace(tutorialsName);
-                w.getWeatherData();
+                //w.setPlace(tutorialsName);
+                //w.getWeatherData();
             }
 
             @Override
