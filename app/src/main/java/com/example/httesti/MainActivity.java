@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
         cities = teemuTrial.getCitiesArray();
         places = teemuTrial.getPlaceNamesArray();
 
-
         //WeatherData w = new WeatherData();
-
 
         Spinner spin = findViewById(R.id.spinnerCities);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cities);
