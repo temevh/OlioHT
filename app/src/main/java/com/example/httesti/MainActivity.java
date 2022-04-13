@@ -2,10 +2,13 @@ package com.example.httesti;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,8 +22,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList cities = new ArrayList<String>();
+    ArrayList places = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +36,37 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        liikuntapaikat testi = new liikuntapaikat();
-        testi.addCitiesToArray();
+        liikuntapaikat teemuTrial = new liikuntapaikat();
+        //teemuTrial.runLuokka("Helsinki");
+        teemuTrial.addCitiesToArray();
 
-        TextView Tittle = findViewById(R.id.Tittle);
-        Tittle.setTextColor(Color.rgb(64,224,208));
+        cities = teemuTrial.getCitiesArray();
+        places = teemuTrial.getPlaceNamesArray();
+
+        //WeatherData w = new WeatherData();
+
+        Spinner spin = findViewById(R.id.spinnerCities);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cities);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(arrayAdapter);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String cityChoice = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
+                teemuTrial.runLuokka(cityChoice);
+                //w.setPlace(tutorialsName);
+                //w.getWeatherData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
-
-
 
 }
 
