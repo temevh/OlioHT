@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String tutorialsName = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), "Selected: " + tutorialsName,Toast.LENGTH_LONG).show();
-                teemuTrial.runLuokka(tutorialsName);
+                String cityChoice = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
+                teemuTrial.runLuokka(cityChoice);
                 //w.setPlace(tutorialsName);
                 //w.getWeatherData();
             }
