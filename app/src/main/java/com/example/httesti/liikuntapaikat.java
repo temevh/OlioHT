@@ -30,6 +30,12 @@ public class liikuntapaikat {
         return cities;
     }
 
+    public ArrayList getPlaceNamesArray(){  //Used to send the city arraylist to MainClass
+        return placeNames;
+    }
+
+
+
     public void runLuokka(){       //wannabe MainClass for this class, used to call the methods/functions
         addCitiesToArray();
         json = getCitySportsPlaceIDs();
@@ -41,7 +47,6 @@ public class liikuntapaikat {
 
 
     public void selection(){
-
 
 
     }

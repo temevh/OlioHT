@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList cities = new ArrayList<String>();
+    ArrayList places = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         teemuTrial.runLuokka();
 
         cities = teemuTrial.getCitiesArray();
+        places = teemuTrial.getPlaceNamesArray();
 
 
         //WeatherData w = new WeatherData();
