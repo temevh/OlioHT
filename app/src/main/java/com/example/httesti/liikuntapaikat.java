@@ -35,7 +35,6 @@ public class liikuntapaikat {
     }
 
 
-
     public void runLuokka(){       //wannabe MainClass for this class, used to call the methods/functions
         addCitiesToArray();
         json = getCitySportsPlaceIDs();
@@ -47,6 +46,14 @@ public class liikuntapaikat {
 
 
     public void selection(){
+        for (int i = 0; i< placeNames.size(); i++){
+            System.out.println(placeNames.get(i));
+        }
+        String select = "Elisa stadion";
+        int index = 0;
+        index = placeNames.indexOf(select);
+        System.out.println("INDEX ON " + index);
+        System.out.println("PAIKAN " + select + " ID ON " + placeIdArray.get(index));
 
 
     }
@@ -64,7 +71,7 @@ public class liikuntapaikat {
             jObject = convertJson(response);
             name = getPlaceName(jObject);
             placeNames.add(name);
-            System.out.println("PAIKAN NIMI: " + name);
+            //System.out.println("PAIKAN NIMI: " + name);
         }
 
     }
