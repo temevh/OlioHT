@@ -35,6 +35,14 @@ public class liikuntapaikat {
         json = getCitySportsPlaceIDs();
         addSportsPlaceIDtoArray(json);
         addPlaceNamesToArray();
+        selection();
+
+    }
+
+
+    public void selection(){
+
+
 
     }
 
@@ -62,14 +70,12 @@ public class liikuntapaikat {
         return name;
     }
 
-    public JsonObject convertJson(String json){
+    public JsonObject convertJson(String json){    //Convert json string to a JsonObject, not sure if this method really is necessary
         JsonObject convertedJson = null;
         Gson g = new Gson();
         convertedJson = g.fromJson(json, JsonObject.class);
         return convertedJson;
     }
-
-
 
     public void addCitiesToArray(){
         cities.add("Helsinki");
