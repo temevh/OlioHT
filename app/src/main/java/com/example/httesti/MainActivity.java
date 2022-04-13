@@ -26,8 +26,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList cities = new ArrayList<String>();
-    ArrayList places = new ArrayList<String>();
+    ArrayList cities = new ArrayList<>();
+    ArrayList places = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         cities = teemuTrial.getCitiesArray();
         places = teemuTrial.getPlaceNamesArray();
 
-        //WeatherData w = new WeatherData();
+        WeatherData w = new WeatherData();
 
         Spinner spin = findViewById(R.id.spinnerCities);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cities);
@@ -56,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
                 teemuTrial.runLuokka(cityChoice);
-                //w.setPlace(tutorialsName);
-                //w.getWeatherData();
+                w.setPlace(cityChoice);
+                w.setURL(w.getParams(),w.getPlace());
+                w.loadData();
             }
 
             @Override
