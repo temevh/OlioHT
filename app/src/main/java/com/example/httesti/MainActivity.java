@@ -1,6 +1,7 @@
 package com.example.httesti;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -28,23 +29,25 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList cities = new ArrayList<String>();
     ArrayList places = new ArrayList<String>();
+    liikuntapaikat teemuTrial = new liikuntapaikat();
+    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+    RecyclerView dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        liikuntapaikat teemuTrial = new liikuntapaikat();
-        //teemuTrial.runLuokka("Helsinki");
-        teemuTrial.addCitiesToArray();
+        dataList = findViewById(R.id.dataList);
 
-        cities = teemuTrial.getCitiesArray();
+        teemuTrial.addCitiesToArray();
         places = teemuTrial.getPlaceNamesArray();
 
         //WeatherData w = new WeatherData();
 
+        //spinner for the cities
+        cities = teemuTrial.getCitiesArray();
         Spinner spin = findViewById(R.id.spinnerCities);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cities);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        //spinner cities end
 
     }
 
