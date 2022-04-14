@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,10 +16,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     List<String> titles;
     List<Integer> images;
-    Context context;
+    String temperatures;
+    String weatherType;
     LayoutInflater inflater;
 
-    public Adapter(Context ctx, List<String> titles, List<Integer> images){
+    public Adapter(Context ctx, List<String> titles, List<Integer> images, String temperatures, String weatherType){
         this.titles = titles;
         this.images = images;
         this.inflater = LayoutInflater.from(ctx);
@@ -26,22 +29,31 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = inflater.inflate(R.layout.grid_layout, parent, false);
+
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.title.setText(titles.get(position));
+        holder.gridIcon.setImageResource(images.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return titles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView title;
+        ImageView gridIcon;
+
         public ViewHolder(@NonNull View itemView){
+
             super(itemView);
+            title = itemView.findViewById(R.id.placeName);
+            gridIcon = itemView.findViewById(R.id.weatherIcon);
         }
     }
 }
