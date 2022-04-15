@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,9 @@ public class MainFragment extends Fragment {
 
     ArrayList cities = new ArrayList<>();
     ArrayList places = new ArrayList<>();
+    ArrayList placeInfo = new ArrayList<>();
 
-    //images and tittles for the recyclerView in Home
+    //images and titles for the recyclerView in Home
     RecyclerView dataList;
     List<String> titles;
     List<Integer> images;

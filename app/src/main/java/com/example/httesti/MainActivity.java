@@ -30,14 +30,18 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
+
+    ArrayList placeInfo = new ArrayList<>();
     ArrayList cities = new ArrayList<>();
-    ArrayList places = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
+
+    liikuntapaikat sportsPlaces = new liikuntapaikat();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
