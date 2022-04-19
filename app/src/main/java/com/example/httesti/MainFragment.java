@@ -21,7 +21,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment{
 
     ArrayList cities = new ArrayList<>();
     ArrayList places = new ArrayList<>();
@@ -69,6 +69,7 @@ public class MainFragment extends Fragment {
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
                 teemuTrial.runLuokka(cityChoice);
+                placeInfo = teemuTrial.getPlaceInfoArray();
                 w.setPlace(cityChoice);
                 w.setURL(w.getParams(),w.getPlace());
                 w.loadData();

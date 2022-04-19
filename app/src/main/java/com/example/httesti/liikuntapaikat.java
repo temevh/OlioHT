@@ -48,7 +48,7 @@ public class liikuntapaikat {
         return placeNames;
     }
 
-    private ArrayList getPlaceInfoArray(){return  placeInfo;}
+    public ArrayList getPlaceInfoArray(){return  placeInfo;}
 
     public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         addCitiesToArray();
