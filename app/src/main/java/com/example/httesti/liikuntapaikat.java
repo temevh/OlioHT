@@ -50,6 +50,8 @@ public class liikuntapaikat {
 
     public ArrayList getPlaceInfoArray(){return  placeInfo;}
 
+
+
     public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         //addCitiesToArray();
         json = getCitySportsPlaceIDs(cityChoice);
@@ -119,6 +121,7 @@ public class liikuntapaikat {
         String response = null;
         String name = null;
         JsonObject jObject = null;
+        placeNames.clear();
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
@@ -128,8 +131,8 @@ public class liikuntapaikat {
             name = getPlaceName(jObject);
             name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
             placeNames.add(name);
-        }
 
+        }
     }
 
     public String getPlaceName(JsonObject jObject){   //Method to get the name of the place from the jsonobject
@@ -181,6 +184,7 @@ public class liikuntapaikat {
     public void addSportsPlaceIDtoArray(String json){ //Add the IDs of sport places to an arraylist
         JSONArray jArray = null;    //Initialize jsonarray
         JSONObject handle = null;       //Used to remove the sportsPlaceId part from the line
+        placeIdArray.clear();;
         try {
             jArray = new JSONArray(json);
             for (int i=0; i<jArray.length(); i++){
