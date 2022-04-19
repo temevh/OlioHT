@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -131,7 +132,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onItemClicked(View v){
         System.out.println("item clicked");
-        placeInfo = lp.selection();
+        TextView tv = findViewById(R.id.placeName);
+        String placeName = tv.getText().toString();
+        System.out.println(placeName + "KAIPUU");
+        placeInfo = lp.selection(placeName);
         for (int i = 0; i< placeInfo.size();i++){
             System.out.println(placeInfo.get(i).toString());
         }
