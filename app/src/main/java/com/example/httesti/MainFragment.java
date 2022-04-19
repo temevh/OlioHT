@@ -24,8 +24,9 @@ import java.util.List;
 public class MainFragment extends Fragment{
 
     ArrayList cities = new ArrayList<>();
-    ArrayList<String> places = new ArrayList<>();
+    ArrayList places = new ArrayList<>();
     ArrayList placeInfo = new ArrayList<>();
+    ArrayList sports = new ArrayList<>();
     ArrayList<String> dates = new ArrayList<String>();
     String today = "Today";
     String tomorrow = "Tomorrow";
@@ -45,6 +46,9 @@ public class MainFragment extends Fragment{
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         dates.add(today);
         dates.add(tomorrow);
+        for (int i = 0; i<100; i++ ){
+            sports.add("KuntosaliJoojoo");
+        }
         return view;
     }
 
@@ -59,6 +63,7 @@ public class MainFragment extends Fragment{
         teemuTrial.addCitiesToArray();
 
         cities = teemuTrial.getCitiesArray();
+        places = teemuTrial.getPlaceNamesArray();
 
         WeatherData w = new WeatherData();
 
@@ -67,17 +72,13 @@ public class MainFragment extends Fragment{
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(arrayAdapter);
-
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
                 teemuTrial.runLuokka(cityChoice);
-                places = teemuTrial.getPlaceNamesArray();
-
-                //placeInfo = teemuTrial.getPlaceInfoArray();
+                placeInfo = teemuTrial.getPlaceInfoArray();
                 w.setPlace(cityChoice);
                 w.setURL(w.getParams(),w.getPlace());
                 w.loadData();
@@ -92,11 +93,12 @@ public class MainFragment extends Fragment{
                 }
                 //titles = places;
 
-                adapter = new Adapter(getActivity(), places, images, temperatures, weatherType);
+                adapter = new Adapter(getActivity(), places, images, sports, weatherType);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);
                 dataList.setAdapter(adapter);
+                //places = null;
                 //images = null;
             }
 
