@@ -21,10 +21,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     String weatherType;
     LayoutInflater inflater;
 
-    public Adapter(Context ctx, List<String> titles, List<Integer> images, List<String> sports, String weatherType){
+    public Adapter(Context ctx, List<String> titles, List<Integer> images, String temperatures, String weatherType){
         this.titles = titles;
         this.images = images;
-        this.sports = sports;
+        this.sports =
         this.inflater = LayoutInflater.from(ctx);
     }
 
@@ -39,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(titles.get(position));
-        holder.sport.setText(sports.get(position));
+        holder.sport.setText(sport.get(position));
         //holder.gridIcon.setImageResource(images.get(position));
     }
 

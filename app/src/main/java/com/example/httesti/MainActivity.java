@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         /*for (int i = 0; i< placeInfo.size();i++){
             System.out.println(placeInfo.get(i).toString());
         }*/
-
+    /*
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("testiString", "Toimiiks tää?");
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         placeFrag.setArguments(bundle);
         loadFragment(placeFrag);
         System.out.println("TIEDOT LÄHETETTY FRAGIIN");
-
+*/
 
     }
 
