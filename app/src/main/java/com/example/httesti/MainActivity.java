@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     ArrayList placeInfo = new ArrayList<>();
-    ArrayList cities = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
 
     liikuntapaikat lp = new liikuntapaikat();

@@ -40,6 +40,17 @@ public class liikuntapaikat {
 
     private String json = null;
 
+    private static liikuntapaikat new_instance = null;
+
+    public static liikuntapaikat getInstance(){
+        if (new_instance == null){
+            new_instance = new liikuntapaikat();
+        }
+        return new_instance;
+    }
+
+
+
     public ArrayList getCitiesArray(){  //Used to send the city arraylist to MainClass
         return cities;
     }
@@ -50,10 +61,7 @@ public class liikuntapaikat {
 
     public ArrayList getPlaceInfoArray(){return  placeInfo;}
 
-
-
     public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
-        //addCitiesToArray();
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
         addPlaceNamesToArray();
@@ -63,12 +71,20 @@ public class liikuntapaikat {
     public ArrayList selection(){       //Used to add the information on a selected place to the info array
         String select = "Elisa stadion";
         int index = 0;  //Initialization of index variable
+        for(int i = 0;i< placeNames.size();i++){
+            System.out.println(i + "ITEMI ON" + placeNames.get(i));
+        }
         index = placeNames.indexOf(select);
+        System.out.println("INDEX ON "+ index);
         addPlaceInfoToArray(index);
         return placeInfo;
     }
 
     public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
+        System.out.println("PLACEIDARRAY");
+        for(int i = 0; i<placeIdArray.size();i++){
+            System.out.println(placeIdArray.get(i));
+        }
         System.out.println(placeIdArray.get(index));
         int id = placeIdArray.get(index);
         //id = 83774;
@@ -184,7 +200,7 @@ public class liikuntapaikat {
     public void addSportsPlaceIDtoArray(String json){ //Add the IDs of sport places to an arraylist
         JSONArray jArray = null;    //Initialize jsonarray
         JSONObject handle = null;       //Used to remove the sportsPlaceId part from the line
-        placeIdArray.clear();;
+        placeIdArray.clear();
         try {
             jArray = new JSONArray(json);
             for (int i=0; i<jArray.length(); i++){

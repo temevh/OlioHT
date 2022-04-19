@@ -77,9 +77,7 @@ public class MainFragment extends Fragment{
                 teemuTrial.runLuokka(cityChoice);
                 places = teemuTrial.getPlaceNamesArray();
 
-
-
-                placeInfo = teemuTrial.getPlaceInfoArray();
+                //placeInfo = teemuTrial.getPlaceInfoArray();
                 w.setPlace(cityChoice);
                 w.setURL(w.getParams(),w.getPlace());
                 w.loadData();
