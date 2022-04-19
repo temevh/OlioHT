@@ -54,8 +54,7 @@ public class MainFragment extends Fragment{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        liikuntapaikat teemuTrial = new liikuntapaikat();
-        //teemuTrial.runLuokka("Helsinki");
+        liikuntapaikat teemuTrial = liikuntapaikat.getInstance();
         teemuTrial.addCitiesToArray();
 
         cities = teemuTrial.getCitiesArray();
