@@ -1,5 +1,6 @@
 package com.example.httesti;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     String weatherType;
     LayoutInflater inflater;
 
-    public Adapter(Context ctx, List<String> titles, List<Integer> images, String temperatures, String weatherType){
+    public Adapter(Context ctx, List<String> titles, List<Integer> images, List<String> sports, String weatherType){
         this.titles = titles;
         this.images = images;
-        this.sports =
+        this.sports = sports;
         this.inflater = LayoutInflater.from(ctx);
     }
 
@@ -39,7 +40,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(titles.get(position));
-        holder.sport.setText(sport.get(position));
+        holder.sport.setText(sports.get(position));
         //holder.gridIcon.setImageResource(images.get(position));
     }
 
@@ -49,6 +50,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        public View view;
+        public ClipData.Item currentItem;
         TextView title;
         TextView sport;
         ImageView gridIcon;
@@ -59,7 +62,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             title = itemView.findViewById(R.id.placeName);
             sport = itemView.findViewById(R.id.placeType);
             //gridIcon = itemView.findViewById(R.id.weatherIcon);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    System.out.println("Hello world");
+                }
+            });
+
         }
     }
 }
-//yo
