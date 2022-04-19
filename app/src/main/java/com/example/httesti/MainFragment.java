@@ -24,12 +24,9 @@ import java.util.List;
 public class MainFragment extends Fragment{
 
     ArrayList cities = new ArrayList<>();
-<<<<<<<<< Temporary merge branch 1
     ArrayList<String> places = new ArrayList<>();
-=========
-    ArrayList places = new ArrayList<>();
+    //ArrayList places = new ArrayList<>();
     ArrayList sports = new ArrayList<>();
->>>>>>>>> Temporary merge branch 2
     ArrayList placeInfo = new ArrayList<>();
     ArrayList<String> dates = new ArrayList<String>();
 
