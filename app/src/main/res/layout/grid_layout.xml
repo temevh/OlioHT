@@ -9,7 +9,7 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="moi"
+        android:onClick="onItemClicked"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
