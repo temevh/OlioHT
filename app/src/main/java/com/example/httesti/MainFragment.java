@@ -26,6 +26,7 @@ public class MainFragment extends Fragment{
     ArrayList cities = new ArrayList<>();
     ArrayList<String> places = new ArrayList<>();
     ArrayList placeInfo = new ArrayList<>();
+    ArrayList sports = new ArrayList<>();
     ArrayList<String> dates = new ArrayList<String>();
     String today = "Today";
     String tomorrow = "Tomorrow";
@@ -45,6 +46,9 @@ public class MainFragment extends Fragment{
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         dates.add(today);
         dates.add(tomorrow);
+        for (int i = 0; i<100; i++ ){
+            sports.add("KuntosaliJoojoo");
+        }
         return view;
     }
 
@@ -54,7 +58,7 @@ public class MainFragment extends Fragment{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        liikuntapaikat teemuTrial = new liikuntapaikat();
+        liikuntapaikat teemuTrial = liikuntapaikat.getInstance();
         //teemuTrial.runLuokka("Helsinki");
         teemuTrial.addCitiesToArray();
 
@@ -92,7 +96,7 @@ public class MainFragment extends Fragment{
                 }
                 //titles = places;
 
-                adapter = new Adapter(getActivity(), places, images, temperatures, weatherType);
+                adapter = new Adapter(getActivity(), places, images, sports, weatherType);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);

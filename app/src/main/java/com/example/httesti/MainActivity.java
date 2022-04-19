@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
 
-    liikuntapaikat lp = new liikuntapaikat();
+    liikuntapaikat lp = liikuntapaikat.getInstance();
 
-    liikuntapaikat sportsPlaces = new liikuntapaikat();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
