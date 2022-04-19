@@ -25,19 +25,15 @@ public class MainFragment extends Fragment{
 
     ArrayList cities = new ArrayList<>();
     ArrayList<String> places = new ArrayList<>();
-    //ArrayList places = new ArrayList<>();
-    ArrayList sports = new ArrayList<>();
     ArrayList placeInfo = new ArrayList<>();
     ArrayList<String> dates = new ArrayList<String>();
-
     String today = "Today";
     String tomorrow = "Tomorrow";
 
-    //sportTypes and titles for the recyclerView in Home
+    //images and titles for the recyclerView in Home
     RecyclerView dataList;
     List<String> titles;
     List<Integer> images;
-    //List<String> sports;
     String temperatures;
     String weatherType;
     Adapter adapter;
@@ -49,9 +45,6 @@ public class MainFragment extends Fragment{
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         dates.add(today);
         dates.add(tomorrow);
-        for (int i = 0; i<100; i++){
-            sports.add("kuntosalijoojoo");
-        }
         return view;
     }
 
@@ -99,7 +92,7 @@ public class MainFragment extends Fragment{
                 }
                 //titles = places;
 
-                adapter = new Adapter(getActivity(), places, images, sports, weatherType);
+                adapter = new Adapter(getActivity(), places, images, temperatures, weatherType);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);

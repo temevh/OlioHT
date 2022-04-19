@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
 
-    liikuntapaikat lp = liikuntapaikat.getInstance();
+    liikuntapaikat lp = new liikuntapaikat();
 
     liikuntapaikat sportsPlaces = new liikuntapaikat();
 
@@ -139,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    //moi
 
 
 }
