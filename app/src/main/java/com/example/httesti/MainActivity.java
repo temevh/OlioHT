@@ -132,9 +132,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onItemClicked(View v){
         System.out.println("item clicked");
+
         TextView tv = findViewById(R.id.placeName);
         String placeName = tv.getText().toString();
-        placeInfo = lp.selection(placeName);
+        System.out.println("PAIKAN NIMI ON " + placeName);
+        //placeInfo = lp.selection(placeName);
         /*for (int i = 0; i< placeInfo.size();i++){
             System.out.println(placeInfo.get(i).toString());
         }*/
