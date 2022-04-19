@@ -136,10 +136,9 @@ public class MainActivity extends AppCompatActivity {
         String placeName = tv.getText().toString();
         System.out.println(placeName + "KAIPUU");
         placeInfo = lp.selection(placeName);
-        for (int i = 0; i< placeInfo.size();i++){
+        /*for (int i = 0; i< placeInfo.size();i++){
             System.out.println(placeInfo.get(i).toString());
-        }
-
+        }*/
 
     }
 
