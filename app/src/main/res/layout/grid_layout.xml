@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="180dp">
+    android:layout_height="130dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="330dp"
@@ -16,52 +16,32 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="342dp"
-            android:layout_height="162dp">
-
-            <ImageView
-                android:id="@+id/weatherIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/weatherText"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+            android:layout_width="match_parent"
+            android:layout_height="101dp">
 
             <TextView
                 android:id="@+id/placeName"
                 android:layout_width="227dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:text="Helsinki sport arena"
-                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/weatherCelsius"
-                android:layout_width="55dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:fontFamily="sans-serif"
-                android:text="-20C"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/weatherText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/placeName" />
-
-            <TextView
-                android:id="@+id/weatherText"
-                android:layout_width="135dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Raining slightly"
-                android:textSize="16sp"
+                android:id="@+id/placeType"
+                android:layout_width="269dp"
+                android:layout_height="28dp"
+                android:text="Kuntosali"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/placeName"
+                app:layout_constraintVertical_bias="0.777" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
