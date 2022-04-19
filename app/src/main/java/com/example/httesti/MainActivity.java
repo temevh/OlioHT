@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 
-    public void moi(View v){
+    public void onItemClicked(View v){
         System.out.println("hello world");
     }
 
