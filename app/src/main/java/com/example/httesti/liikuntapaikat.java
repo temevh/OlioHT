@@ -68,9 +68,8 @@ public class liikuntapaikat {
         //selection();
     }
 
-    public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
-        //String select = "Helsinki-halli";
-        String select = selection;
+    public ArrayList selection(){       //Used to add the information on a selected place to the info array
+        String select = "Elisa stadion";
         int index = 0;  //Initialization of index variable
         for(int i = 0;i< placeNames.size();i++){
             System.out.println(i + "ITEMI ON" + placeNames.get(i));
