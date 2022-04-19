@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     ArrayList placeInfo = new ArrayList<>();
+    ArrayList cities = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
-
-    liikuntapaikat lp = new liikuntapaikat();
 
     liikuntapaikat sportsPlaces = new liikuntapaikat();
 
@@ -131,16 +130,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onItemClicked(View v){
-        System.out.println("item clicked");
-        placeInfo = lp.selection();
-        for (int i = 0; i< placeInfo.size();i++){
-            System.out.println(placeInfo.get(i).toString());
-        }
-
-
+        System.out.println("hello world");
     }
-
-    //moi
 
 
 }
