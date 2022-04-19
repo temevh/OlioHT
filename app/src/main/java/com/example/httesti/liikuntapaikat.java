@@ -1,6 +1,8 @@
 package com.example.httesti;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -17,15 +19,26 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class liikuntapaikat {
     ArrayList<String> cities = new ArrayList<String>();    //List of cities
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
     ArrayList<String> placeInfo = new ArrayList<String>();
+    /*Array for storing the information of a chosen sports place
+    Stored based on index
+    0 = place name
+    1 = admin/owner
+    2 = email (if exists)
+    3 = phone number (if exists)
+    4 = address
+    5 = additional info (if exists)
+    6 = sports place type
+     */
 
     private String json = null;
-
 
     public ArrayList getCitiesArray(){  //Used to send the city arraylist to MainClass
         return cities;
@@ -35,36 +48,72 @@ public class liikuntapaikat {
         return placeNames;
     }
 
+    public ArrayList getPlaceInfoArray(){return  placeInfo;}
 
     public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         addCitiesToArray();
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
         addPlaceNamesToArray();
-        selection();
+        //selection();
 
     }
 
-
-    public void selection(){
-        for (int i = 0; i< placeNames.size(); i++){
-            System.out.println(placeNames.get(i));
-        }
-        String select = "\"Elisa stadion\"";
+    public void selection(){       //Used to add the information on a selected place to the info array
+        String select = "Elisa stadion";
         int index = 0;
         index = placeNames.indexOf(select);
         addPlaceInfoToArray(index);
     }
 
-    public void addPlaceInfoToArray(int index){
+    public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
+        int id = placeIdArray.get(index);
+        id = 83774;
+        String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
+        String json = getJSON(url);
+        String admin = "N/A";
+        String email = "N/A";
+        String phoneNumber = "N/A";
+        String address = "N/A";
+        String addInfo ="N/A";
+        String placeType = "N/A";
+        String name = "N/A";
 
+        try {
+            JSONObject jObject = new JSONObject(json);
+            if(jObject.has("admin")){
+                admin = jObject.getString("admin");
+            }
+            if(jObject.has("email")){
+                email = jObject.getString("email");
+            }
+            if(jObject.has("phoneNumber")){
+                phoneNumber = jObject.getString("phoneNumber");
+            }
+            if(jObject.has("location")){
+                address = jObject.getJSONObject("location").getString("address");
+            }
+            if(jObject.has("properties")){
+                addInfo = jObject.getJSONObject("properties").getString("infoFi");
+            }
+            placeType = jObject.getJSONObject("type").getString("name");
+            name = jObject.getString("name");
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        placeInfo.add(0, name);
+        placeInfo.add(1, admin);
+        placeInfo.add(2, email);
+        placeInfo.add(3, phoneNumber);
+        placeInfo.add(4, address);
+        placeInfo.add(5, addInfo);
+        placeInfo.add(6, placeType);
 
     }
 
-
-
-    public void addPlaceNamesToArray(){
+    public void addPlaceNamesToArray(){   //Adds the sports places of a selected city to an array
         String url = null;
         String response = null;
         String name = null;
@@ -76,26 +125,26 @@ public class liikuntapaikat {
 
             jObject = convertJson(response);
             name = getPlaceName(jObject);
+            name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
             placeNames.add(name);
-            //System.out.println("PAIKAN NIMI: " + name);
         }
 
     }
 
-    public String getPlaceName(JsonObject jObject){
+    public String getPlaceName(JsonObject jObject){   //Method to get the name of the place from the jsonobject
         String name = null;
         name = jObject.get("name").toString();
         return name;
     }
 
-    public JsonObject convertJson(String json){    //Convert json string to a JsonObject, not sure if this method really is necessary
+    public JsonObject convertJson(String json){    //Convert json string to a JsonObject
         JsonObject convertedJson = null;
         Gson g = new Gson();
         convertedJson = g.fromJson(json, JsonObject.class);
         return convertedJson;
     }
 
-    public void addCitiesToArray(){
+    public void addCitiesToArray(){  //Manually add the 20 biggest cities in Finland to array
         cities.add("Helsinki");
         cities.add("Espoo");
         cities.add("Tampere");
@@ -111,10 +160,17 @@ public class liikuntapaikat {
         cities.add("Lappeenranta");
         cities.add("Hämeenlinna");
         cities.add("Vaasa");
+        cities.add("Seinäjoki");
+        cities.add("Rovaniemi");
+        cities.add("Mikkeli");
+        cities.add("Salo");
+        cities.add("Kotka");
+        cities.add("Porvoo");
     }
 
-    public String getCitySportsPlaceIDs(String cityChoice){
+    public String getCitySportsPlaceIDs(String cityChoice){   //Lists the IDs of a citys sport places
         String city = cityChoice;
+        //city = "Vaasa";
         String url = "http://lipas.cc.jyu.fi/api/sports-places?searchString=";
         String searchUrl = url + city;
         String json = getJSON(searchUrl);

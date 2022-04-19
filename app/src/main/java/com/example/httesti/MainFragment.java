@@ -17,15 +17,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment{
 
     ArrayList cities = new ArrayList<>();
     ArrayList places = new ArrayList<>();
+    ArrayList placeInfo = new ArrayList<>();
 
-    //images and tittles for the recyclerView in Home
+    //images and titles for the recyclerView in Home
     RecyclerView dataList;
     List<String> titles;
     List<Integer> images;
@@ -67,6 +69,7 @@ public class MainFragment extends Fragment {
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
                 teemuTrial.runLuokka(cityChoice);
+                placeInfo = teemuTrial.getPlaceInfoArray();
                 w.setPlace(cityChoice);
                 w.setURL(w.getParams(),w.getPlace());
                 w.loadData();
