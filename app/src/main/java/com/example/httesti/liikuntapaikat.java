@@ -78,10 +78,7 @@ public class liikuntapaikat {
     }
 
     public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
-        System.out.println("PLACEIDARRAY");
-
         int id = placeIdArray.get(index);
-        //id = 83774;
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
         String json = getJSON(url);
         String admin = "N/A";

@@ -20,6 +20,20 @@ public class PlaceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.place_layout, container,false);
+        placeInfo = getArguments().getParcelableArrayList("placeinfo");
+
+
+        String testiteksti = getArguments().getString("testiString");
+        System.out.println("TESTI TEKSTI ON " +testiteksti);
+        for(int i = 0; i<placeInfo.size();i++){
+            System.out.println(placeInfo.get(i));
+        }
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         TextView placeNameView = (TextView) getView().findViewById(R.id.placeNameView);
         TextView placeLocationView = (TextView) getView().findViewById(R.id.placeLocationView);
         TextView placePhoneView = (TextView) getView().findViewById(R.id.placePhoneView);
@@ -27,13 +41,15 @@ public class PlaceFragment extends Fragment {
         TextView placeOwnerView = (TextView) getView().findViewById(R.id.placeOwnerView);
         TextView placeAddinfoView = (TextView) getView().findViewById(R.id.placeAddinfoView);
         TextView placeTypeView = (TextView) getView().findViewById(R.id.placeTypeView);
-        if (getArguments() != null){
-            placeInfo = getArguments().getParcelableArrayList("placeinfo");
-        }
 
+        placeNameView.setText(placeInfo.get(0).toString());
+        placeOwnerView.setText(placeInfo.get(1).toString());
+        placeEmailView.setText(placeInfo.get(2).toString());
+        placePhoneView.setText(placeInfo.get(3).toString());
+        placeLocationView.setText(placeInfo.get(4).toString());
+        placeAddinfoView.setText(placeInfo.get(5).toString());
+        placeTypeView.setText(placeInfo.get(6).toString());
 
-        placeNameView.setText("NAME: " + placeInfo.get(0).toString());
-
-        return view;
+        super.onViewCreated(view, savedInstanceState);
     }
 }
