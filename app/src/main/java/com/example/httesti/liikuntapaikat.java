@@ -51,24 +51,25 @@ public class liikuntapaikat {
     public ArrayList getPlaceInfoArray(){return  placeInfo;}
 
     public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
-        addCitiesToArray();
+        //addCitiesToArray();
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
         addPlaceNamesToArray();
         //selection();
-
     }
 
-    public void selection(){       //Used to add the information on a selected place to the info array
+    public ArrayList selection(){       //Used to add the information on a selected place to the info array
         String select = "Elisa stadion";
-        int index = 0;
+        int index = 0;  //Initialization of index variable
         index = placeNames.indexOf(select);
         addPlaceInfoToArray(index);
+        return placeInfo;
     }
 
     public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
+        System.out.println(placeIdArray.get(index));
         int id = placeIdArray.get(index);
-        id = 83774;
+        //id = 83774;
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
         String json = getJSON(url);
         String admin = "N/A";

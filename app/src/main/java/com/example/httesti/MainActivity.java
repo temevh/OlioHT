@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList cities = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
 
+    liikuntapaikat lp = new liikuntapaikat();
+
     liikuntapaikat sportsPlaces = new liikuntapaikat();
 
     @Override
@@ -130,7 +132,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onItemClicked(View v){
-        System.out.println("hello world");
+        System.out.println("item clicked");
+        placeInfo = lp.selection();
+        for (int i = 0; i< placeInfo.size();i++){
+            System.out.println(placeInfo.get(i).toString());
+        }
+
+
     }
 
 
