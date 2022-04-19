@@ -42,12 +42,12 @@ public class PlaceFragment extends Fragment {
         TextView placeAddinfoView = (TextView) getView().findViewById(R.id.placeAddinfoView);
         TextView placeTypeView = (TextView) getView().findViewById(R.id.placeTypeView);
 
-        placeNameView.setText("NAME: " + placeInfo.get(0));
-        placeOwnerView.setText("OWNER: " + placeInfo.get(1));
-        placeEmailView.setText("EMAIL: " + placeInfo.get(2));
-        placePhoneView.setText("PHONE: " + placeInfo.get(3));
-        placeLocationView.setText("ADDRESS: " + placeInfo.get(4));
-        placeAddinfoView.setText("ADDITIONAL INFO: " + placeInfo.get(5));
+        placeNameView.setText(placeInfo.get(0).toString());
+        placeOwnerView.setText(placeInfo.get(1).toString());
+        placeEmailView.setText(placeInfo.get(2).toString());
+        placePhoneView.setText(placeInfo.get(3).toString());
+        placeLocationView.setText(placeInfo.get(4).toString());
+        placeAddinfoView.setText(placeInfo.get(5).toString());
         placeTypeView.setText(placeInfo.get(6).toString());
 
         super.onViewCreated(view, savedInstanceState);
