@@ -135,10 +135,9 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = findViewById(R.id.placeName);
         String placeName = tv.getText().toString();
         placeInfo = lp.selection(placeName);
-        for (int i = 0; i< placeInfo.size();i++){
+        /*for (int i = 0; i< placeInfo.size();i++){
             System.out.println(placeInfo.get(i).toString());
-        }
-
+        }*/
 
     }
 

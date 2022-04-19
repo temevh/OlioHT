@@ -68,24 +68,18 @@ public class liikuntapaikat {
         //selection();
     }
 
-    public ArrayList selection(String Name){       //Used to add the information on a selected place to the info array
-        String select = Name;
+    public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
+        String select = selection;
+        System.out.println("VALINTA ON" + select);
         int index = 0;  //Initialization of index variable
-        for(int i = 0;i< placeNames.size();i++){
-            System.out.println(i + "ITEMI ON" + placeNames.get(i));
-        }
         index = placeNames.indexOf(select);
-        System.out.println("INDEX ON "+ index);
         addPlaceInfoToArray(index);
         return placeInfo;
     }
 
     public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
         System.out.println("PLACEIDARRAY");
-        for(int i = 0; i<placeIdArray.size();i++){
-            System.out.println(placeIdArray.get(i));
-        }
-        System.out.println(placeIdArray.get(index));
+
         int id = placeIdArray.get(index);
         //id = 83774;
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
