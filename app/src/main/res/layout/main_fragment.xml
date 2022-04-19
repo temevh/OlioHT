@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerCities2"
+        android:id="@+id/spinnerDates"
         android:layout_width="136dp"
         android:layout_height="55dp"
         android:layout_marginTop="220dp"

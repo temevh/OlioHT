@@ -26,6 +26,9 @@ public class MainFragment extends Fragment{
     ArrayList cities = new ArrayList<>();
     ArrayList<String> places = new ArrayList<>();
     ArrayList placeInfo = new ArrayList<>();
+    ArrayList<String> dates = new ArrayList<String>();
+    String today = "Today";
+    String tomorrow = "Tomorrow";
 
     //images and titles for the recyclerView in Home
     RecyclerView dataList;
@@ -40,6 +43,8 @@ public class MainFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
+        dates.add(today);
+        dates.add(tomorrow);
         return view;
     }
 
@@ -72,9 +77,7 @@ public class MainFragment extends Fragment{
                 teemuTrial.runLuokka(cityChoice);
                 places = teemuTrial.getPlaceNamesArray();
 
-
-
-                placeInfo = teemuTrial.getPlaceInfoArray();
+                //placeInfo = teemuTrial.getPlaceInfoArray();
                 w.setPlace(cityChoice);
                 w.setURL(w.getParams(),w.getPlace());
                 w.loadData();
@@ -95,6 +98,24 @@ public class MainFragment extends Fragment{
                 dataList.setLayoutManager(gridLayoutManager);
                 dataList.setAdapter(adapter);
                 //images = null;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Spinner spinning = view.findViewById(R.id.spinnerDates);
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, dates);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinning.setAdapter(arrayAdapter2);
+        spinning.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String date = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), "Selected: " + date,Toast.LENGTH_LONG).show();
             }
 
             @Override
