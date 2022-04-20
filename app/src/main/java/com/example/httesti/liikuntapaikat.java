@@ -27,6 +27,7 @@ public class liikuntapaikat {
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
     ArrayList<String> placeInfo = new ArrayList<String>();
+    ArrayList<String> placeTypeArray = new ArrayList<>();
     /*Array for storing the information of a chosen sports place
     Stored based on index
     0 = place name
@@ -60,6 +61,8 @@ public class liikuntapaikat {
     }
 
     public ArrayList getPlaceInfoArray(){return  placeInfo;}
+
+    public ArrayList getPlaceTypeArray(){return  placeTypeArray;}
 
     public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
@@ -127,8 +130,10 @@ public class liikuntapaikat {
         String url = null;
         String response = null;
         String name = null;
+        String type = null;
         JsonObject jObject = null;
         placeNames.clear();
+        placeTypeArray.clear();
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
@@ -136,7 +141,9 @@ public class liikuntapaikat {
 
             jObject = convertJson(response);
             name = getPlaceName(jObject);
+            type = getPlaceType(jObject);
             name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
+            placeTypeArray.add(type);
             placeNames.add(name);
 
         }
@@ -146,6 +153,14 @@ public class liikuntapaikat {
         String name = null;
         name = jObject.get("name").toString();
         return name;
+    }
+
+    public String getPlaceType(JsonObject jObject){   //Method to get the name of the place from the jsonobject
+        String type = null;
+        JsonObject temp = new JsonObject();
+        temp = jObject.getAsJsonObject("type");
+        type = temp.get("name").toString();
+        return type;
     }
 
     public JsonObject convertJson(String json){    //Convert json string to a JsonObject

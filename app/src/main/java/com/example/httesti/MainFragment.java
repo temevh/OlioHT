@@ -27,6 +27,7 @@ public class MainFragment extends Fragment{
     ArrayList places = new ArrayList<>();
     ArrayList placeInfo = new ArrayList<>();
     ArrayList sports = new ArrayList<>();
+    ArrayList placeTypes = new ArrayList();
     ArrayList<String> dates = new ArrayList<String>();
     String today = "Today";
     String tomorrow = "Tomorrow";
@@ -64,6 +65,7 @@ public class MainFragment extends Fragment{
 
         cities = teemuTrial.getCitiesArray();
         places = teemuTrial.getPlaceNamesArray();
+        placeTypes = teemuTrial.getPlaceTypeArray();
 
         WeatherData w = new WeatherData();
 
