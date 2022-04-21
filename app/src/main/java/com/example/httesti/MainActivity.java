@@ -1,5 +1,6 @@
 package com.example.httesti;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -131,25 +134,21 @@ public class MainActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 
-    public void onItemClicked(View v){
+    public void onItemClicked(View v, String placeName){
         System.out.println("item clicked");
-
-        TextView tv = findViewById(R.id.placeName);
-        String placeName = tv.getText().toString();
+        //TextView tv = findViewById(R.id.placeName);
+        //String placeName = tv.getText().toString();
         System.out.println("PAIKAN NIMI ON " + placeName);
-        //placeInfo = lp.selection(placeName);
-        /*for (int i = 0; i< placeInfo.size();i++){
-            System.out.println(placeInfo.get(i).toString());
-        }*/
-    /*
+        placeInfo = lp.selection(placeName);
+
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("testiString", "Toimiiks tää?");
         PlaceFragment placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
-        loadFragment(placeFrag);
+        //loadFragment(placeFrag);
         System.out.println("TIEDOT LÄHETETTY FRAGIIN");
-*/
+
 
     }
 

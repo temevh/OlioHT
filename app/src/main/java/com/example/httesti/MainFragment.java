@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
@@ -31,6 +32,7 @@ public class MainFragment extends Fragment{
     ArrayList<String> dates = new ArrayList<String>();
     String today = "Today";
     String tomorrow = "Tomorrow";
+    Adapter adapter;
 
     //images and titles for the recyclerView in Home
     RecyclerView dataList;
@@ -38,7 +40,6 @@ public class MainFragment extends Fragment{
     List<Integer> images;
     String temperatures;
     String weatherType;
-    Adapter adapter;
 
 
     @Nullable
@@ -93,15 +94,12 @@ public class MainFragment extends Fragment{
                 for (int k = 0; k < places.size(); k++){
                     images.add(R.drawable.ic_baseline_cloud_24);
                 }
-                //titles = places;
 
-                adapter = new Adapter(getActivity(), places, images, sports, weatherType);
+                adapter = new Adapter(getActivity(), places, images, sports);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);
                 dataList.setAdapter(adapter);
-                //places = null;
-                //images = null;
             }
 
             @Override
@@ -127,6 +125,7 @@ public class MainFragment extends Fragment{
 
             }
         });
+
 
 
     }

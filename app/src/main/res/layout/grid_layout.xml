@@ -10,9 +10,9 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card"
             android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:onClick="onItemClicked">
+            android:layout_height="101dp">
 
             <TextView
                 android:id="@+id/placeName"
@@ -22,6 +22,7 @@
                 android:clickable="true"
                 android:text="Helsinki sport arena"
                 android:textAlignment="center"
+                android:textColor="@color/teal_700"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -29,15 +30,16 @@
 
             <TextView
                 android:id="@+id/placeType"
-                android:layout_width="225dp"
+                android:layout_width="222dp"
                 android:layout_height="26dp"
                 android:text="Kuntosali"
                 android:textAlignment="center"
+                android:textColor="@color/teal_200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.472"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/placeName"
-                app:layout_constraintVertical_bias="0.777" />
+                app:layout_constraintTop_toBottomOf="@+id/placeName" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
