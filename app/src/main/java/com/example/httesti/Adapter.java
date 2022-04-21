@@ -42,6 +42,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.title.setText(titles.get(position));
         holder.sport.setText(sports.get(position));
         //holder.gridIcon.setImageResource(images.get(position));
+
     }
 
     @Override
@@ -56,11 +57,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         TextView sport;
         ImageView gridIcon;
 
-        public ViewHolder(@NonNull View itemView){
+        public ViewHolder(View view){
 
-            super(itemView);
-            title = itemView.findViewById(R.id.placeName);
-            sport = itemView.findViewById(R.id.placeType);
+            super(view);
+            title = view.findViewById(R.id.placeName);
+            sport = view.findViewById(R.id.placeType);
             //gridIcon = itemView.findViewById(R.id.weatherIcon);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
