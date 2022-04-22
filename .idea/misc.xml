@@ -4,11 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHT/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_baseline_cloud_24.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_email.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_location.xml" value="0.3675" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_owner.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_phone.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_settings.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/ic_star.xml" value="0.3625" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/round_corners.xml" value="0.186" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/drawable/round_corners_bottom.xml" value="0.1325" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/acc_layout.xml" value="0.2028985507246377" />
         <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
-        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/grid_layout.xml" value="0.33" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/grid_layout.xml" value="0.44693877551020406" />
         <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/main_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/nav_header.xml" value="0.2028985507246377" />
         <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/place_layout.xml" value="0.33" />
+        <entry key="..\:/Users/Mattis/AndroidStudioProjects/OlioHTv2/app/src/main/res/layout/toolbar.xml" value="0.2028985507246377" />
         <entry key="..\:/Users/temeh/AndroidStudioProjects/HtTesti/app/src/main/res/layout/activity_main.xml" value="0.32760416666666664" />
         <entry key="..\:/Users/temeh/AndroidStudioProjects/HtTesti/app/src/main/res/layout/fragment_place.xml" value="0.32760416666666664" />
         <entry key="..\:/Users/temeh/AndroidStudioProjects/HtTesti/app/src/main/res/layout/grid_layout.xml" value="0.5744791666666667" />
