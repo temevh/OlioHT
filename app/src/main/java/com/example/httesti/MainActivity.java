@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
-    PlaceFragment placeFrag = new PlaceFragment();
+    PlaceFragment placeFrag;
+    RegisterFragment registerFragment;
 
     liikuntapaikat lp = liikuntapaikat.getInstance();
 
@@ -124,6 +125,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_first_fragment:
                 fragment = mainFragment;
                 break;
+
+            case R.id.nav_register:
+                fragment = new RegisterFragment();
+                break;
             default:
                 fragment = mainFragment;
         }
@@ -152,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("testiString", "Toimiiks tää?");
+        placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
         loadFragment(placeFrag);
         System.out.println("TIEDOT LÄHETETTY FRAGIIN");
