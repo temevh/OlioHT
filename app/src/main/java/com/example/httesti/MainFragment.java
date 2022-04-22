@@ -51,6 +51,7 @@ public class MainFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
+        dates.clear();
         dates.add(today);
         dates.add(tomorrow);
         for (int i = 0; i<100; i++ ){
