@@ -13,6 +13,7 @@
         android:layout_height="64dp"
         android:layout_marginTop="4dp"
         android:text="We-Mo"
+        android:textColor="@color/LutGreen"
         android:textAlignment="center"
         android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +26,7 @@
         android:layout_width="325dp"
         android:layout_height="58dp"
         android:layout_marginTop="76dp"
+        android:background="@color/backround_gray2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +38,13 @@
         android:layout_height="55dp"
         android:layout_marginTop="220dp"
         android:layout_marginEnd="44dp"
+        android:background="@color/backround_gray2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerPlaces"
+        android:background="@color/backround_gray2"
         android:layout_width="325dp"
         android:layout_height="58dp"
         android:layout_marginTop="148dp"
@@ -49,6 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:background="@color/backround_gray2"
         android:id="@+id/dataList"
         android:layout_width="325dp"
         android:layout_height="359dp"
@@ -62,12 +67,14 @@
         android:layout_height="28dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="220dp"
+        android:background="@color/backround_gray2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/temperature"
+        android:background="@color/backround_gray2"
         android:layout_width="163dp"
         android:layout_height="28dp"
         android:layout_marginStart="40dp"

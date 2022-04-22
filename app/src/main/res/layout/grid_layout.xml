@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="130dp"
     android:layout_gravity="center">
 
     <LinearLayout
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="89dp"
+        android:layout_width="279dp"
+        android:layout_height="99dp"
         android:layout_gravity="center"
-        android:background="@color/backround_gray"
-        android:orientation="vertical">
+        android:background="@drawable/round_corners"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/placeName"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/backround_gray"
             android:text="Helsinki sport arena"
             android:textAlignment="center"
-            android:textColor="@color/teal_700"
+            android:textColor="@color/LutPink"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/placeType"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round_corners_bottom"
+            android:backgroundTint="@color/backround_gray"
             android:text="Kuntosali"
             android:textAlignment="center"
-            android:textColor="@color/teal_200" />
+            android:textColor="@color/LutOrange" />
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

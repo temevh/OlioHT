@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,9 +63,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    title.getText().toString();
-                    MA.onItemClicked(v, title.getText().toString());
-                    System.out.println(title.getText().toString() + " hello " + sport.getText().toString());
+                    placeName = title.getText().toString();
+                    MA.onItemClicked(v, placeName);
                 }
             });
         }
