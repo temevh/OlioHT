@@ -1,5 +1,6 @@
 package com.example.httesti;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.telecom.Call;
@@ -22,7 +23,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     List<Integer> images;
     List<String> sports;
     LayoutInflater inflater;
-    MainActivity MA = new MainActivity();
+    MainActivity MA = MainActivity.getInstance();
 
     public Adapter(Context ctx, List<String> titles, List<Integer> images, List<String> sports){
         this.titles = titles;
