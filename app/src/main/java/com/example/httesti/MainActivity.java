@@ -164,6 +164,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
+    public void openProfile(){
+        accFragment accFrag = new accFragment();
+        loadFragment(accFrag);
+        System.out.println("VAIHDETTU PROFILE FRAGIIN");
+    }
+
 
 }
 
