@@ -160,6 +160,12 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void openProfile(){
+        accFragment accFrag = new accFragment();
+        loadFragment(accFrag);
+        System.out.println("VAIHDETTU PROFILE FRAGIIN");
+    }
+
 
 }
 
