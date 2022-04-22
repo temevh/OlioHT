@@ -19,6 +19,7 @@
                 android:layout_width="227dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="4dp"
+                android:clickable="true"
                 android:text="Helsinki sport arena"
                 android:textAlignment="center"
                 android:textColor="@color/teal_700"
