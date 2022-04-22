@@ -34,11 +34,10 @@ public class WeatherData {
     private String URL;
 
     // Variables for saving different weather data to
-    private Double windSpeed;
-    private Double temperature;
-    private String weatherType;
-    private Double precipitationAmnt;
-    private String time;
+    private Double windSpeed = null;
+    private Double temperature = null;
+    private String weatherType = null;
+    private Double precipitationAmnt = null;
 
     //For weathertypes indicated by the WeatherSymbol3 returned from the datasource
     private HashMap<Double,String> weather_types = new HashMap<>();
@@ -99,23 +98,19 @@ public class WeatherData {
                     System.out.println("Time: " + time);
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("Temperature")) {
                         Double temp = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
-                        System.out.println("Temp: " + temp);
                         setTemperature(temp);
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("WindSpeedMs")) {
                         Double ws = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
-                        System.out.println("Wind speed: " + ws);
                         setWindSpeed(ws);
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("WeatherSymbol3")) {
                         Double WeatherSymbol = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
-                        System.out.println("Weather type: " + weather_types.get(WeatherSymbol));
                         setWeatherType(weather_types.get(WeatherSymbol));
 
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("PrecipitationAmount")) {
                         Double rain = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
-                        System.out.println("Amount of precipitation: " + rain);
                         setPrecipitationAmnt(rain);
                     }
 
@@ -181,30 +176,22 @@ public class WeatherData {
     }
 
     public Double getPrecipitationAmnt() {
-        return precipitationAmnt;
+        return this.precipitationAmnt;
     }
 
     public Double getTemperature() {
-        return temperature;
+        return this.temperature;
     }
 
     public Double getWindSpeed() {
-        return windSpeed;
+        return this.windSpeed;
     }
 
     public String getWeatherType() {
-        return weatherType;
+            return this.weatherType;
     }
 
-    public void setTime(String t) {
-        this.time = t;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setURL(String params, String place) {
+    public void setURL(String params, String place, Integer flag) {
         // Getting time now
         TimeZone tz = TimeZone.getTimeZone("EET");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
@@ -214,7 +201,7 @@ public class WeatherData {
         // Setting the timegap from which data is fetched
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.HOUR_OF_DAY, 2);
+        calendar.add(Calendar.HOUR_OF_DAY, flag);
         String endtimeAsISO = df.format(calendar.getTime());
 
         System.out.println(nowAsISO);

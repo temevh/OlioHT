@@ -30,6 +30,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static MainActivity instance;
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
+
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
@@ -38,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
+    PlaceFragment placeFrag = new PlaceFragment();
 
     liikuntapaikat lp = liikuntapaikat.getInstance();
 
@@ -46,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        instance = this;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -144,20 +152,16 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("testiString", "Toimiiks tää?");
-        PlaceFragment placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
-        //loadFragment(placeFrag);
+        loadFragment(placeFrag);
         System.out.println("TIEDOT LÄHETETTY FRAGIIN");
 
 
     }
 
     private void loadFragment(Fragment fragment){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.mainFrag, fragment);
-        transaction.addToBackStack(null);
-        transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
     public void openProfile(){

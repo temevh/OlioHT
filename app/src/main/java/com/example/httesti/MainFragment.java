@@ -1,6 +1,6 @@
 package com.example.httesti;
 
-import android.content.Context;
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -9,18 +9,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainFragment extends Fragment{
 
@@ -38,9 +40,12 @@ public class MainFragment extends Fragment{
     RecyclerView dataList;
     List<String> titles;
     List<Integer> images;
-    String temperatures;
-    String weatherType;
+    Double temperatures;
+    String wType;
+    String date = today; // default value (gives the weather data of NOW)
 
+    TextView weatherType;
+    TextView Temp;
 
     @Nullable
     @Override
@@ -59,6 +64,10 @@ public class MainFragment extends Fragment{
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+
+        Temp = (TextView) view.findViewById(R.id.temperature);
+        weatherType = (TextView) view.findViewById(R.id.weatherType);
 
         liikuntapaikat teemuTrial = liikuntapaikat.getInstance();
         //teemuTrial.runLuokka("Helsinki");
@@ -83,9 +92,27 @@ public class MainFragment extends Fragment{
                 teemuTrial.runLuokka(cityChoice);
                 placeInfo = teemuTrial.getPlaceInfoArray();
                 w.setPlace(cityChoice);
-                w.setURL(w.getParams(),w.getPlace());
+
+                if(date.equals("Today")){
+                    w.setURL(w.getParams(), w.getPlace(), 1);
+                }else{
+                    w.setURL(w.getParams(), w.getPlace(), 24);
+                }
+
                 w.loadData();
 
+                temperatures = w.getTemperature();
+                wType = w.getWeatherType();
+
+                if(temperatures != null){
+                    Temp.setText(temperatures.intValue() + " °C");
+                }
+                if(temperatures != null){
+                   weatherType.setText(wType.toUpperCase(Locale.ROOT));
+                }
+
+                System.out.println(temperatures);
+                System.out.println(wType);
                 //dataList is the recyclerView on Home page
                 dataList = getView().findViewById(R.id.dataList);
                 titles = new ArrayList<>();
@@ -95,7 +122,7 @@ public class MainFragment extends Fragment{
                     images.add(R.drawable.ic_baseline_cloud_24);
                 }
 
-                adapter = new Adapter(getActivity(), places, images, sports);
+                adapter = new Adapter(getActivity().getApplicationContext(), places, images, sports);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);
@@ -116,7 +143,7 @@ public class MainFragment extends Fragment{
         spinning.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String date = adapterView.getItemAtPosition(i).toString();
+                date = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + date,Toast.LENGTH_LONG).show();
             }
 
