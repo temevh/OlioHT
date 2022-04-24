@@ -10,4 +10,10 @@
     <color name="LutPink">#E70060</color>
     <color name="backround_gray2">#f2f2f2</color>
 
+    <string name="pwreqs"> Password requirements:\n\n
+         • Must include upper and lower case letters\n
+         • Must include at least one (1) numeric\n
+         • Must include at least one (1) special character\n
+         • Must be at least 12 characters long</string>
+
 </resources>
