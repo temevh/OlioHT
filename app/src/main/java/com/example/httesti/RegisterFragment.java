@@ -1,6 +1,5 @@
 package com.example.httesti;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,16 +31,16 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_fragment, container,false);
-
+        MainActivity.getInstance().setTitle("Register");
         return view;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        username = (EditText) view.findViewById(R.id.username);
+        username = (EditText) view.findViewById(R.id.name);
         password = (EditText) view.findViewById(R.id.password);
-        repassword = (EditText) view.findViewById(R.id.repassword);
+        repassword = (EditText) view.findViewById(R.id.repass);
         signup = (Button) view.findViewById(R.id.btnsignup);
-        signin = (Button) view.findViewById(R.id.btnsignin);
+        signin = (Button) view.findViewById(R.id.btnsave);
 
         //DBManager for storing the users (uses SQLite)
         Users = new DBManager(getContext().getApplicationContext());
@@ -54,7 +53,7 @@ public class RegisterFragment extends Fragment {
                 String pass = password.getText().toString();
                 String repass = repassword.getText().toString();
                 // Regular expression pattern for checking if the password fulfills the requirements
-                String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{12,30}$";
+                String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=()!])(?=\\S+$).{12,30}$";
                 Pattern pattern = Pattern.compile(regex);
 
                 if(user.equals("")||pass.equals("")||repass.equals(""))
@@ -64,7 +63,7 @@ public class RegisterFragment extends Fragment {
                         if(pass.equals(repass)){
                             Boolean checkuser = Users.checkusername(user);
                             if(checkuser==false){
-                                Boolean insert = Users.insertData(user, pass);
+                                Boolean insert = Users.insertUser(user, pass);
                                 if(insert==true){
                                     Toast.makeText(getContext().getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
                                     FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();

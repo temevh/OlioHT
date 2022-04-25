@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 
 public class DBManager extends SQLiteOpenHelper {
     public static final String DBNAME = "Users.db";
@@ -21,16 +22,67 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        // not the most secure way to store things into a DB but works for this project.
-        MyDB.execSQL("create Table users(username TEXT primary key, hash TEXT, salt TEXT)");
+        // not the most secure way to store things in a DB but works for this project.
+        MyDB.execSQL("create Table users(username TEXT primary key, " +
+                                        "hash TEXT, " +
+                                        "salt TEXT);");
+        MyDB.execSQL("create Table profiles(" +
+                        "username TEXT, " +
+                        "name TEXT, " +
+                        "age INTEGER, " +
+                        "height REAL, " +
+                        "weight REAL, " +
+                        "home TEXT," +
+                        "FOREIGN KEY(username) REFERENCES users(username)" +
+                        "ON DELETE CASCADE);");
+        MyDB.execSQL("create Table favourites(username TEXT, " +
+                    "favourite TEXT," +
+                    "FOREIGN KEY(username) REFERENCES users(username)" +
+                    "ON DELETE CASCADE);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
         MyDB.execSQL("drop Table if exists users");
+        MyDB.execSQL("drop Table if exists profiles");
+        MyDB.execSQL("drop Table if exists favourites");
     }
 
-    public Boolean insertData(String username, String password) {
+    public Boolean insertProfile(User user){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("username", user.getUsername());
+        contentValues.put("name", user.getName());
+        contentValues.put("age", user.getAge());
+        contentValues.put("height", user.getHeight());
+        contentValues.put("weight", user.getWeight());
+        contentValues.put("home", user.getHomeCity());
+        long result = MyDB.insert("profiles", null, contentValues);
+
+        if(result==-1)
+            return false;
+        else
+            return true;
+    }
+
+    public Boolean insertFavourites(User user){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        ArrayList<String> favs = user.getFavourites();
+        for(String fav: favs){
+            contentValues.put("username", user.getUsername());
+            contentValues.put("favourite", fav);
+            long result = MyDB.insert("favourites", null, contentValues);
+            // if even one of the inserts goes wrong, we return with false
+            if(result==-1)
+                return false;
+        }
+        // If the insert was completed, we return true as a sign of successful insert
+        return true;
+    }
+
+    public Boolean insertUser(String username, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
         try{
@@ -65,7 +117,6 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase MyDB = this.getReadableDatabase();
         Cursor cursor = MyDB.rawQuery("Select hash, salt from users where username = ?", new String[] {username});
         if(cursor != null && cursor.moveToFirst()) {
-            System.out.println(cursor.getCount());
             String hash = cursor.getString(0);
             byte[] salt = cursor.getBlob(1);
             // Checking if given password hashed with salt from DB equals the hash in the DB

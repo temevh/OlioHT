@@ -22,7 +22,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container,false);
-
+        MainActivity.getInstance().setTitle("Login");
         return view;
     }
     @Override
@@ -44,9 +44,14 @@ public class LoginFragment extends Fragment {
                     Boolean checkuserpass = Users.checkpassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(getContext().getApplicationContext(), "Sign in successfull", Toast.LENGTH_SHORT).show();
+                        User newUser = new User(user);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", newUser);
                         FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.flContent, new MainFragment()).commit();
-                        MainActivity.getInstance().setTitle("Home");
+                        Fragment profFrag = new profileCreationFragment();
+                        profFrag.setArguments(bundle);
+                        fragmentManager.beginTransaction().replace(R.id.flContent, profFrag).commit();
+
 
                     }else{
                         Toast.makeText(getContext().getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();

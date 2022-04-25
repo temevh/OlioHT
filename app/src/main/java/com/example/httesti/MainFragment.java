@@ -58,6 +58,7 @@ public class MainFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
+        MainActivity.getInstance().setTitle("Home");
         dates.clear();
         dates.add(today);
         dates.add(tomorrow);
