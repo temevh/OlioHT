@@ -142,6 +142,7 @@ public class liikuntapaikat {
             name = getPlaceName(jObject);
             type = getPlaceType(jObject);
             name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
+            type = type.substring(1, type.length()-1);
             placeTypeArray.add(type);
             placeNames.add(name);
 
