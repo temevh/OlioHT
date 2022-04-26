@@ -30,13 +30,12 @@ public class liikuntapaikat {
     ArrayList<String> placeTypeArray = new ArrayList<>();
     /*Array for storing the information of a chosen sports place
     Stored based on index
-    0 = place name
-    1 = admin/owner
-    2 = email (if exists)
-    3 = phone number (if exists)
-    4 = address
-    5 = additional info (if exists)
-    6 = sports place type
+    0 = admin/owner
+    1 = email (if exists)
+    2 = phone number (if exists)
+    3 = address
+    4 = additional info (if exists)
+    5 = sports place type
      */
 
     private String json = null;
@@ -116,13 +115,13 @@ public class liikuntapaikat {
             e.printStackTrace();
         }
 
-        placeInfo.add(0, name);
-        placeInfo.add(1, admin);
-        placeInfo.add(2, email);
-        placeInfo.add(3, phoneNumber);
-        placeInfo.add(4, address);
-        placeInfo.add(5, addInfo);
-        placeInfo.add(6, placeType);
+        //placeInfo.add(0, name);
+        placeInfo.add(0, admin);
+        placeInfo.add(1, email);
+        placeInfo.add(2, phoneNumber);
+        placeInfo.add(3, address);
+        placeInfo.add(4, addInfo);
+        placeInfo.add(5, placeType);
 
     }
 

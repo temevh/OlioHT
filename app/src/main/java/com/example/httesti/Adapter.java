@@ -26,6 +26,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     LayoutInflater inflater;
     MainActivity MA = MainActivity.getInstance();
 
+    //Testi123
+
     public Adapter(Context ctx, List<String> titles, List<Integer> images, List<String> sports){
         this.titles = titles;
         this.images = images;
