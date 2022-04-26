@@ -31,7 +31,6 @@ public class MainFragment extends Fragment{
     ArrayList cities = new ArrayList<>();
     ArrayList places = new ArrayList<>();
     ArrayList placeInfo = new ArrayList<>();
-    ArrayList sports = new ArrayList<>();
     ArrayList placeTypes = new ArrayList();
     ArrayList<String> dates = new ArrayList<String>();
     String today = "Today";
@@ -62,9 +61,6 @@ public class MainFragment extends Fragment{
         dates.clear();
         dates.add(today);
         dates.add(tomorrow);
-        for (int i = 0; i<100; i++ ){
-            sports.add("KuntosaliJoojoo");
-        }
         return view;
     }
 
@@ -111,13 +107,8 @@ public class MainFragment extends Fragment{
                 //dataList is the recyclerView on Home page
                 dataList = getView().findViewById(R.id.dataList);
                 titles = new ArrayList<>();
-                images = new ArrayList<>();
 
-                for (int k = 0; k < places.size(); k++){
-                    images.add(R.drawable.ic_baseline_cloud_24);
-                }
-
-                adapter = new Adapter(getActivity().getApplicationContext(), places, images, sports);
+                adapter = new Adapter(getActivity().getApplicationContext(), places, images, placeTypes);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);
