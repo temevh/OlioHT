@@ -58,7 +58,7 @@ public class profileCreationFragment extends Fragment {
         Profiles = new DBManager(getContext().getApplicationContext());
 
 
-        liikuntapaikat teemuTrial = liikuntapaikat.getInstance();
+        placesClass teemuTrial = placesClass.getInstance();
         cities = teemuTrial.getCitiesArray();
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
