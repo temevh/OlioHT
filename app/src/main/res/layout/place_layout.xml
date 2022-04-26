@@ -11,14 +11,14 @@
         android:id="@+id/placeNameView"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
         android:textColor="@color/LutPink"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.392"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/placePhoneView"
@@ -136,13 +136,28 @@
         android:id="@+id/placeTypeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/LutOrange"
         android:text="place type"
+        android:textColor="@color/LutOrange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placeNameView"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintVertical_bias="0.022" />
+
+    <ImageButton
+        android:id="@+id/buttonBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:adjustViewBounds="false"
+        android:background="?android:selectableItemBackground"
+        android:onClick="backToMainMenu"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/placeNameView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
