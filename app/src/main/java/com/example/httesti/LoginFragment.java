@@ -2,6 +2,7 @@ package com.example.httesti;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,7 +22,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container,false);
-
+        MainActivity.getInstance().setTitle("Login");
         return view;
     }
     @Override
@@ -40,11 +41,18 @@ public class LoginFragment extends Fragment {
                 if(user.equals("")||pass.equals(""))
                     Toast.makeText(getContext().getApplicationContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else{
-                    Boolean checkuserpass = Users.checkusernamepassword(user, pass);
+                    Boolean checkuserpass = Users.checkpassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(getContext().getApplicationContext(), "Sign in successfull", Toast.LENGTH_SHORT).show();
+                        User newUser = new User(user);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", newUser);
                         FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.flContent, new MainFragment()).commit();
+                        Fragment profFrag = new profileCreationFragment();
+                        profFrag.setArguments(bundle);
+                        fragmentManager.beginTransaction().replace(R.id.flContent, profFrag).commit();
+
+
                     }else{
                         Toast.makeText(getContext().getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }

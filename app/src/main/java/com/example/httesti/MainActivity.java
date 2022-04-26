@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
     PlaceFragment placeFrag;
-    RegisterFragment registerFragment;
 
     liikuntapaikat lp = liikuntapaikat.getInstance();
 
@@ -65,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, mainFragment).commit();
+        setTitle("Home");
 
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.setDrawerIndicatorEnabled(true);
 
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        // Setup drawer view
         setupDrawerContent(nvDrawer);
 
         mDrawer.addDrawerListener(drawerToggle);
@@ -129,6 +128,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_register:
                 fragment = new RegisterFragment();
                 break;
+
+            case R.id.nav_profile:
+                fragment = new accFragment();
+                break;
             default:
                 fragment = mainFragment;
         }
@@ -162,12 +165,12 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(placeFrag);
         System.out.println("TIEDOT LÄHETETTY FRAGIIN");
 
-
     }
 
     private void loadFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
     }
 
     public void openProfile(){
