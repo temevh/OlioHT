@@ -26,6 +26,8 @@ import java.util.Locale;
 
 public class MainFragment extends Fragment{
 
+    WeatherData w = new WeatherData();
+
     ArrayList cities = new ArrayList<>();
     ArrayList places = new ArrayList<>();
     ArrayList placeInfo = new ArrayList<>();
@@ -40,17 +42,23 @@ public class MainFragment extends Fragment{
     RecyclerView dataList;
     List<String> titles;
     List<Integer> images;
-    Double temperatures;
-    String wType;
-    String date = today; // default value (gives the weather data of NOW)
+    String date = "Today"; // default value (gives the weather data for the on going hour)
+                        // "tomorrow" value gives weather data from 24 hours forward.
 
     TextView weatherType;
     TextView Temp;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
+        MainActivity.getInstance().setTitle("Home");
         dates.clear();
         dates.add(today);
         dates.add(tomorrow);
@@ -71,14 +79,12 @@ public class MainFragment extends Fragment{
         weatherType = (TextView) view.findViewById(R.id.weatherType);
 
         liikuntapaikat teemuTrial = liikuntapaikat.getInstance();
-        //teemuTrial.runLuokka("Helsinki");
         teemuTrial.addCitiesToArray();
 
         cities = teemuTrial.getCitiesArray();
         places = teemuTrial.getPlaceNamesArray();
         placeTypes = teemuTrial.getPlaceTypeArray();
 
-        WeatherData w = new WeatherData();
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
@@ -102,18 +108,6 @@ public class MainFragment extends Fragment{
 
                 w.loadData();
 
-                temperatures = w.getTemperature();
-                wType = w.getWeatherType();
-
-                if(temperatures != null){
-                    Temp.setText(temperatures.intValue() + " °C");
-                }
-                if(temperatures != null){
-                   weatherType.setText(wType.toUpperCase(Locale.ROOT));
-                }
-
-                System.out.println(temperatures);
-                System.out.println(wType);
                 //dataList is the recyclerView on Home page
                 dataList = getView().findViewById(R.id.dataList);
                 titles = new ArrayList<>();
@@ -146,6 +140,14 @@ public class MainFragment extends Fragment{
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 date = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + date,Toast.LENGTH_LONG).show();
+
+                if(date.equals("Today")){
+                    w.setURL(w.getParams(), w.getPlace(), 1);
+                }else{
+                    w.setURL(w.getParams(), w.getPlace(), 24);
+                }
+                w.loadData();
+
             }
 
             @Override
@@ -157,8 +159,6 @@ public class MainFragment extends Fragment{
 
 
     }
-
-
 
 
 }

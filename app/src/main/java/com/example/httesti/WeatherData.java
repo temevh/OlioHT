@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -80,7 +81,8 @@ public class WeatherData {
     }
 
     public void loadData(){
-        new LoadWeatherData().execute(URL);
+        LoadWeatherData lw = new LoadWeatherData();
+        lw.execute(getURL());
     }
 
     public void getWeatherData(String url) throws ParserConfigurationException, IOException, SAXException {
@@ -93,9 +95,7 @@ public class WeatherData {
                 Node measure = nodeList.item(i);
                 if(measure.getNodeType() == measure.ELEMENT_NODE) {
                     Element m = (Element) measure;
-                    String time = m.getElementsByTagName("BsWfs:Time").item(0).getTextContent();
 
-                    System.out.println("Time: " + time);
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("Temperature")) {
                         Double temp = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
                         setTemperature(temp);
@@ -108,6 +108,7 @@ public class WeatherData {
                         Double WeatherSymbol = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
                         setWeatherType(weather_types.get(WeatherSymbol));
 
+
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("PrecipitationAmount")) {
                         Double rain = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
@@ -116,6 +117,7 @@ public class WeatherData {
 
                 }
             }
+
 
     }
 
@@ -132,13 +134,17 @@ public class WeatherData {
                 e.printStackTrace();
             } catch (SAXException e) {
                 e.printStackTrace();
-            } finally {
-                System.out.println("DONE!");
             }
             return null;
         }
 
-
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            System.out.println("Data loaded");
+            System.out.println("Sää: "+getWeatherType());
+            System.out.println("Lämpötila: "+getTemperature());
+        }
     }
 
 
@@ -204,10 +210,10 @@ public class WeatherData {
         calendar.add(Calendar.HOUR_OF_DAY, flag);
         String endtimeAsISO = df.format(calendar.getTime());
 
-        System.out.println(nowAsISO);
         // Setting up the url with the params
         this.URL = "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::simple&place="+place+"&parameters="+params+
                 "&starttime="+nowAsISO+"&endtime="+endtimeAsISO;
+        System.out.println(URL);
     }
 
     public String getURL() {
