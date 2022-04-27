@@ -84,15 +84,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/refreshButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/bSearch"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:text="Search"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/dataList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintHorizontal_bias="0.846"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDates"
-        app:layout_constraintVertical_bias="0.202" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPlaces"
+        app:layout_constraintVertical_bias="0.833" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
