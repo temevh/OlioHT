@@ -150,6 +150,7 @@ public class placesClass {
                 singlePlaceTypes.add(type);
             }
         }
+        singlePlaceTypes.add(0," ");
     }
 
 

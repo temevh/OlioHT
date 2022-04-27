@@ -91,7 +91,6 @@ public class MainFragment extends Fragment{
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
         spin.setAdapter(arrayAdapter);
         place.setAdapter(placeAdapter);
 
