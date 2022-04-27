@@ -20,17 +20,14 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    List<String> titles;
-    List<Integer> images;
-    List<String> sports;
+    List<String> titles;    //the names of the sportPlaces
+    List<String> sports;    //type of sport that can be done in the place
     LayoutInflater inflater;
     MainActivity MA = MainActivity.getInstance();
 
-    //Testi123
 
-    public Adapter(Context ctx, List<String> titles, List<Integer> images, List<String> sports){
+    public Adapter(Context ctx, List<String> titles, List<String> sports){
         this.titles = titles;
-        this.images = images;
         this.sports = sports;
         this.inflater = LayoutInflater.from(ctx);
     }
@@ -64,7 +61,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             title = itemView.findViewById(R.id.placeName);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
+                // OnClickListener for the cards in recyclerView
                 public void onClick(View v) {
+                    //onClick gets the tittle on the card and send it to the mainActivity.java and opens a fragment
                     placeName = title.getText().toString();
                     MA.onItemClicked(v, placeName);
                 }

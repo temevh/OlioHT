@@ -15,7 +15,7 @@
         android:text="We-Mo"
         android:textColor="@color/LutGreen"
         android:textAlignment="center"
-        android:textSize="50dp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
