@@ -62,6 +62,9 @@ public class MainFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         MainActivity.getInstance().setTitle("Home");
+
+        Temp = (TextView) view.findViewById(R.id.temperature);
+        weatherType = (TextView) view.findViewById(R.id.weatherType);
         dates.clear();
         dates.add(today);
         dates.add(tomorrow);
@@ -116,7 +119,7 @@ public class MainFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
+                Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_SHORT).show();
                 pC.runPlacesClass(cityChoice);
                 placeInfo = pC.getPlaceInfoArray();
                 w.setPlace(cityChoice);
@@ -137,7 +140,7 @@ public class MainFragment extends Fragment{
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);
-                dataList.setAdapter(adapter);
+
             }
 
             @Override
@@ -156,7 +159,7 @@ public class MainFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 date = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), "Selected: " + date,Toast.LENGTH_LONG).show();
+                Toast.makeText(adapterView.getContext(), "Selected: " + date,Toast.LENGTH_SHORT).show();
 
                 if(date.equals("Today")){
                     w.setURL(w.getParams(), w.getPlace(), 1);
@@ -187,7 +190,9 @@ public class MainFragment extends Fragment{
 
     public void refreshButtonClicked(View v){
         System.out.println("REFRESHED");
-
+        Temp.setText(Integer.toString(w.getTemperature().intValue()));
+        weatherType.setText(w.getWeatherType().toUpperCase(Locale.ROOT));
+        dataList.setAdapter(adapter);
     }
 
 
