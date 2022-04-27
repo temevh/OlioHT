@@ -7,6 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -28,24 +33,15 @@ public class DBManager extends SQLiteOpenHelper {
                                         "salt TEXT);");
         MyDB.execSQL("create Table profiles(" +
                         "username TEXT, " +
-                        "name TEXT, " +
-                        "age INTEGER, " +
-                        "height REAL, " +
-                        "weight REAL, " +
-                        "home TEXT," +
+                        "user BLOB," +
                         "FOREIGN KEY(username) REFERENCES users(username)" +
                         "ON DELETE CASCADE);");
-        MyDB.execSQL("create Table favourites(username TEXT, " +
-                    "favourite TEXT," +
-                    "FOREIGN KEY(username) REFERENCES users(username)" +
-                    "ON DELETE CASCADE);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
         MyDB.execSQL("drop Table if exists users");
         MyDB.execSQL("drop Table if exists profiles");
-        MyDB.execSQL("drop Table if exists favourites");
     }
 
     public Boolean insertProfile(User user){
@@ -53,34 +49,34 @@ public class DBManager extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("username", user.getUsername());
-        contentValues.put("name", user.getName());
-        contentValues.put("age", user.getAge());
-        contentValues.put("height", user.getHeight());
-        contentValues.put("weight", user.getWeight());
-        contentValues.put("home", user.getHomeCity());
-        long result = MyDB.insert("profiles", null, contentValues);
+        try {
 
-        if(result==-1)
-            return false;
-        else
-            return true;
-    }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
 
-    public Boolean insertFavourites(User user){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        ArrayList<String> favs = user.getFavourites();
-        for(String fav: favs){
-            contentValues.put("username", user.getUsername());
-            contentValues.put("favourite", fav);
-            long result = MyDB.insert("favourites", null, contentValues);
-            // if even one of the inserts goes wrong, we return with false
+            oos.writeObject(user);
+
+            byte[] userAsBytes = baos.toByteArray();
+
+            contentValues.put("user", userAsBytes);
+
+            long result = MyDB.insert("profiles", null, contentValues);
+
             if(result==-1)
                 return false;
+            else
+                return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            System.out.println("User profile created!");
         }
-        // If the insert was completed, we return true as a sign of successful insert
-        return true;
+
+
     }
+
+
 
     public Boolean insertUser(String username, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
@@ -103,13 +99,81 @@ public class DBManager extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean checkusername(String username) {
+
+    public User fetchUser(String username){
+        User user = null;
         SQLiteDatabase MyDB = this.getReadableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
-        if (cursor.getCount() > 0)
-            return true;
-        else
-            return false;
+        Cursor cursor = MyDB.rawQuery("Select user from profiles where username = ?", new String[]{username});
+        if(cursor != null && cursor.moveToFirst()) {
+            try {
+                byte[] userAsBytes = cursor.getBlob(0);
+                ByteArrayInputStream bais = new ByteArrayInputStream(userAsBytes);
+                ObjectInputStream ois = null;
+                ois = new ObjectInputStream(bais);
+                user = (User) ois.readObject();
+                ois.close();
+                bais.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        cursor.close();
+        return user;
+    }
+
+
+    public void updateUser(String username, User user){
+        SQLiteDatabase MyDB = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        try {
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+
+            oos.writeObject(user);
+
+            byte[] userAsBytes = baos.toByteArray();
+
+            contentValues.put("user", userAsBytes);
+
+            long result = MyDB.update("profiles", contentValues, "username = ?", new String[]{username});
+
+            if(result==-1){
+                System.out.println("Something went wrong in update!");
+                return;
+            }
+            baos.close();
+            oos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            System.out.println("Update completed!");
+        }
+    }
+
+    public Boolean checkusername(String username, String table) {
+        if(table.equals("users")){
+            SQLiteDatabase MyDB = this.getReadableDatabase();
+            Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
+            if (cursor.getCount() > 0){
+                cursor.close();
+                return true;
+            }
+
+
+        }
+        if(table.equals("profiles")){
+            SQLiteDatabase MyDB = this.getReadableDatabase();
+            Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
+            if (cursor.getCount() > 0){
+                cursor.close();
+                return true;
+            }
+        }
+        return false;
     }
 
     public Boolean checkpassword(String username, String password){
@@ -120,11 +184,17 @@ public class DBManager extends SQLiteOpenHelper {
             String hash = cursor.getString(0);
             byte[] salt = cursor.getBlob(1);
             // Checking if given password hashed with salt from DB equals the hash in the DB
-            if (generateHashedPW(password, salt).equals(hash))
+            if (generateHashedPW(password, salt).equals(hash)){
+                cursor.close();
                 return true;
-            else
+            }
+
+            else{
+                cursor.close();
                 return false;
+            }
         }
+        cursor.close();
         return false;
     }
 

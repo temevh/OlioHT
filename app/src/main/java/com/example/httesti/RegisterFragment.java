@@ -61,8 +61,8 @@ public class RegisterFragment extends Fragment {
                 else{
                     if(pattern.matcher(pass).matches()){
                         if(pass.equals(repass)){
-                            Boolean checkuser = Users.checkusername(user);
-                            if(checkuser==false){
+                            Boolean checkuser = Users.checkusername(user, "users");
+                            if(checkuser){
                                 Boolean insert = Users.insertUser(user, pass);
                                 if(insert==true){
                                     Toast.makeText(getContext().getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();

@@ -44,13 +44,28 @@ public class LoginFragment extends Fragment {
                     Boolean checkuserpass = Users.checkpassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(getContext().getApplicationContext(), "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        User newUser = new User(user);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("user", newUser);
-                        FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
-                        Fragment profFrag = new profileCreationFragment();
-                        profFrag.setArguments(bundle);
-                        fragmentManager.beginTransaction().replace(R.id.flContent, profFrag).commit();
+                        if(Users.checkusername(user, "profiles")){
+                            User currentUser = Users.fetchUser(user);
+                            if(currentUser != null){
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("user", currentUser);
+                                FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
+                                Fragment accFrag = new accFragment();
+                                accFrag.setArguments(bundle);
+                                fragmentManager.beginTransaction().replace(R.id.flContent, accFrag).commit();
+                            }else {
+                                Toast.makeText(getContext().getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            User newUser = new User(user);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("user", newUser);
+                            FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
+                            Fragment profFrag = new profileCreationFragment();
+                            profFrag.setArguments(bundle);
+                            fragmentManager.beginTransaction().replace(R.id.flContent, profFrag).commit();
+                        }
+
 
 
                     }else{
