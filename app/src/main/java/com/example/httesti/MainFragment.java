@@ -102,7 +102,7 @@ public class MainFragment extends Fragment{
                 dataList = getView().findViewById(R.id.dataList);
                 titles = new ArrayList<>();
 
-                adapter = new Adapter(getActivity().getApplicationContext(), places, images, placeTypes);
+                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);
