@@ -74,7 +74,7 @@
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="268dp"
         android:background="@color/blue1"
         android:hint=" °C"
@@ -106,5 +106,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+    <ImageView
+        android:id="@+id/weatherImage"
+        android:layout_width="29dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/temperature"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toEndOf="@+id/weatherType"
+        app:layout_constraintTop_toBottomOf="@+id/bSearch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

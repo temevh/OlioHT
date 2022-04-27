@@ -39,6 +39,7 @@ public class WeatherData {
     private Double temperature = null;
     private String weatherType = null;
     private Double precipitationAmnt = null;
+    private Double weatherSymbol = null;
 
     //For weathertypes indicated by the WeatherSymbol3 returned from the datasource
     private HashMap<Double,String> weather_types = new HashMap<>();
@@ -105,8 +106,9 @@ public class WeatherData {
                         setWindSpeed(ws);
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("WeatherSymbol3")) {
-                        Double WeatherSymbol = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
-                        setWeatherType(weather_types.get(WeatherSymbol));
+                        weatherSymbol = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
+
+                        setWeatherType(weather_types.get(weatherSymbol));
 
 
                     }
@@ -218,5 +220,9 @@ public class WeatherData {
 
     public String getURL() {
         return URL;
+    }
+
+    public Double getWeatherSymbol() {
+        return this.weatherSymbol;
     }
 }
