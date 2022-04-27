@@ -40,14 +40,14 @@ public class PlaceFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        TextView placeNameView = (TextView) getView().findViewById(R.id.placeNameView);
-        TextView placeLocationView = (TextView) getView().findViewById(R.id.placeLocationView);
-        TextView placePhoneView = (TextView) getView().findViewById(R.id.placePhoneView);
-        TextView placeEmailView = (TextView) getView().findViewById(R.id.placeEmailView);
-        TextView placeOwnerView = (TextView) getView().findViewById(R.id.placeOwnerView);
-        TextView placeAddinfoView = (TextView) getView().findViewById(R.id.placeAddinfoView);
+        TextView placeNameView = view.findViewById(R.id.placeNameView);
+        TextView placeLocationView = view.findViewById(R.id.placeLocationView);
+        TextView placePhoneView = view.findViewById(R.id.placePhoneView);
+        TextView placeEmailView = view.findViewById(R.id.placeEmailView);
+        TextView placeOwnerView = view.findViewById(R.id.placeOwnerView);
+        TextView placeAddinfoView = view.findViewById(R.id.placeAddinfoView);
         placeAddinfoView.setMovementMethod(new ScrollingMovementMethod());
-        TextView placeTypeView = (TextView) getView().findViewById(R.id.placeTypeView);
+        TextView placeTypeView = view.findViewById(R.id.placeTypeView);
 
         backButton = (ImageButton) view.findViewById(R.id.buttonBack);
 
