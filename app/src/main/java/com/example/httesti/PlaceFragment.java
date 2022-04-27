@@ -73,8 +73,6 @@ public class PlaceFragment extends Fragment {
         Fragment mainFrag = new MainFragment();
         fragmentManager.beginTransaction().replace(R.id.flContent, mainFrag).commit();
 
-
-
     }
 
 }
