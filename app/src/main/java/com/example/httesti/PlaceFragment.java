@@ -1,6 +1,7 @@
 package com.example.httesti;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,6 @@ public class PlaceFragment extends Fragment {
         view = inflater.inflate(R.layout.place_layout, container,false);
         placeInfo = getArguments().getParcelableArrayList("placeinfo");
         placeName = getArguments().getString("placename");
-
-        String testiteksti = getArguments().getString("testiString");
-        System.out.println("TESTI TEKSTI ON " +testiteksti);
         for(int i = 0; i<placeInfo.size();i++){
             System.out.println(placeInfo.get(i));
         }
@@ -42,13 +40,14 @@ public class PlaceFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        TextView placeNameView = (TextView) getView().findViewById(R.id.placeNameView);
-        TextView placeLocationView = (TextView) getView().findViewById(R.id.placeLocationView);
-        TextView placePhoneView = (TextView) getView().findViewById(R.id.placePhoneView);
-        TextView placeEmailView = (TextView) getView().findViewById(R.id.placeEmailView);
-        TextView placeOwnerView = (TextView) getView().findViewById(R.id.placeOwnerView);
-        TextView placeAddinfoView = (TextView) getView().findViewById(R.id.placeAddinfoView);
-        TextView placeTypeView = (TextView) getView().findViewById(R.id.placeTypeView);
+        TextView placeNameView = view.findViewById(R.id.placeNameView);
+        TextView placeLocationView = view.findViewById(R.id.placeLocationView);
+        TextView placePhoneView = view.findViewById(R.id.placePhoneView);
+        TextView placeEmailView = view.findViewById(R.id.placeEmailView);
+        TextView placeOwnerView = view.findViewById(R.id.placeOwnerView);
+        TextView placeAddinfoView = view.findViewById(R.id.placeAddinfoView);
+        placeAddinfoView.setMovementMethod(new ScrollingMovementMethod());
+        TextView placeTypeView = view.findViewById(R.id.placeTypeView);
 
         backButton = (ImageButton) view.findViewById(R.id.buttonBack);
 
@@ -59,7 +58,6 @@ public class PlaceFragment extends Fragment {
             }
         });
 
-        //placeNameView.setText(placeInfo.get(0).toString());
         placeNameView.setText(placeName);
         placeOwnerView.setText(placeInfo.get(0).toString());
         placeEmailView.setText(placeInfo.get(1).toString());
@@ -72,13 +70,8 @@ public class PlaceFragment extends Fragment {
     }
 
     public void backToMainMenu(){
-        System.out.println("TOIMII");
-
-        //Bundle bundle = new Bundle();
-        //bundle.putSerializable("user", user);
         FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
         Fragment mainFrag = new MainFragment();
-        //accFrag.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.flContent, mainFrag).commit();
 
 
