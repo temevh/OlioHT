@@ -22,29 +22,30 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class liikuntapaikat {
+public class placesClass {
     ArrayList<String> cities = new ArrayList<String>();    //List of cities
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
-    ArrayList<String> placeInfo = new ArrayList<String>();
-    ArrayList<String> placeTypeArray = new ArrayList<>();
+    ArrayList<String> placeInfo = new ArrayList<String>();    //Information for the place
     /*Array for storing the information of a chosen sports place
-    Stored based on index
-    0 = admin/owner
-    1 = email (if exists)
-    2 = phone number (if exists)
-    3 = address
-    4 = additional info (if exists)
-    5 = sports place type
-     */
+   Stored based on index
+   0 = admin/owner
+   1 = email (if exists)
+   2 = phone number (if exists)
+   3 = address
+   4 = additional info (if exists)
+   5 = sports place type
+    */
+    ArrayList<String> placeTypeArray = new ArrayList<>(); //All placetypes
+    ArrayList<String> singlePlaceTypes = new ArrayList<>(); //Placetypes without duplicates
 
     private String json = null;
 
-    private static liikuntapaikat new_instance = null;
+    private static placesClass new_instance = null;
 
-    public static liikuntapaikat getInstance(){
+    public static placesClass getInstance(){
         if (new_instance == null){
-            new_instance = new liikuntapaikat();
+            new_instance = new placesClass();
         }
         return new_instance;
     }
@@ -63,11 +64,12 @@ public class liikuntapaikat {
 
     public ArrayList getPlaceTypeArray(){return  placeTypeArray;}
 
-    public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
+    public ArrayList getSingleTypes(){return singlePlaceTypes;}
+
+    public void runPlacesClass(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
         addPlaceNamesToArray();
-        //selection();
     }
 
     public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
@@ -115,7 +117,6 @@ public class liikuntapaikat {
             e.printStackTrace();
         }
 
-        //placeInfo.add(0, name);
         placeInfo.add(0, admin);
         placeInfo.add(1, email);
         placeInfo.add(2, phoneNumber);
@@ -133,6 +134,7 @@ public class liikuntapaikat {
         JsonObject jObject = null;
         placeNames.clear();
         placeTypeArray.clear();
+        singlePlaceTypes();
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
@@ -148,6 +150,28 @@ public class liikuntapaikat {
 
         }
     }
+
+    public void singlePlaceTypes(){  //Get a list of placetypes WITHOUT duplicates
+        String url = null;
+        String response = null;
+        String type = null;
+        JsonObject jObject = null;
+        singlePlaceTypes.clear();
+
+        for (int i = 0; i< placeIdArray.size(); i++){
+            url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
+            response = getJSON(url);
+
+            jObject = convertJson(response);
+            type = getPlaceType(jObject);//Removes the " " marks from the place name
+            type = type.substring(1, type.length()-1);
+            if (!singlePlaceTypes.contains(type)){
+                singlePlaceTypes.add(type);
+            }
+        }
+    }
+
+
 
     public String getPlaceName(JsonObject jObject){   //Method to get the name of the place from the jsonobject
         String name = null;
@@ -211,7 +235,7 @@ public class liikuntapaikat {
             jArray = new JSONArray(json);
             for (int i=0; i<jArray.length(); i++){
                 handle = jArray.getJSONObject(i);
-                int id = handle.getInt("sportsPlaceId");  //ID without sportsPlaceId
+                int id = handle.getInt("sportsPlaceId");  //ID without sportsPlaceId-part
                 placeIdArray.add(id);
             }
         } catch (JSONException e) {
@@ -219,7 +243,7 @@ public class liikuntapaikat {
         }
     }
 
-    public String getJSON(String searchUrl){
+    public String getJSON(String searchUrl){    //Method to get the JSON as string
         String response = null;
         try{
             URL url = new URL(searchUrl);

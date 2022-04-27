@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:textSize="18sp"
             android:background="@drawable/round_corners_bottom"
             android:backgroundTint="@color/backround_gray"
             android:text="Kuntosali"
