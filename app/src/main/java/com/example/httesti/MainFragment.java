@@ -77,15 +77,14 @@ public class MainFragment extends Fragment{
         Temp = (TextView) view.findViewById(R.id.temperature);
         weatherType = (TextView) view.findViewById(R.id.weatherType);
 
-        placesClass teemuTrial = placesClass.getInstance();
-        teemuTrial.addCitiesToArray();
+        placesClass pC = placesClass.getInstance();
+        pC.addCitiesToArray();
+        pC.singlePlaceTypes();
 
-        cities = teemuTrial.getCitiesArray();
-        places = teemuTrial.getPlaceNamesArray();
-        placeTypes = teemuTrial.getPlaceTypeArray();
-
-        Set<String> set = new HashSet<>(placeTypes);
-        typesSingles.addAll(set);
+        cities = pC.getCitiesArray();
+        places = pC.getPlaceNamesArray();
+        placeTypes = pC.getPlaceTypeArray();
+        typesSingles = pC.getSingleTypes();
 
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
@@ -93,16 +92,15 @@ public class MainFragment extends Fragment{
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
         ArrayAdapter<String> placeAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, typesSingles);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         spin.setAdapter(arrayAdapter);
         place.setAdapter(placeAdapter);
+
         place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String typeChoice = adapterView.getItemAtPosition(i).toString();
-                dataList = getView().findViewById(R.id.dataList);
-                titles = new ArrayList<>();
-
                 adapter = new Adapter(getActivity().getApplicationContext(), places, images, placeTypes);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
@@ -116,14 +114,13 @@ public class MainFragment extends Fragment{
             }
         });
 
-
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
-                teemuTrial.runLuokka(cityChoice);
-                placeInfo = teemuTrial.getPlaceInfoArray();
+                pC.runLuokka(cityChoice);
+                placeInfo = pC.getPlaceInfoArray();
                 w.setPlace(cityChoice);
 
                 if(date.equals("Today")){

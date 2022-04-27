@@ -26,17 +26,18 @@ public class placesClass {
     ArrayList<String> cities = new ArrayList<String>();    //List of cities
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
-    ArrayList<String> placeInfo = new ArrayList<String>();
-    ArrayList<String> placeTypeArray = new ArrayList<>();
+    ArrayList<String> placeInfo = new ArrayList<String>();    //Information for the place
     /*Array for storing the information of a chosen sports place
-    Stored based on index
-    0 = admin/owner
-    1 = email (if exists)
-    2 = phone number (if exists)
-    3 = address
-    4 = additional info (if exists)
-    5 = sports place type
-     */
+   Stored based on index
+   0 = admin/owner
+   1 = email (if exists)
+   2 = phone number (if exists)
+   3 = address
+   4 = additional info (if exists)
+   5 = sports place type
+    */
+    ArrayList<String> placeTypeArray = new ArrayList<>(); //All placetypes
+    ArrayList<String> singlePlaceTypes = new ArrayList<>(); //Placetypes without duplicates
 
     private String json = null;
 
@@ -62,6 +63,8 @@ public class placesClass {
     public ArrayList getPlaceInfoArray(){return  placeInfo;}
 
     public ArrayList getPlaceTypeArray(){return  placeTypeArray;}
+
+    public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
     public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
@@ -133,6 +136,7 @@ public class placesClass {
         JsonObject jObject = null;
         placeNames.clear();
         placeTypeArray.clear();
+        singlePlaceTypes();
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
@@ -148,6 +152,28 @@ public class placesClass {
 
         }
     }
+
+    public void singlePlaceTypes(){
+        String url = null;
+        String response = null;
+        String type = null;
+        JsonObject jObject = null;
+        singlePlaceTypes.clear();
+
+        for (int i = 0; i< placeIdArray.size(); i++){
+            url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
+            response = getJSON(url);
+
+            jObject = convertJson(response);
+            type = getPlaceType(jObject);//Removes the " " marks from the place name
+            type = type.substring(1, type.length()-1);
+            if (!singlePlaceTypes.contains(type)){
+                singlePlaceTypes.add(type);
+            }
+        }
+    }
+
+
 
     public String getPlaceName(JsonObject jObject){   //Method to get the name of the place from the jsonobject
         String name = null;
