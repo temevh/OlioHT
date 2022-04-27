@@ -85,6 +85,8 @@ public class MainFragment extends Fragment{
         Temp = (TextView) view.findViewById(R.id.temperature);
         weatherType = (TextView) view.findViewById(R.id.weatherType);
         wImage = (ImageView) view.findViewById(R.id.weatherImage);
+        //dataList is the recyclerView on Home page
+        dataList = (RecyclerView) view.findViewById(R.id.dataList);
 
         placesClass pC = placesClass.getInstance();
         pC.addCitiesToArray();
@@ -93,6 +95,8 @@ public class MainFragment extends Fragment{
         places = pC.getPlaceNamesArray();
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
+
+
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
@@ -137,8 +141,7 @@ public class MainFragment extends Fragment{
 
                 w.loadData();
 
-                //dataList is the recyclerView on Home page
-                dataList = getView().findViewById(R.id.dataList);
+
                 titles = new ArrayList<>();
 
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
@@ -195,6 +198,8 @@ public class MainFragment extends Fragment{
 
     public void refreshButtonClicked(View v){
         System.out.println("REFRESHED");
+
+        // show all fetched data and relevant info
         Temp.setText(Integer.toString(w.getTemperature().intValue())+ "°C");
         weatherType.setText(w.getWeatherType().toUpperCase(Locale.ROOT));
         if(w.getWeatherSymbol() < 2){
@@ -209,6 +214,12 @@ public class MainFragment extends Fragment{
         if(w.getWeatherSymbol() >= 40 && w.getWeatherSymbol() < 54){
             wImage.setImageResource(R.drawable.ic_snow);
 
+        }
+        if(w.getWeatherSymbol()>60 && w.getWeatherSymbol()<= 65){
+            wImage.setImageResource(R.drawable.ic_thunder);
+        }
+        if(w.getWeatherSymbol()>90){
+            wImage.setImageResource(R.drawable.ic_fog);
         }
         dataList.setAdapter(adapter);
     }
