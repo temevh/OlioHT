@@ -119,7 +119,7 @@ public class MainFragment extends Fragment{
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_LONG).show();
-                pC.runLuokka(cityChoice);
+                pC.runPlacesClass(cityChoice);
                 placeInfo = pC.getPlaceInfoArray();
                 w.setPlace(cityChoice);
 

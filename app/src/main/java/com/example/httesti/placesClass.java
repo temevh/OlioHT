@@ -66,11 +66,10 @@ public class placesClass {
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    public void runLuokka(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
+    public void runPlacesClass(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
         addPlaceNamesToArray();
-        //selection();
     }
 
     public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
@@ -118,7 +117,6 @@ public class placesClass {
             e.printStackTrace();
         }
 
-        //placeInfo.add(0, name);
         placeInfo.add(0, admin);
         placeInfo.add(1, email);
         placeInfo.add(2, phoneNumber);
@@ -153,7 +151,7 @@ public class placesClass {
         }
     }
 
-    public void singlePlaceTypes(){
+    public void singlePlaceTypes(){  //Get a list of placetypes WITHOUT duplicates
         String url = null;
         String response = null;
         String type = null;
@@ -237,7 +235,7 @@ public class placesClass {
             jArray = new JSONArray(json);
             for (int i=0; i<jArray.length(); i++){
                 handle = jArray.getJSONObject(i);
-                int id = handle.getInt("sportsPlaceId");  //ID without sportsPlaceId
+                int id = handle.getInt("sportsPlaceId");  //ID without sportsPlaceId-part
                 placeIdArray.add(id);
             }
         } catch (JSONException e) {
@@ -245,7 +243,7 @@ public class placesClass {
         }
     }
 
-    public String getJSON(String searchUrl){
+    public String getJSON(String searchUrl){    //Method to get the JSON as string
         String response = null;
         try{
             URL url = new URL(searchUrl);
