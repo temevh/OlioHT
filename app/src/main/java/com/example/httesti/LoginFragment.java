@@ -44,13 +44,18 @@ public class LoginFragment extends Fragment {
                     Boolean checkuserpass = Users.checkpassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(getContext().getApplicationContext(), "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        User newUser = new User(user);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("user", newUser);
-                        FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
-                        Fragment profFrag = new profileCreationFragment();
-                        profFrag.setArguments(bundle);
-                        fragmentManager.beginTransaction().replace(R.id.flContent, profFrag).commit();
+                        if(Users.checkusername(user, "profiles")){
+                            User currentUser = Users.fetchUser(user);
+                            if(currentUser != null){
+                                MainActivity.getInstance().loadFragment(new accFragment(), currentUser);
+                            }else {
+                                Toast.makeText(getContext().getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            User newUser = new User(user);
+                            MainActivity.getInstance().loadFragment(new accFragment(), newUser);
+                        }
+
 
 
                     }else{

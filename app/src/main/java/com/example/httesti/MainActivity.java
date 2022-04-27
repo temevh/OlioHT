@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -45,9 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
-    PlaceFragment placeFrag;
+    Fragment accFragment = new accFragment();
+    Fragment placeFrag;
 
     placesClass lp = placesClass.getInstance();
+
+    User currentUser = null;
 
 
     @Override
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
+
 
         mDrawer.addDrawerListener(drawerToggle);
 
@@ -130,14 +136,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_profile:
-                fragment = new accFragment();
+                fragment = accFragment;
                 break;
             default:
                 fragment = mainFragment;
         }
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        loadFragment(fragment, currentUser);
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
         // Set action bar title
@@ -157,12 +161,22 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("placename", placeName);
         placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
-        loadFragment(placeFrag);
+        loadFragment(placeFrag, currentUser);
 
     }
 
-    private void loadFragment(Fragment fragment){
+    public void loadFragment(Fragment fragment, User currentUser){
+        this.currentUser = currentUser;
+        Menu menu = nvDrawer.getMenu();
+        if(this.currentUser != null){
+            menu.findItem(R.id.nav_register).setVisible(false);
+        }else {
+            menu.findItem(R.id.nav_register).setVisible(true);
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", currentUser);
+        fragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
     }
