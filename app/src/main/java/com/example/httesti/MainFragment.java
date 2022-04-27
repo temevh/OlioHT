@@ -150,6 +150,7 @@ public class MainFragment extends Fragment{
             }
         });
 
+        //joo
         Spinner spinning = view.findViewById(R.id.spinnerDates);
         ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, dates);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
