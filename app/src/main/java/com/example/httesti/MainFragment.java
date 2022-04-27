@@ -88,12 +88,16 @@ public class MainFragment extends Fragment{
         //dataList is the recyclerView on Home page
         dataList = (RecyclerView) view.findViewById(R.id.dataList);
 
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
+        dataList.setLayoutManager(gridLayoutManager);
+
         placesClass pC = placesClass.getInstance();
         pC.addCitiesToArray();
 
         cities = pC.getCitiesArray();
         places = pC.getPlaceNamesArray();
 
+        pC.addPlaceNamesToArray();
 
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
@@ -118,9 +122,6 @@ public class MainFragment extends Fragment{
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
 
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
-                dataList.setLayoutManager(gridLayoutManager);
-                dataList.setAdapter(adapter);
             }
 
             @Override
@@ -150,9 +151,6 @@ public class MainFragment extends Fragment{
                 titles = new ArrayList<>();
 
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
-
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
-                dataList.setLayoutManager(gridLayoutManager);
 
             }
 
@@ -227,7 +225,9 @@ public class MainFragment extends Fragment{
         if(w.getWeatherSymbol()>90){
             wImage.setImageResource(R.drawable.ic_fog);
         }
+
         dataList.setAdapter(adapter);
+
     }
 
 

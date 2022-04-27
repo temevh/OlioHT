@@ -135,6 +135,7 @@ public class placesClass {
         singlePlaceTypes.clear();
         placeNames.clear();
         placeTypeArray.clear();
+        singlePlaceTypes.add("All places");
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
@@ -147,11 +148,12 @@ public class placesClass {
             type = type.substring(1, type.length()-1);
             placeTypeArray.add(type);
             placeNames.add(name);
-            if(!singlePlaceTypes.contains(type)){
+            if (!singlePlaceTypes.contains(type)) {
+                System.out.println(type);
                 singlePlaceTypes.add(type);
             }
         }
-        singlePlaceTypes.add(0," ");
+        //singlePlaceTypes.add(0," ");
     }
 
 
