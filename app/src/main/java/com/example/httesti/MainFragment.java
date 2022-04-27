@@ -40,7 +40,7 @@ public class MainFragment extends Fragment{
     String tomorrow = "Tomorrow";
     Adapter adapter;
 
-    //images and titles for the recyclerView in Home
+    //titles for the recyclerView in Home
     RecyclerView dataList;
     List<String> titles;
     String date = "Today"; // default value (gives the weather data for the on going hour)
@@ -175,6 +175,8 @@ public class MainFragment extends Fragment{
 
             }
         });
+
+
 
 
 
