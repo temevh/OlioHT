@@ -39,6 +39,7 @@ public class MainFragment extends Fragment{
     String today = "Today";
     String tomorrow = "Tomorrow";
     Adapter adapter;
+    String type;
 
     //titles for the recyclerView in Home
     RecyclerView dataList;
@@ -52,6 +53,7 @@ public class MainFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Nullable
@@ -72,7 +74,6 @@ public class MainFragment extends Fragment{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
         Temp = (TextView) view.findViewById(R.id.temperature);
         weatherType = (TextView) view.findViewById(R.id.weatherType);
 
@@ -83,39 +84,22 @@ public class MainFragment extends Fragment{
         places = teemuTrial.getPlaceNamesArray();
         placeTypes = teemuTrial.getPlaceTypeArray();
 
-        Set<String> set = new HashSet<>(placeTypes);
-        typesSingles.addAll(set);
-
+        for(int i = 0; i < placeTypes.size(); i++){
+            type = placeTypes.get(i).toString();
+            if (!typesSingles.contains(type)){
+                typesSingles.add(type);
+            }
+        }
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
         ArrayAdapter<String> placeAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, typesSingles);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         spin.setAdapter(arrayAdapter);
-        place.setAdapter(placeAdapter);
-        place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String typeChoice = adapterView.getItemAtPosition(i).toString();
-                dataList = getView().findViewById(R.id.dataList);
-                titles = new ArrayList<>();
-
-                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
-
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
-                dataList.setLayoutManager(gridLayoutManager);
-                dataList.setAdapter(adapter);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -153,7 +137,7 @@ public class MainFragment extends Fragment{
         //joo
         Spinner spinning = view.findViewById(R.id.spinnerDates);
         ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, dates);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinning.setAdapter(arrayAdapter2);
         spinning.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -169,6 +153,31 @@ public class MainFragment extends Fragment{
                 }
                 w.loadData();
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        place.setAdapter(placeAdapter);
+        place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String typeChoice = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), "Selected: " + typeChoice,Toast.LENGTH_LONG).show();
+                teemuTrial.runLuokka(typeChoice);
+
+                //dataList is the recyclerView on Home page
+                dataList = getView().findViewById(R.id.dataList);
+                titles = new ArrayList<>();
+
+                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
+
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
+                dataList.setLayoutManager(gridLayoutManager);
+                dataList.setAdapter(adapter);
             }
 
             @Override
