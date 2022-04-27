@@ -40,7 +40,6 @@ public class MainFragment extends Fragment{
     //images and titles for the recyclerView in Home
     RecyclerView dataList;
     List<String> titles;
-    List<Integer> images;
     String date = "Today"; // default value (gives the weather data for the on going hour)
                         // "tomorrow" value gives weather data from 24 hours forward.
 
@@ -108,7 +107,7 @@ public class MainFragment extends Fragment{
                 dataList = getView().findViewById(R.id.dataList);
                 titles = new ArrayList<>();
 
-                adapter = new Adapter(getActivity().getApplicationContext(), places, images, placeTypes);
+                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
                 dataList.setLayoutManager(gridLayoutManager);
