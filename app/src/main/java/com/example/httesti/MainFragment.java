@@ -86,6 +86,9 @@ public class MainFragment extends Fragment{
 
         cities = pC.getCitiesArray();
         places = pC.getPlaceNamesArray();
+
+        pC.addPlaceNamesToArray();
+
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
 
@@ -169,11 +172,11 @@ public class MainFragment extends Fragment{
                 Toast.makeText(adapterView.getContext(), "Selected: " + placeChoice,Toast.LENGTH_SHORT).show();
                 System.out.println(placeChoice);
 
-                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
+                //adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
 
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
-                dataList.setLayoutManager(gridLayoutManager);
-                dataList.setAdapter(adapter);
+                //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
+                //dataList.setLayoutManager(gridLayoutManager);
+                //dataList.setAdapter(adapter);
             }
 
             @Override
