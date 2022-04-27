@@ -5,7 +5,7 @@
     android:id="@+id/register_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="10sp"
     android:textAlignment="gravity">
 
     <EditText
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:hint="Username"
         android:inputType="text"
-        android:minHeight="48dp"
+        android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="168dp"
         android:hint="Password"
-        android:minHeight="48dp"
+        android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/repass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
@@ -38,9 +38,9 @@
         android:id="@+id/repass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="28sp"
         android:hint="Retype Password"
-        android:minHeight="48dp"
+        android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/btnsignup"
         tools:layout_editor_absoluteX="10dp" />
 
@@ -64,13 +64,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnsignup"
         app:layout_constraintVertical_bias="0.29"
-        tools:layout_editor_absoluteX="3dp" />
+        tools:layout_editor_absoluteX="3sp" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="363dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="363sp"
+        android:layout_height="106sp"
+        android:layout_marginTop="24sp"
         android:text="@string/pwreqs"
         android:textAlignment="gravity"
         app:layout_constraintBottom_toTopOf="@+id/repass"
