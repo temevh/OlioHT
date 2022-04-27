@@ -132,6 +132,7 @@ public class placesClass {
         String name = null;
         String type = null;
         JsonObject jObject = null;
+        singlePlaceTypes.clear();
         placeNames.clear();
         placeTypeArray.clear();
 
