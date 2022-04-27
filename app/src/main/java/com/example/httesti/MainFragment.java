@@ -84,6 +84,7 @@ public class MainFragment extends Fragment{
 
         Temp = (TextView) view.findViewById(R.id.temperature);
         weatherType = (TextView) view.findViewById(R.id.weatherType);
+        wImage = (ImageView) view.findViewById(R.id.weatherImage);
 
         placesClass pC = placesClass.getInstance();
         pC.addCitiesToArray();
@@ -196,7 +197,7 @@ public class MainFragment extends Fragment{
         System.out.println("REFRESHED");
         Temp.setText(Integer.toString(w.getTemperature().intValue())+ "°C");
         weatherType.setText(w.getWeatherType().toUpperCase(Locale.ROOT));
-        /*if(w.getWeatherSymbol() < 2){
+        if(w.getWeatherSymbol() < 2){
             wImage.setImageResource(R.drawable.ic_sun);
         }
         if(w.getWeatherSymbol() >= 2 && w.getWeatherSymbol() < 4){
@@ -208,7 +209,7 @@ public class MainFragment extends Fragment{
         if(w.getWeatherSymbol() >= 40 && w.getWeatherSymbol() < 54){
             wImage.setImageResource(R.drawable.ic_snow);
 
-        }*/
+        }
         dataList.setAdapter(adapter);
     }
 
