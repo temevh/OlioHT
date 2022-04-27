@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
+    placesClass lp = placesClass.getInstance();
 
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
     Fragment accFragment = new accFragment();
     Fragment placeFrag;
 
-    placesClass lp = placesClass.getInstance();
 
     private User currentUser = null;
 
