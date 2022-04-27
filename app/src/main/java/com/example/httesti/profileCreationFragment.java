@@ -58,8 +58,8 @@ public class profileCreationFragment extends Fragment {
         Profiles = new DBManager(getContext().getApplicationContext());
 
 
-        placesClass teemuTrial = placesClass.getInstance();
-        cities = teemuTrial.getCitiesArray();
+        placesClass pC = placesClass.getInstance();
+        cities = pC.getCitiesArray();
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

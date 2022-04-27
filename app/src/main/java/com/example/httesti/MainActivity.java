@@ -174,12 +174,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openProfile(){
-        accFragment accFrag = new accFragment();
-        loadFragment(accFrag);
-        System.out.println("VAIHDETTU PROFILE FRAGIIN");
-    }
-
 
 }
 
