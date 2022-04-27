@@ -132,7 +132,7 @@ public class placesClass {
         String name = null;
         String type = null;
         JsonObject jObject = null;
-        singlePlaceTypes.clear();
+        //singlePlaceTypes.clear();
         placeNames.clear();
         placeTypeArray.clear();
 
@@ -151,7 +151,7 @@ public class placesClass {
                 singlePlaceTypes.add(type);
             }
         }
-        singlePlaceTypes.add(0," ");
+        //singlePlaceTypes.add(0," ");
     }
 
 
