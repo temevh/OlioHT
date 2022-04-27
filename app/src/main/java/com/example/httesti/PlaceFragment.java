@@ -21,6 +21,7 @@ public class PlaceFragment extends Fragment {
 
     View view;
     ImageButton backButton;
+    User currentUser;
 
     ArrayList placeInfo = new ArrayList();
     String placeName = "N/A";
@@ -31,6 +32,7 @@ public class PlaceFragment extends Fragment {
         view = inflater.inflate(R.layout.place_layout, container,false);
         placeInfo = getArguments().getParcelableArrayList("placeinfo");
         placeName = getArguments().getString("placename");
+        currentUser = (User) getArguments().getSerializable("user");
         for(int i = 0; i<placeInfo.size();i++){
             System.out.println(placeInfo.get(i));
         }
@@ -69,10 +71,7 @@ public class PlaceFragment extends Fragment {
     }
 
     public void backToMainMenu(){
-        FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
-        Fragment mainFrag = new MainFragment();
-        fragmentManager.beginTransaction().replace(R.id.flContent, mainFrag).commit();
-
+        MainActivity.getInstance().loadFragment(MainActivity.getInstance().mainFragment, currentUser);
     }
 
 }
