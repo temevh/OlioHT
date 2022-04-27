@@ -42,6 +42,7 @@ public class PlaceFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         TextView placeNameView = view.findViewById(R.id.placeNameView);
+        placeNameView.setMovementMethod(new ScrollingMovementMethod());
         TextView placeLocationView = view.findViewById(R.id.placeLocationView);
         TextView placePhoneView = view.findViewById(R.id.placePhoneView);
         TextView placeEmailView = view.findViewById(R.id.placeEmailView);

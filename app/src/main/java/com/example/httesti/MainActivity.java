@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private Menu menu;
 
+    placesClass lp = placesClass.getInstance();
 
     ArrayList placeInfo = new ArrayList<>();
     Fragment mainFragment = new MainFragment();
     Fragment accFragment = new accFragment();
     Fragment placeFrag;
 
-    placesClass lp = placesClass.getInstance();
 
     private User currentUser = null;
 
