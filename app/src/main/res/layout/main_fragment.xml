@@ -23,33 +23,76 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerCities"
-        android:layout_width="325dp"
+        android:id="@+id/spinnerPlaces"
+        android:layout_width="319dp"
         android:layout_height="58dp"
-        android:layout_marginTop="68dp"
         android:background="@color/backround_gray2"
+        app:layout_constraintBottom_toTopOf="@+id/bSearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDates" />
+
+    <Spinner
+        android:id="@+id/spinnerCities"
+        android:layout_width="155sp"
+        android:layout_height="50dp"
+        android:background="@color/backround_gray2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerDates"
+        app:layout_constraintHorizontal_bias="0.785"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <TextView
+        android:id="@+id/weatherType"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="268dp"
+        android:autoSizeTextType="uniform"
+        android:background="@color/blue1"
+        android:text="Weather"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerDates"
-        android:layout_width="136dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="196dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="157sp"
+        android:layout_height="50dp"
         android:background="@color/backround_gray2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.835"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.127" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="268dp"
+        android:background="@color/blue1"
+        android:hint="C"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/weatherType"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinnerPlaces"
-        android:layout_width="325dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="132dp"
-        android:background="@color/backround_gray2"
+    <Button
+        android:id="@+id/bSearch"
+        android:layout_width="327dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="204dp"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:text="Search"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,41 +105,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
-
-    <TextView
-        android:id="@+id/weatherType"
-        android:layout_width="163dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="196dp"
-        android:autoSizeTextType="uniform"
-        android:background="@color/backround_gray2"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/temperature"
-        android:layout_width="163dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="40dp"
-        android:background="@color/backround_gray2"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherType" />
-
-    <Button
-        android:id="@+id/bSearch"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/ic_menu_search"
-        android:text="Search"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/dataList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPlaces"
-        app:layout_constraintVertical_bias="0.757" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
