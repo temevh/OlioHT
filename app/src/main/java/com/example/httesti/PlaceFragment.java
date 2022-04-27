@@ -34,7 +34,6 @@ public class PlaceFragment extends Fragment {
         for(int i = 0; i<placeInfo.size();i++){
             System.out.println(placeInfo.get(i));
         }
-
         return view;
     }
 

@@ -134,7 +134,6 @@ public class placesClass {
         JsonObject jObject = null;
         placeNames.clear();
         placeTypeArray.clear();
-        singlePlaceTypes();
 
         for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
@@ -147,30 +146,11 @@ public class placesClass {
             type = type.substring(1, type.length()-1);
             placeTypeArray.add(type);
             placeNames.add(name);
-
-        }
-    }
-
-    public void singlePlaceTypes(){  //Get a list of placetypes WITHOUT duplicates
-        String url = null;
-        String response = null;
-        String type = null;
-        JsonObject jObject = null;
-        singlePlaceTypes.clear();
-
-        for (int i = 0; i< placeIdArray.size(); i++){
-            url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
-            response = getJSON(url);
-
-            jObject = convertJson(response);
-            type = getPlaceType(jObject);//Removes the " " marks from the place name
-            type = type.substring(1, type.length()-1);
-            if (!singlePlaceTypes.contains(type)){
+            if(!singlePlaceTypes.contains(type)){
                 singlePlaceTypes.add(type);
             }
         }
     }
-
 
 
     public String getPlaceName(JsonObject jObject){   //Method to get the name of the place from the jsonobject
