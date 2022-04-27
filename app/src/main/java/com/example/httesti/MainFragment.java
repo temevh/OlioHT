@@ -94,14 +94,10 @@ public class MainFragment extends Fragment{
         cities = pC.getCitiesArray();
         places = pC.getPlaceNamesArray();
 
+        pC.addPlaceNamesToArray();
 
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
-
-
-        System.out.println(placeTypes);
-        System.out.println(typesSingles);
-
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);

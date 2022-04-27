@@ -179,7 +179,6 @@ public class placesClass {
     }
 
     public void addCitiesToArray(){  //Manually add the 20 biggest cities in Finland to array
-        //cities.add("City");
         cities.add("Helsinki");
         cities.add("Espoo");
         cities.add("Tampere");
