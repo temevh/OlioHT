@@ -151,20 +151,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onItemClicked(View v, String placeName){
-        System.out.println("item clicked");
-        //TextView tv = findViewById(R.id.placeName);
-        //String placeName = tv.getText().toString();
-        //System.out.println("PAIKAN NIMI ON " + placeName);
         placeInfo = lp.selection(placeName);
-
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("placename", placeName);
-        bundle.putString("testiString", "Toimiiks tää?");
         placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
         loadFragment(placeFrag);
-        System.out.println("TIEDOT LÄHETETTY FRAGIIN");
 
     }
 
