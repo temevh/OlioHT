@@ -26,8 +26,8 @@
             android:backgroundTint="@color/backround_gray"
             android:text="Helsinki sport arena"
             android:textAlignment="center"
-            android:textColor="@color/LutPink"
-            android:textSize="18sp" />
+            android:textColor="@color/blue2"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/placeType"
@@ -39,7 +39,7 @@
             android:backgroundTint="@color/backround_gray"
             android:text="Kuntosali"
             android:textAlignment="center"
-            android:textColor="@color/LutOrange" />
+            android:textColor="@color/blue3" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
