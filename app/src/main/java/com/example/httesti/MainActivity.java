@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     placesClass lp = placesClass.getInstance();
 
-    User currentUser = null;
+    private User currentUser = null;
 
 
     @Override
@@ -138,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_profile:
                 fragment = accFragment;
                 break;
+            case R.id.nav_logout:
+                fragment = mainFragment;
+                currentUser = null;
+                break;
             default:
                 fragment = mainFragment;
         }
@@ -159,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("placename", placeName);
-        bundle.putSerializable("user", currentUser);
         placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
 
@@ -172,8 +175,10 @@ public class MainActivity extends AppCompatActivity {
         this.currentUser = currentUser;
         Menu menu = nvDrawer.getMenu();
         if(this.currentUser != null){
+            menu.findItem(R.id.nav_logout).setVisible(true);
             menu.findItem(R.id.nav_register).setVisible(false);
         }else {
+            menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_register).setVisible(true);
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -183,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
     }
+
 
 
 }

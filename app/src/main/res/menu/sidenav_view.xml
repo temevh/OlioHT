@@ -9,8 +9,14 @@
 
         <item
             android:id="@+id/nav_register"
-            android:icon="@android:drawable/picture_frame"
+            android:icon="@drawable/ic_login"
             android:title="Register" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout"
+            android:visible="false"
+            />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_owner"
