@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainFrag"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue1">
 
     <TextView
         android:id="@+id/Tittle"
@@ -14,7 +15,7 @@
         android:layout_marginTop="4dp"
         android:text="We-Mo"
         android:textAlignment="center"
-        android:textColor="@color/LutGreen"
+        android:textColor="@color/black"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -53,13 +54,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/backround_gray2"
+        android:background="@color/white"
         android:id="@+id/dataList"
         android:layout_width="325dp"
         android:layout_height="359dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <TextView
         android:id="@+id/weatherType"
