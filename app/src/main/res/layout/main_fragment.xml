@@ -24,33 +24,33 @@
 
     <Spinner
         android:id="@+id/spinnerCities"
-        android:layout_width="145sp"
-        android:layout_height="51dp"
+        android:layout_width="150sp"
+        android:layout_height="50dp"
         android:layout_marginTop="76dp"
         android:background="@color/backround_gray2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerDates"
-        android:layout_width="145sp"
-        android:layout_height="55sp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="36dp"
+        android:layout_width="150sp"
+        android:layout_height="50dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="40dp"
         android:background="@color/backround_gray2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerPlaces"
-        android:layout_width="145sp"
-        android:layout_height="52dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="330dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="136dp"
         android:background="@color/backround_gray2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,10 +66,10 @@
 
     <TextView
         android:id="@+id/temperature"
-        android:layout_width="145sp"
-        android:layout_height="28dp"
+        android:layout_width="150sp"
+        android:layout_height="30dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="200dp"
         android:background="@color/backround_gray2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,10 +77,10 @@
 
     <TextView
         android:id="@+id/weatherType"
-        android:layout_width="145sp"
-        android:layout_height="28dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="136dp"
+        android:layout_width="150sp"
+        android:layout_height="30dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="200dp"
         android:background="@color/backround_gray2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,8 +96,6 @@
         app:layout_constraintBottom_toTopOf="@+id/dataList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDates"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
