@@ -159,9 +159,12 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("placename", placeName);
+        bundle.putSerializable("user", currentUser);
         placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
-        loadFragment(placeFrag, currentUser);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, placeFrag).commit();
 
     }
 
