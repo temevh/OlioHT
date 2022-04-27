@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -171,9 +173,24 @@ public class MainFragment extends Fragment{
             }
         });
 
+        Button refreshButton = (Button) view.findViewById(R.id.bSearch);
+
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshButtonClicked(view);
+            }
+        });
 
 
     }
+
+    public void refreshButtonClicked(View v){
+        System.out.println("REFRESHED");
+
+    }
+
+
 
 
 }
