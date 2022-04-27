@@ -47,23 +47,13 @@ public class LoginFragment extends Fragment {
                         if(Users.checkusername(user, "profiles")){
                             User currentUser = Users.fetchUser(user);
                             if(currentUser != null){
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("user", currentUser);
-                                FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
-                                Fragment accFrag = new accFragment();
-                                accFrag.setArguments(bundle);
-                                fragmentManager.beginTransaction().replace(R.id.flContent, accFrag).commit();
+                                MainActivity.getInstance().loadFragment(new accFragment(), currentUser);
                             }else {
                                 Toast.makeText(getContext().getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                             }
                         }else{
                             User newUser = new User(user);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("user", newUser);
-                            FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
-                            Fragment profFrag = new profileCreationFragment();
-                            profFrag.setArguments(bundle);
-                            fragmentManager.beginTransaction().replace(R.id.flContent, profFrag).commit();
+                            MainActivity.getInstance().loadFragment(new accFragment(), newUser);
                         }
 
 
