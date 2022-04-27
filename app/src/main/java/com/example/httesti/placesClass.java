@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class liikuntapaikat {
+public class placesClass {
     ArrayList<String> cities = new ArrayList<String>();    //List of cities
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
@@ -40,11 +40,11 @@ public class liikuntapaikat {
 
     private String json = null;
 
-    private static liikuntapaikat new_instance = null;
+    private static placesClass new_instance = null;
 
-    public static liikuntapaikat getInstance(){
+    public static placesClass getInstance(){
         if (new_instance == null){
-            new_instance = new liikuntapaikat();
+            new_instance = new placesClass();
         }
         return new_instance;
     }

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment mainFragment = new MainFragment();
     PlaceFragment placeFrag;
 
-    liikuntapaikat lp = liikuntapaikat.getInstance();
+    placesClass lp = placesClass.getInstance();
 
 
     @Override
