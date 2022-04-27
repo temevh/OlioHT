@@ -93,9 +93,14 @@ public class MainFragment extends Fragment{
 
         cities = pC.getCitiesArray();
         places = pC.getPlaceNamesArray();
+
+
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
 
+
+        System.out.println(placeTypes);
+        System.out.println(typesSingles);
 
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
@@ -202,6 +207,7 @@ public class MainFragment extends Fragment{
         // show all fetched data and relevant info
         Temp.setText(Integer.toString(w.getTemperature().intValue())+ "°C");
         weatherType.setText(w.getWeatherType().toUpperCase(Locale.ROOT));
+        // terve
         if(w.getWeatherSymbol() < 2){
             wImage.setImageResource(R.drawable.ic_sun);
         }
