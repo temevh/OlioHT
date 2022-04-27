@@ -89,31 +89,12 @@ public class MainFragment extends Fragment{
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
 
+
+
         Spinner spin = view.findViewById(R.id.spinnerCities);
-        Spinner place = view.findViewById(R.id.spinnerPlaces);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
-        ArrayAdapter<String> placeAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, typesSingles);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spin.setAdapter(arrayAdapter);
-        place.setAdapter(placeAdapter);
-
-        place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
-
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
-                dataList.setLayoutManager(gridLayoutManager);
-                dataList.setAdapter(adapter);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -149,7 +130,7 @@ public class MainFragment extends Fragment{
             }
         });
 
-        //joo
+
         Spinner spinning = view.findViewById(R.id.spinnerDates);
         ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, dates);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -176,6 +157,31 @@ public class MainFragment extends Fragment{
             }
         });
 
+        Spinner place = view.findViewById(R.id.spinnerPlaces);
+        ArrayAdapter<String> placeAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, typesSingles);
+        placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        place.setAdapter(placeAdapter);
+
+        place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String placeChoice = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), "Selected: " + placeChoice,Toast.LENGTH_SHORT).show();
+                System.out.println(placeChoice);
+
+                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
+
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
+                dataList.setLayoutManager(gridLayoutManager);
+                dataList.setAdapter(adapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         Button refreshButton = (Button) view.findViewById(R.id.bSearch);
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
@@ -188,9 +194,11 @@ public class MainFragment extends Fragment{
 
     }
 
+
     public void refreshButtonClicked(View v){
         System.out.println("REFRESHED");
-        Temp.setText(Integer.toString(w.getTemperature().intValue()));
+        String tempValue = Integer.toString(w.getTemperature().intValue());
+        Temp.setText(tempValue + " °C");
         weatherType.setText(w.getWeatherType().toUpperCase(Locale.ROOT));
         dataList.setAdapter(adapter);
     }

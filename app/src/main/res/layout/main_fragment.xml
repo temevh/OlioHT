@@ -77,7 +77,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="268dp"
         android:background="@color/blue1"
-        android:hint="C"
+        android:hint=" °C"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/weatherType"
         app:layout_constraintTop_toTopOf="parent" />
@@ -97,8 +97,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:id="@+id/dataList"
+        android:background="@drawable/round_corners"
         android:layout_width="325dp"
         android:layout_height="359dp"
         app:layout_constraintBottom_toBottomOf="parent"

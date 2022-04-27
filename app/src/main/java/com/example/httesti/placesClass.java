@@ -160,7 +160,7 @@ public class placesClass {
         return name;
     }
 
-    public String getPlaceType(JsonObject jObject){   //Method to get the name of the place from the jsonobject
+    public String getPlaceType(JsonObject jObject){   //Method to get the type of the place from the jsonobject
         String type = null;
         JsonObject temp = new JsonObject();
         temp = jObject.getAsJsonObject("type");
