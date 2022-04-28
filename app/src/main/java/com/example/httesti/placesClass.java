@@ -93,6 +93,9 @@ public class placesClass {
 
     public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
         int id = placeIdArray.get(index);
+        for (int i = 0; i < placeIdArray.size(); i++){
+            System.out.println(i);
+        }
         System.out.println(id);
         placeInfo.clear();
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
@@ -232,6 +235,7 @@ public class placesClass {
     public void addSportsPlaceIDtoArray(String json){ //Add the IDs of sport places to an arraylist
         JSONArray jArray = null;    //Initialize jsonarray
         JSONObject handle = null;       //Used to remove the sportsPlaceId part from the line
+        allPlaces.clear();
         placeIdArray.clear();
         try {
             jArray = new JSONArray(json);
