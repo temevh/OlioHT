@@ -154,9 +154,9 @@ public class MainActivity extends AppCompatActivity {
     public void onItemClicked(View v, String placeName, String placeType){
 
         // set relevant info to the bundle
-        placeInfo = lp.selection(placeName);
+        activityPlace placeInfo = lp.selection(placeName);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("placeinfo", placeInfo);
+        bundle.putSerializable("placeinfo", placeInfo);
         bundle.putString("placename", placeName);
         bundle.putString("placeType", placeType);
 
