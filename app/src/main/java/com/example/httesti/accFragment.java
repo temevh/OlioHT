@@ -38,12 +38,15 @@ public class accFragment extends Fragment {
         TextView homeTown = (TextView) view.findViewById(R.id.homeTown);
         TextView userHeight = (TextView) view.findViewById(R.id.userHeight);
         TextView userWeight = (TextView) view.findViewById(R.id.userWeight);
+        TextView userAge = (TextView) view.findViewById(R.id.userAge);
         DBManager DB = new DBManager(getContext().getApplicationContext());
         if(user != null){
             userName.setText(user.getName().toUpperCase(Locale.ROOT));
             homeTown.setText(user.getHomeCity().toUpperCase(Locale.ROOT));
+            userAge.setText(user.getAge().toString()+"v");
             userHeight.setText(user.getHeight().toString()+"cm");
             userWeight.setText(user.getWeight().toString()+"kg");
+
             System.out.println("Fetched users name is: "+user.getName());
         }
 

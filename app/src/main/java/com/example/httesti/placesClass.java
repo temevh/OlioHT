@@ -89,7 +89,6 @@ public class placesClass {
         for (activityPlace a : places){
             if(a.getName().equals(selection)){
                 selected = a;
-                System.out.println(selected.getName());
             }
         }
 
