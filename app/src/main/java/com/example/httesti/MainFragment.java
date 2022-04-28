@@ -107,8 +107,6 @@ public class MainFragment extends Fragment{
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
 
-
-
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);

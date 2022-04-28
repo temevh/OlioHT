@@ -112,6 +112,8 @@ public class placesClass {
 
         try {
             JSONObject jObject = new JSONObject(json);
+            JSONObject prop = new JSONObject();
+
             if(jObject.has("admin")){
                 admin = jObject.getString("admin");
             }
@@ -124,12 +126,14 @@ public class placesClass {
             if(jObject.has("location")){
                 address = jObject.getJSONObject("location").getString("address");
             }
-            /*if(jObject.has("properties")){
-                addInfo = jObject.getJSONObject("properties").getString("infoFi");
-            }*/
+            if(jObject.has("properties")){
+                prop = jObject.getJSONObject("properties");
+            }
+            if(prop.has("infoFi")){
+                addInfo = prop.getString("infoFi");
+            }
             placeType = jObject.getJSONObject("type").getString("name");
             name = jObject.getString("name");
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -142,7 +146,6 @@ public class placesClass {
         place.setEmail(email);
         place.setID(id);
         place.setUrl(url);
-
 
         return place;
 
