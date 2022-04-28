@@ -66,15 +66,14 @@ public class placesClass {
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    public void runPlacesClass(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
+    public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
-        addPlaceNamesToArray();
+        addPlaceNamesToArray(typeChoice);
     }
 
     public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
         String select = selection;
-        System.out.println("VALINTA ON" + select);
         int index = 0;  //Initialization of index variable
         index = placeNames.indexOf(select);
         addPlaceInfoToArray(index);
@@ -83,7 +82,9 @@ public class placesClass {
 
     public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
         int id = placeIdArray.get(index);
+        placeInfo.clear();
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
+        System.out.println("URLI ON " +url);
         String json = getJSON(url);
         String admin = "N/A";
         String email = "N/A";
@@ -91,7 +92,7 @@ public class placesClass {
         String address = "N/A";
         String addInfo ="N/A";
         String placeType = "N/A";
-        String name = "N/A";
+        //String name = "N/A";
 
         try {
             JSONObject jObject = new JSONObject(json);
@@ -111,7 +112,7 @@ public class placesClass {
                 addInfo = jObject.getJSONObject("properties").getString("infoFi");
             }
             placeType = jObject.getJSONObject("type").getString("name");
-            name = jObject.getString("name");
+            //name = jObject.getString("name");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -126,7 +127,7 @@ public class placesClass {
 
     }
 
-    public void addPlaceNamesToArray(){   //Adds the sports places of a selected city to an array
+    public void addPlaceNamesToArray(String typeChoice){   //Adds the sports places of a selected city to an array
         String url = null;
         String response = null;
         String name = null;
@@ -146,14 +147,17 @@ public class placesClass {
             type = getPlaceType(jObject);
             name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
             type = type.substring(1, type.length()-1);
-            placeTypeArray.add(type);
-            placeNames.add(name);
+            if(typeChoice.equals("All places")){
+                placeTypeArray.add(type);
+                placeNames.add(name);
+            }else if(!typeChoice.equals("All places") && typeChoice.equals(type)){
+                placeTypeArray.add(type);
+                placeNames.add(name);
+            }
             if (!singlePlaceTypes.contains(type)) {
-                System.out.println(type);
                 singlePlaceTypes.add(type);
             }
         }
-        //singlePlaceTypes.add(0," ");
     }
 
 
