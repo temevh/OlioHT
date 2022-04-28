@@ -30,12 +30,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 
 public class MainFragment extends Fragment{
 
     WeatherData w = new WeatherData();
+    placesClass pC = placesClass.getInstance();
 
     ArrayList cities = new ArrayList<>();
     ArrayList places = new ArrayList<>();
@@ -46,7 +46,8 @@ public class MainFragment extends Fragment{
     String today = "Today";
     String tomorrow = "Tomorrow";
     Adapter adapter;
-    String typeChoice="All places";
+    String typeChoice = "All places";
+    String cityChoice = "Helsinki";
 
     //images and titles for the recyclerView in Home
     RecyclerView dataList;
@@ -57,6 +58,9 @@ public class MainFragment extends Fragment{
     TextView weatherType;
     TextView Temp;
     ImageView wImage;
+
+
+
 
 
     @Override
@@ -96,16 +100,14 @@ public class MainFragment extends Fragment{
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
         dataList.setLayoutManager(gridLayoutManager);
 
-        placesClass pC = placesClass.getInstance();
-        pC.addCitiesToArray();
+        pC.runPlacesClass(cityChoice,typeChoice);
+
         cities = pC.getCitiesArray();
-
         places = pC.getPlaceNamesArray();
-
-        pC.addPlaceNamesToArray(typeChoice);
-
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
+
+
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
@@ -122,9 +124,6 @@ public class MainFragment extends Fragment{
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
                 typeChoice = adapterView.getItemAtPosition(i).toString();
-
-                dataList.setAdapter(adapter);
-
             }
 
             @Override
@@ -136,10 +135,8 @@ public class MainFragment extends Fragment{
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String cityChoice = adapterView.getItemAtPosition(i).toString();
+                cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_SHORT).show();
-                pC.runPlacesClass(cityChoice, typeChoice);
-                placeInfo = pC.getPlaceInfoArray();
                 w.setPlace(cityChoice);
 
                 if(date.equals("Today")){
@@ -151,7 +148,7 @@ public class MainFragment extends Fragment{
                 w.loadData();
 
                 titles = new ArrayList<>();
-                adapter = new Adapter(requireActivity().getApplicationContext(), places, placeTypes);
+                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
 
             }
 
@@ -205,7 +202,7 @@ public class MainFragment extends Fragment{
         // show all fetched data and relevant info
         Temp.setText(Integer.toString(w.getTemperature().intValue())+ "°C");
         weatherType.setText(w.getWeatherType().toUpperCase(Locale.ROOT));
-        // terve
+
         if(w.getWeatherSymbol() < 2){
             wImage.setImageResource(R.drawable.ic_sun);
         }
@@ -225,7 +222,7 @@ public class MainFragment extends Fragment{
         if(w.getWeatherSymbol()>90){
             wImage.setImageResource(R.drawable.ic_fog);
         }
-
+        pC.runPlacesClass(cityChoice, typeChoice);
         dataList.setAdapter(adapter);
 
     }

@@ -84,14 +84,15 @@ public class profileCreationFragment extends Fragment {
                 if(user == null || home.equals("") || age.getText().toString().equals("") || height.getText().toString().equals("") || weight.getText().toString().equals("") || name.getText().toString().equals("")){
                     Toast.makeText(getContext().getApplicationContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 }else{
+
+                    // set the inputted data and insert the user object into the database
                     user.setHomeCity(home);
                     user.setName(name.getText().toString());
                     user.setAge(Integer.parseInt(age.getText().toString()));
                     user.setHeight(Double.parseDouble(height.getText().toString()));
                     user.setWeight(Double.parseDouble(weight.getText().toString()));
-
+                    user.setBMI();
                     Profiles.insertProfile(user);
-
                     Toast.makeText(getContext().getApplicationContext(), "Profile creation successful", Toast.LENGTH_SHORT).show();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("user", user);
