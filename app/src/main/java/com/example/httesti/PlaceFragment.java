@@ -88,7 +88,11 @@ public class PlaceFragment extends Fragment {
     public void favoriteClicked(View view){
         System.out.println("ADDED TO FAVORITES");
         Toast.makeText(getActivity(), "Added to favorites", Toast.LENGTH_SHORT).show();
-        star.setBackgroundResource(R.drawable.ic_star_full);
+        if(star.isChecked()){
+            star.setBackgroundResource(R.drawable.ic_star_full);
+        }else{
+            star.setBackgroundResource(R.drawable.ic_star_empty);
+        }
 
 
 
