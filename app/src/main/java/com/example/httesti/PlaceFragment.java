@@ -25,6 +25,7 @@ public class PlaceFragment extends Fragment {
 
     ArrayList placeInfo = new ArrayList();
     String placeName = "N/A";
+    String placeType = "N/A";
 
     @Nullable
     @Override
@@ -32,6 +33,7 @@ public class PlaceFragment extends Fragment {
         view = inflater.inflate(R.layout.place_layout, container,false);
         placeInfo = getArguments().getParcelableArrayList("placeinfo");
         placeName = getArguments().getString("placename");
+        placeType = getArguments().getString("placeType");
         currentUser = (User) getArguments().getSerializable("user");
         for(int i = 0; i<placeInfo.size();i++){
             System.out.println(placeInfo.get(i));
@@ -50,7 +52,6 @@ public class PlaceFragment extends Fragment {
         TextView placeAddinfoView = view.findViewById(R.id.placeAddinfoView);
         placeAddinfoView.setMovementMethod(new ScrollingMovementMethod());
         TextView placeTypeView = view.findViewById(R.id.placeTypeView);
-
         backButton = (ImageButton) view.findViewById(R.id.buttonBack);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,8 @@ public class PlaceFragment extends Fragment {
         placePhoneView.setText(placeInfo.get(2).toString());
         placeLocationView.setText(placeInfo.get(3).toString());
         placeAddinfoView.setText(placeInfo.get(4).toString());
-        placeTypeView.setText(placeInfo.get(5).toString());
+        //placeTypeView.setText(placeInfo.get(5).toString());
+        placeTypeView.setText(placeType);
 
         super.onViewCreated(view, savedInstanceState);
     }

@@ -158,11 +158,13 @@ public class MainActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 
-    public void onItemClicked(View v, String placeName){
+    public void onItemClicked(View v, String placeName, String placeType){
         placeInfo = lp.selection(placeName);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
         bundle.putString("placename", placeName);
+        bundle.putString("placeType", placeType);
+
         bundle.putSerializable("user", currentUser);
         placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);

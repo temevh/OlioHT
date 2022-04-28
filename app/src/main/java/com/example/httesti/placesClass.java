@@ -148,8 +148,6 @@ public class placesClass {
             type = getPlaceType(jObject);
             name = name.substring(1, name.length() - 1);   //Removes the " " marks from the place name
             type = type.substring(1, type.length() - 1);
-            System.out.println("PLACETYPE ON" +placeType);
-            System.out.println("TYPE ON "+ type);
             if(placeType.equals("All places")){
                 placeTypeArray.add(type);
                 placeNames.add(name);
