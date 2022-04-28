@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,7 @@ public class PlaceFragment extends Fragment {
 
     View view;
     ImageButton backButton;
+    ToggleButton star;
     User currentUser;
 
     activityPlace placeInfo = null;
@@ -46,14 +49,24 @@ public class PlaceFragment extends Fragment {
         TextView placeAddinfoView = view.findViewById(R.id.placeAddinfoView);
         placeAddinfoView.setMovementMethod(new ScrollingMovementMethod());
         TextView placeTypeView = view.findViewById(R.id.placeTypeView);
-        backButton = (ImageButton) view.findViewById(R.id.buttonBack);
 
+        backButton = (ImageButton) view.findViewById(R.id.buttonBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 backToMainMenu();
             }
         });
+
+        star  = (ToggleButton) view.findViewById(R.id.favoriteButton);
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favoriteClicked(view);
+            }
+        });
+
+
         if (placeInfo != null){
             placeNameView.setText(placeInfo.getName());
             placeOwnerView.setText(placeInfo.getAdmin());
@@ -72,4 +85,18 @@ public class PlaceFragment extends Fragment {
         MainActivity.getInstance().loadFragment(MainActivity.getInstance().mainFragment, currentUser);
     }
 
+    public void favoriteClicked(View view){
+        System.out.println("ADDED TO FAVORITES");
+        Toast.makeText(getActivity(), "Added to favorites", Toast.LENGTH_SHORT).show();
+        star.setBackgroundResource(R.drawable.ic_star_full);
+
+
+
+
+
+    }
+
+
+
 }
+
