@@ -162,15 +162,22 @@ public class DBManager extends SQLiteOpenHelper {
                 cursor.close();
                 return true;
             }
+            else{
+                return false;
+            }
 
 
         }
         if(table.equals("profiles")){
             SQLiteDatabase MyDB = this.getReadableDatabase();
-            Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
+            Cursor cursor = MyDB.rawQuery("Select * from profiles where username = ?", new String[]{username});
+            System.out.println(cursor.getCount());
             if (cursor.getCount() > 0){
                 cursor.close();
                 return true;
+            }
+            else{
+                return false;
             }
         }
         return false;

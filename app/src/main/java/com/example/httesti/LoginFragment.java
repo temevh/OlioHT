@@ -44,18 +44,20 @@ public class LoginFragment extends Fragment {
                     Boolean checkuserpass = Users.checkpassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(getContext().getApplicationContext(), "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        if(Users.checkusername(user, "profiles")){
+                        Boolean profile = Users.checkusername(user, "profiles");
+                        if(profile){
+                            System.out.println("Profiili löytyi");
                             User currentUser = Users.fetchUser(user);
                             if(currentUser != null){
                                 MainActivity.getInstance().loadFragment(new accFragment(), currentUser);
-                            }else {
+                            }else{
                                 Toast.makeText(getContext().getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                             }
                         }else{
+                            System.out.println("Profiilia ei löytynyt");
                             User newUser = new User(user);
-                            MainActivity.getInstance().loadFragment(new accFragment(), newUser);
+                            MainActivity.getInstance().loadFragment(new profileCreationFragment(), newUser);
                         }
-
 
 
                     }else{
