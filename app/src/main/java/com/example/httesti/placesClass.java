@@ -38,6 +38,7 @@ public class placesClass {
     */
     ArrayList<String> placeTypeArray = new ArrayList<>(); //All placetypes
     ArrayList<String> singlePlaceTypes = new ArrayList<>(); //Placetypes without duplicates
+    ArrayList<String> allPlaces = new ArrayList<>();
 
     private String json = null;
 
@@ -60,25 +61,32 @@ public class placesClass {
         return placeNames;
     }
 
-    public ArrayList getPlaceInfoArray(){return  placeInfo;}
 
     public ArrayList getPlaceTypeArray(){return  placeTypeArray;}
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
+    //public ArrayList getPlacesToShow(){return placesToShow;}
 
+    public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
         addCitiesToArray();
         addPlaceNamesToArray(typeChoice);
     }
 
+    public void printer(){
+        for(int i = 0; i<placeNames.size();i++){
+            System.out.println(placeNames.get(i));
+        }
+    }
+
     public ArrayList selection(String selection){
-        System.out.println(selection);//Used to add the information on a selected place to the info array
-        String select = selection;
-        int index = placeNames.indexOf(select);
-        System.out.println(index);
+        String select = selection;//Used to add the information on a selected place to the info array
+        printer();
+        int index = allPlaces.indexOf(select);
+        System.out.println("VALITTU PAIKKKA " + selection);
+        System.out.println("VALITUN PAIKAN INDEKSI ON " + index);
         addPlaceInfoToArray(index);
         return placeInfo;
     }
@@ -154,9 +162,11 @@ public class placesClass {
             if(typeChoice.equals("All places")){
                 placeTypeArray.add(type);
                 placeNames.add(name);
+                allPlaces.add(name);
             }else if(!typeChoice.equals("All places") && typeChoice.equals(type)){
                 placeTypeArray.add(type);
                 placeNames.add(name);
+                allPlaces.add(name);
             }
             if (!singlePlaceTypes.contains(type)) {
                 singlePlaceTypes.add(type);
