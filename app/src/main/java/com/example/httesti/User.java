@@ -14,7 +14,7 @@ public class User implements Serializable {
     private Double weight;
     private Double BMI;
     private String homeCity;
-    private ArrayList<String> favourites;
+    private ArrayList<activityPlace> favourites;
 
     // getters and setters for each of the variables
     public User(String username){
@@ -29,7 +29,7 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public void setFavourites(ArrayList<String> favourites) {
+    public void setFavourites(ArrayList<activityPlace> favourites) {
         this.favourites = favourites;
     }
 
@@ -73,7 +73,7 @@ public class User implements Serializable {
         return this.BMI;
     }
 
-    public ArrayList<String> getFavourites() {
+    public ArrayList<activityPlace> getFavourites() {
         return this.favourites;
     }
 
