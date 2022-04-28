@@ -23,21 +23,15 @@ public class PlaceFragment extends Fragment {
     ImageButton backButton;
     User currentUser;
 
-    ArrayList placeInfo = new ArrayList();
-    String placeName = "N/A";
-    String placeType = "N/A";
+    activityPlace placeInfo = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.place_layout, container,false);
-        placeInfo = getArguments().getParcelableArrayList("placeinfo");
-        placeName = getArguments().getString("placename");
-        placeType = getArguments().getString("placeType");
+        placeInfo = (activityPlace) getArguments().getSerializable("placeinfo");
         currentUser = (User) getArguments().getSerializable("user");
-        for(int i = 0; i<placeInfo.size();i++){
-            System.out.println(placeInfo.get(i));
-        }
+
         return view;
     }
 
@@ -60,15 +54,16 @@ public class PlaceFragment extends Fragment {
                 backToMainMenu();
             }
         });
+        if (placeInfo != null){
+            placeNameView.setText(placeInfo.getName());
+            placeOwnerView.setText(placeInfo.getAdmin());
+            placeEmailView.setText(placeInfo.getEmail());
+            placePhoneView.setText(placeInfo.getPhoneNumber());
+            placeLocationView.setText(placeInfo.getAddress());
+            placeAddinfoView.setText(placeInfo.getAddInfo());
+            placeTypeView.setText(placeInfo.getPlaceType());
+        }
 
-        placeNameView.setText(placeName);
-        placeOwnerView.setText(placeInfo.get(0).toString());
-        placeEmailView.setText(placeInfo.get(1).toString());
-        placePhoneView.setText(placeInfo.get(2).toString());
-        placeLocationView.setText(placeInfo.get(3).toString());
-        placeAddinfoView.setText(placeInfo.get(4).toString());
-        //placeTypeView.setText(placeInfo.get(5).toString());
-        placeTypeView.setText(placeType);
 
         super.onViewCreated(view, savedInstanceState);
     }
