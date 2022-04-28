@@ -107,8 +107,6 @@ public class MainFragment extends Fragment{
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
 
-
-
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
@@ -136,6 +134,7 @@ public class MainFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityChoice = adapterView.getItemAtPosition(i).toString();
+                pC.clearPlaces();  //TODO TÄÄ EHKÄ HELVETTIIN TÄÄLTÄ
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_SHORT).show();
                 w.setPlace(cityChoice);
 

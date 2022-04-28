@@ -51,8 +51,6 @@ public class placesClass {
         return new_instance;
     }
 
-
-
     public ArrayList getCitiesArray(){  //Used to send the city arraylist to MainClass
         return cities;
     }
@@ -61,12 +59,13 @@ public class placesClass {
         return placeNames;
     }
 
-
     public ArrayList getPlaceTypeArray(){return  placeTypeArray;}
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    //public ArrayList getPlacesToShow(){return placesToShow;}
+    public void clearPlaces(){
+        allPlaces.clear();
+    }
 
     public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
@@ -104,7 +103,6 @@ public class placesClass {
         String address = "N/A";
         String addInfo ="N/A";
         String placeType = "N/A";
-        //String name = "N/A";
 
         try {
             JSONObject jObject = new JSONObject(json);
@@ -124,7 +122,6 @@ public class placesClass {
                 addInfo = jObject.getJSONObject("properties").getString("infoFi");
             }
             placeType = jObject.getJSONObject("type").getString("name");
-            //name = jObject.getString("name");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -139,7 +136,7 @@ public class placesClass {
 
     }
 
-    public void addPlaceNamesToArray(String typeChoice){   //Adds the sports places of a selected city to an array
+    public void addPlaceNamesToArray(String typeChoice){   //Adds the sports places of a selec/ted city to an array
         String url = null;
         String response = null;
         String name = null;
