@@ -38,7 +38,8 @@ public class placesClass {
     */
     ArrayList<String> placeTypeArray = new ArrayList<>(); //All placetypes
     ArrayList<String> singlePlaceTypes = new ArrayList<>(); //Placetypes without duplicates
-    ArrayList<String> allPlaces = new ArrayList<>();
+    ArrayList<activityPlace> places = new ArrayList<>();
+
 
     private String json = null;
 
@@ -51,6 +52,8 @@ public class placesClass {
         return new_instance;
     }
 
+
+
     public ArrayList getCitiesArray(){  //Used to send the city arraylist to MainClass
         return cities;
     }
@@ -59,13 +62,15 @@ public class placesClass {
         return placeNames;
     }
 
+    public ArrayList<activityPlace> getPlaces() {
+        return places;
+    }
+
     public ArrayList getPlaceTypeArray(){return  placeTypeArray;}
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    public void clearPlaces(){
-        allPlaces.clear();
-    }
+    //public ArrayList getPlacesToShow(){return placesToShow;}
 
     public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
@@ -74,28 +79,28 @@ public class placesClass {
         addPlaceNamesToArray(typeChoice);
     }
 
-    public void printer(){
-        for(int i = 0; i<placeNames.size();i++){
-            System.out.println(placeNames.get(i));
+
+
+
+
+    public activityPlace selection(String selection){//Used to add the information on a selected place to the info array
+        activityPlace selected = null;
+        for (activityPlace a : places){
+            if(a.getName().equals(selection)){
+                selected = a;
+                System.out.println(selected.getName());
+            }
         }
+
+        return selected;
     }
 
-    public ArrayList selection(String selection){
-        String select = selection;//Used to add the information on a selected place to the info array
-        printer();
-        int index = allPlaces.indexOf(select);
-        System.out.println("VALITTU PAIKKKA " + selection);
-        System.out.println("VALITUN PAIKAN INDEKSI ON " + index);
-        addPlaceInfoToArray(index);
-        return placeInfo;
-    }
-
-    public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
+    public activityPlace addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
+        activityPlace place = new activityPlace();
         int id = placeIdArray.get(index);
-        System.out.println(id);
+
         placeInfo.clear();
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
-        System.out.println("URLI ON " +url);
         String json = getJSON(url);
         String admin = "N/A";
         String email = "N/A";
@@ -103,6 +108,7 @@ public class placesClass {
         String address = "N/A";
         String addInfo ="N/A";
         String placeType = "N/A";
+        String name = "N/A";
 
         try {
             JSONObject jObject = new JSONObject(json);
@@ -118,39 +124,47 @@ public class placesClass {
             if(jObject.has("location")){
                 address = jObject.getJSONObject("location").getString("address");
             }
-            if(jObject.has("properties")){
+            /*if(jObject.has("properties")){
                 addInfo = jObject.getJSONObject("properties").getString("infoFi");
-            }
+            }*/
             placeType = jObject.getJSONObject("type").getString("name");
+            name = jObject.getString("name");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        place.setName(name);
+        place.setAddress(address);
+        place.setAdmin(admin);
+        place.setPlaceType(placeType);
+        place.setAddInfo(addInfo);
+        place.setPhoneNumber(phoneNumber);
+        place.setEmail(email);
+        place.setID(id);
+        place.setUrl(url);
 
-        placeInfo.add(0, admin);
-        placeInfo.add(1, email);
-        placeInfo.add(2, phoneNumber);
-        placeInfo.add(3, address);
-        placeInfo.add(4, addInfo);
-        placeInfo.add(5, placeType);
+
+        return place;
 
     }
 
-    public void addPlaceNamesToArray(String typeChoice){   //Adds the sports places of a selec/ted city to an array
+    public void addPlaceNamesToArray(String typeChoice){   //Adds the sports places of a selected city to an array
         String url = null;
         String response = null;
         String name = null;
         String type = null;
         JsonObject jObject = null;
+        places.clear();
         singlePlaceTypes.clear();
         placeNames.clear();
         placeTypeArray.clear();
         singlePlaceTypes.add("All places");
 
         for (int i = 0; i< placeIdArray.size(); i++){
+
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
             response = getJSON(url);
-
+            activityPlace a = addPlaceInfoToArray(i);
             jObject = convertJson(response);
             name = getPlaceName(jObject);
             type = getPlaceType(jObject);
@@ -159,14 +173,16 @@ public class placesClass {
             if(typeChoice.equals("All places")){
                 placeTypeArray.add(type);
                 placeNames.add(name);
-                allPlaces.add(name);
+                places.add(a);
+
             }else if(!typeChoice.equals("All places") && typeChoice.equals(type)){
                 placeTypeArray.add(type);
                 placeNames.add(name);
-                allPlaces.add(name);
+                places.add(a);
             }
             if (!singlePlaceTypes.contains(type)) {
                 singlePlaceTypes.add(type);
+                places.add(a);
             }
         }
     }
