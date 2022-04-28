@@ -17,11 +17,13 @@
             android:title="Logout"
             android:visible="false"
             />
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_owner"
-            android:title="Profile"
-            android:visible="false"/>
+            android:title="Profile"/>
+        <!-- android:visible="false" -->
+
 
         <item
             android:id="@+id/nav_favorites"
