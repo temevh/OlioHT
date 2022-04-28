@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class User implements Serializable {
+    // User specific variables
     private String username;
     private String name;
     private Integer age;
@@ -15,11 +16,10 @@ public class User implements Serializable {
     private String homeCity;
     private ArrayList<String> favourites;
 
+    // getters and setters for each of the variables
     public User(String username){
         this.username = username;
     }
-
-
 
     public void setName(String name) {
         this.name = name;

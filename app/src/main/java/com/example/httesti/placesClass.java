@@ -67,21 +67,25 @@ public class placesClass {
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
     public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
+
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
+        addCitiesToArray();
         addPlaceNamesToArray(typeChoice);
     }
 
-    public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
+    public ArrayList selection(String selection){
+        System.out.println(selection);//Used to add the information on a selected place to the info array
         String select = selection;
-        int index = 0;  //Initialization of index variable
-        index = placeNames.indexOf(select);
+        int index = placeNames.indexOf(select);
+        System.out.println(index);
         addPlaceInfoToArray(index);
         return placeInfo;
     }
 
     public void addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
         int id = placeIdArray.get(index);
+        System.out.println(id);
         placeInfo.clear();
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
         System.out.println("URLI ON " +url);
