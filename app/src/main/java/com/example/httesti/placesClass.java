@@ -151,7 +151,6 @@ public class placesClass {
         place.setID(id);
         place.setUrl(url);
 
-
         return place;
 
     }
