@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Locale;
+
 public class accFragment extends Fragment {
 
     User user = null;
@@ -33,9 +35,15 @@ public class accFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         TextView userName = (TextView) view.findViewById(R.id.accNameField);
+        TextView homeTown = (TextView) view.findViewById(R.id.homeTown);
+        TextView userHeight = (TextView) view.findViewById(R.id.userHeight);
+        TextView userWeight = (TextView) view.findViewById(R.id.userWeight);
         DBManager DB = new DBManager(getContext().getApplicationContext());
         if(user != null){
-            userName.setText(user.getName());
+            userName.setText(user.getName().toUpperCase(Locale.ROOT));
+            homeTown.setText(user.getHomeCity().toUpperCase(Locale.ROOT));
+            userHeight.setText(user.getHeight().toString()+"cm");
+            userWeight.setText(user.getWeight().toString()+"kg");
             System.out.println("Fetched users name is: "+user.getName());
         }
 
