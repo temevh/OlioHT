@@ -19,6 +19,7 @@ public class User implements Serializable {
     // getters and setters for each of the variables
     public User(String username){
         this.username = username;
+        this.favourites = new ArrayList<activityPlace>();
     }
 
     public void setName(String name) {
@@ -83,5 +84,22 @@ public class User implements Serializable {
 
     public String getHomeCity() {
         return this.homeCity;
+    }
+
+    public void addToFavourites(activityPlace ap){
+        boolean exists = false;
+        for (activityPlace place: getFavourites()) {
+            if(place.getName().equals(ap.getName())){
+                exists = true;
+            }
+        }
+
+        if(!exists){
+            getFavourites().add(ap);
+        }
+    }
+
+    public void removeFromFavourites(activityPlace ap){
+        getFavourites().removeIf(place -> place.getName().equals(ap.getName()));
     }
 }

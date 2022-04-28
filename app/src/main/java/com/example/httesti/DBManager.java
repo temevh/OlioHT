@@ -62,14 +62,22 @@ public class DBManager extends SQLiteOpenHelper {
 
             long result = MyDB.insert("profiles", null, contentValues);
 
-            if(result==-1)
+            if(result==-1){
+                MyDB.close();
                 return false;
-            else
+            }
+
+            else{
+                MyDB.close();
                 return true;
+            }
+
         } catch (IOException e) {
+            MyDB.close();
             e.printStackTrace();
             return false;
         }finally {
+            MyDB.close();
             System.out.println("User profile created!");
         }
 
@@ -89,11 +97,19 @@ public class DBManager extends SQLiteOpenHelper {
             contentValues.put("salt", salt);
             long result = MyDB.insert("users", null, contentValues);
 
-            if(result==-1)
+            if(result==-1){
+                MyDB.close();
                 return false;
-            else
+            }
+
+            else{
+                MyDB.close();
                 return true;
+            }
+
+
         }catch (NoSuchAlgorithmException e) {
+            MyDB.close();
             e.printStackTrace();
             return false;
         }
@@ -120,13 +136,15 @@ public class DBManager extends SQLiteOpenHelper {
             }
         }
         cursor.close();
+        MyDB.close();
         return user;
     }
 
 
-    public void updateUser(String username, User user){
+    public void updateUser(User user){
         SQLiteDatabase MyDB = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
+        String username = user.getUsername();
         try {
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -146,10 +164,13 @@ public class DBManager extends SQLiteOpenHelper {
             }
             baos.close();
             oos.close();
+            MyDB.close();
 
         } catch (IOException e) {
+            MyDB.close();
             e.printStackTrace();
         }finally {
+            MyDB.close();
             System.out.println("Update completed!");
         }
     }
@@ -159,10 +180,12 @@ public class DBManager extends SQLiteOpenHelper {
             SQLiteDatabase MyDB = this.getReadableDatabase();
             Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
             if (cursor.getCount() > 0){
+                MyDB.close();
                 cursor.close();
                 return true;
             }
             else{
+                MyDB.close();
                 return false;
             }
 
@@ -174,9 +197,11 @@ public class DBManager extends SQLiteOpenHelper {
             System.out.println(cursor.getCount());
             if (cursor.getCount() > 0){
                 cursor.close();
+                MyDB.close();
                 return true;
             }
             else{
+                MyDB.close();
                 return false;
             }
         }
@@ -192,16 +217,19 @@ public class DBManager extends SQLiteOpenHelper {
             byte[] salt = cursor.getBlob(1);
             // Checking if given password hashed with salt from DB equals the hash in the DB
             if (generateHashedPW(password, salt).equals(hash)){
+                MyDB.close();
                 cursor.close();
                 return true;
             }
 
             else{
+                MyDB.close();
                 cursor.close();
                 return false;
             }
         }
         cursor.close();
+        MyDB.close();
         return false;
     }
 
