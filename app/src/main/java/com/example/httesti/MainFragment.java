@@ -1,6 +1,8 @@
 package com.example.httesti;
 
 
+
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +45,7 @@ public class MainFragment extends Fragment{
     String today = "Today";
     String tomorrow = "Tomorrow";
     Adapter adapter;
+    String typeChoice="All places";
 
     //images and titles for the recyclerView in Home
     RecyclerView dataList;
@@ -93,19 +97,14 @@ public class MainFragment extends Fragment{
 
         placesClass pC = placesClass.getInstance();
         pC.addCitiesToArray();
-
         cities = pC.getCitiesArray();
+
         places = pC.getPlaceNamesArray();
 
-        pC.addPlaceNamesToArray();
+        pC.addPlaceNamesToArray(typeChoice);
 
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
-
-
-        System.out.println(placeTypes);
-        System.out.println(typesSingles);
-
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
@@ -121,6 +120,7 @@ public class MainFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
+                typeChoice = adapterView.getItemAtPosition(i).toString();
 
             }
 
@@ -135,7 +135,7 @@ public class MainFragment extends Fragment{
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_SHORT).show();
-                pC.runPlacesClass(cityChoice);
+                pC.runPlacesClass(cityChoice, typeChoice);
                 placeInfo = pC.getPlaceInfoArray();
                 w.setPlace(cityChoice);
 
@@ -147,9 +147,7 @@ public class MainFragment extends Fragment{
 
                 w.loadData();
 
-
                 titles = new ArrayList<>();
-
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
 
             }
@@ -160,7 +158,6 @@ public class MainFragment extends Fragment{
             }
         });
 
-        //joo
         Spinner spinning = view.findViewById(R.id.spinnerDates);
         ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, dates);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
