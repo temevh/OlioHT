@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +23,7 @@ public class PlaceFragment extends Fragment {
 
     View view;
     ImageButton backButton;
-    ImageButton star;
+    ToggleButton star;
     User currentUser;
 
     activityPlace placeInfo = null;
@@ -57,7 +58,7 @@ public class PlaceFragment extends Fragment {
             }
         });
 
-        star  = (ImageButton) view.findViewById(R.id.favoriteButton);
+        star  = (ToggleButton) view.findViewById(R.id.favoriteButton);
         star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
