@@ -46,18 +46,21 @@ public class MainFragment extends Fragment{
     String today = "Today";
     String tomorrow = "Tomorrow";
     Adapter adapter;
-    String typeChoice="All places";
-    String cityChoice="Helsinki";
+    String typeChoice = "All places";
+    String cityChoice = "Helsinki";
 
     //images and titles for the recyclerView in Home
     RecyclerView dataList;
     List<String> titles;
     String date = "Today"; // default value (gives the weather data for the on going hour)
-                           // "tomorrow" value gives weather data from 24 hours forward.
+                        // "tomorrow" value gives weather data from 24 hours forward.
 
     TextView weatherType;
     TextView Temp;
     ImageView wImage;
+
+
+
 
 
     @Override
@@ -97,15 +100,14 @@ public class MainFragment extends Fragment{
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
         dataList.setLayoutManager(gridLayoutManager);
 
+        pC.runPlacesClass(cityChoice,typeChoice);
 
-        pC.addCitiesToArray();           //Add the cities to the array
-        cities = pC.getCitiesArray();    //Get the array with the cities
-
-        pC.addPlaceNamesToArray(typeChoice);   //Use array with the place IDs and typechoice to add places to the array
-        places = pC.getPlaceNamesArray();      //Get the array with the places
-
+        cities = pC.getCitiesArray();
+        places = pC.getPlaceNamesArray();
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
+
+
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
@@ -122,8 +124,6 @@ public class MainFragment extends Fragment{
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
                 typeChoice = adapterView.getItemAtPosition(i).toString();
-                pC.addPlaceNamesToArray(typeChoice);
-                System.out.println("VALITTU TYYPPI ON " + typeChoice);
             }
 
             @Override
@@ -136,10 +136,7 @@ public class MainFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityChoice = adapterView.getItemAtPosition(i).toString();
-                System.out.println("VALITTU KAUPUNKI ON " + cityChoice);
                 Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_SHORT).show();
-                pC.runPlacesClass(cityChoice, typeChoice);
-                placeInfo = pC.getPlaceInfoArray();
                 w.setPlace(cityChoice);
 
                 if(date.equals("Today")){
@@ -178,6 +175,7 @@ public class MainFragment extends Fragment{
                     w.setURL(w.getParams(), w.getPlace(), 24);
                 }
                 w.loadData();
+
             }
 
             @Override
@@ -199,6 +197,7 @@ public class MainFragment extends Fragment{
     }
 
     public void refreshButtonClicked(View v){
+        System.out.println("REFRESHED");
 
         // show all fetched data and relevant info
         Temp.setText(Integer.toString(w.getTemperature().intValue())+ "°C");
@@ -223,6 +222,7 @@ public class MainFragment extends Fragment{
         if(w.getWeatherSymbol()>90){
             wImage.setImageResource(R.drawable.ic_fog);
         }
+        pC.runPlacesClass(cityChoice, typeChoice);
         dataList.setAdapter(adapter);
 
     }

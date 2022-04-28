@@ -47,8 +47,6 @@ public class WeatherData {
 
 
 
-
-
     public WeatherData(){
         // List of weather types linked with WeatherSymbol3 as the key for each of them
         weather_types.put(1.0, "selkeää");
@@ -82,17 +80,22 @@ public class WeatherData {
 
     }
 
+
+    //method for calling the async data fetch
     public void loadData(){
         LoadWeatherData lw = new LoadWeatherData();
         lw.execute(getURL());
     }
 
+
+    // method that the AsyncTask runs
     public void getWeatherData(String url) throws ParserConfigurationException, IOException, SAXException {
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(url);
             doc.getDocumentElement().normalize();
             NodeList nodeList = doc.getDocumentElement().getElementsByTagName("wfs:member");
+            // go through the retrieved XML and get the relevant info from there
             for(int i = 0; i<nodeList.getLength();i++){
                 Node measure = nodeList.item(i);
                 if(measure.getNodeType() == measure.ELEMENT_NODE) {
@@ -124,6 +127,7 @@ public class WeatherData {
 
     }
 
+    // subclass for fetching data asynchronously
     private class LoadWeatherData extends AsyncTask<String,Void,String>{
 
 
@@ -151,7 +155,7 @@ public class WeatherData {
     }
 
 
-
+    // A whole bunch of getters and setters
     public String getParams() {
         return this.params;
     }

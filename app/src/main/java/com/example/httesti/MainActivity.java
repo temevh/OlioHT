@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private DrawerLayout mDrawer;
+    private DrawerLayout Drawer;
     private Toolbar toolbar;
-    private NavigationView nvDrawer;
+    private NavigationView nav;
     private ActionBarDrawerToggle drawerToggle;
     private Menu menu;
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment mainFragment = new MainFragment();
     Fragment accFragment = new accFragment();
     Fragment placeFrag;
-
+    FragmentManager fragmentManager;
 
     private User currentUser = null;
 
@@ -60,22 +60,24 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, mainFragment).commit();
         setTitle("Home");
 
 
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // Setup the sliding drawer
+        Drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
 
         // Setup toggle to display hamburger icon with nice animation
         drawerToggle.setDrawerIndicatorEnabled(true);
 
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        setupDrawerContent(nvDrawer);
-        menu = nvDrawer.getMenu();
+        // Setup the NavView and the menu with it
+        nav = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nav);
+        menu = nav.getMenu();
 
-        mDrawer.addDrawerListener(drawerToggle);
+        Drawer.addDrawerListener(drawerToggle);
 
     }
 
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                mDrawer.openDrawer(GravityCompat.START);
+                Drawer.openDrawer(GravityCompat.START);
                 return true;
         }
         if (drawerToggle.onOptionsItemSelected(item)) {
@@ -137,19 +139,21 @@ public class MainActivity extends AppCompatActivity {
                 fragment = mainFragment;
         }
         loadFragment(fragment, currentUser);
-        // Highlight the selected item has been done by NavigationView
+        // Highlight the selected item
         menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
         // Close the navigation drawer
-        mDrawer.closeDrawers();
+        Drawer.closeDrawers();
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 
+
+    // this method is used when a placeItem in the GridLayout is clicked
     public void onItemClicked(View v, String placeName, String placeType){
+
+        // set relevant info to the bundle
         placeInfo = lp.selection(placeName);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("placeinfo", placeInfo);
@@ -160,13 +164,19 @@ public class MainActivity extends AppCompatActivity {
         placeFrag = new PlaceFragment();
         placeFrag.setArguments(bundle);
 
+        // Load the new placeFragment i.e. show all info of the said place
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, placeFrag).commit();
 
     }
 
+
+    // This method is used for loading new fragments
     public void loadFragment(Fragment fragment, User currentUser){
+        // keep track of the current user
         this.currentUser = currentUser;
+
+        // show different menu items based on if there's a user logged in or not
         if(this.currentUser != null){
             menu.findItem(R.id.nav_logout).setVisible(true);
             menu.findItem(R.id.nav_register).setVisible(false);
@@ -175,10 +185,11 @@ public class MainActivity extends AppCompatActivity {
         }else {
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_register).setVisible(true);
-            menu.findItem(R.id.nav_profile).setVisible(false);
+            //menu.findItem(R.id.nav_profile).setVisible(false);
             menu.findItem(R.id.nav_favorites).setVisible(false);
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // loads the wanted fragment and passes the currentUser with it
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", currentUser);
         fragment.setArguments(bundle);
