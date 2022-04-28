@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.sql.SQLOutput;
 import java.text.DateFormat;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
@@ -211,6 +212,9 @@ public class WeatherData {
         calendar.setTime(new Date());
         calendar.add(Calendar.HOUR_OF_DAY, flag);
         String endtimeAsISO = df.format(calendar.getTime());
+
+        // replace ä with a and ö with o
+        //place = Normalizer.normalize(place, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 
         // Setting up the url with the params
         this.URL = "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::simple&place="+place+"&parameters="+params+

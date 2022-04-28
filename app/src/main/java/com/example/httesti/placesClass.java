@@ -66,10 +66,10 @@ public class placesClass {
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    public void runPlacesClass(String cityChoice, String placeType){       //wannabe MainClass for this class, used to call the methods/functions
+    public void runPlacesClass(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
-        addPlaceNamesToArray(placeType);
+        addPlaceNamesToArray();
     }
 
     public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
@@ -126,7 +126,7 @@ public class placesClass {
 
     }
 
-    public void addPlaceNamesToArray(String placeType){   //Adds the sports places of a selected city to an array
+    public void addPlaceNamesToArray(){   //Adds the sports places of a selected city to an array
         String url = null;
         String response = null;
         String name = null;
@@ -137,28 +137,17 @@ public class placesClass {
         placeTypeArray.clear();
         singlePlaceTypes.add("All places");
 
-        System.out.println("PLACETYPE ON "+placeType);
-
-        for (int i = 0; i< placeIdArray.size(); i++) {
+        for (int i = 0; i< placeIdArray.size(); i++){
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
             response = getJSON(url);
 
             jObject = convertJson(response);
             name = getPlaceName(jObject);
             type = getPlaceType(jObject);
-            name = name.substring(1, name.length() - 1);   //Removes the " " marks from the place name
-            type = type.substring(1, type.length() - 1);
-            System.out.println("PLACETYPE ON" +placeType);
-            System.out.println("TYPE ON "+ type);
-            if(placeType.equals("All places")){
-                placeTypeArray.add(type);
-                placeNames.add(name);
-            }else{
-                if(placeType.equals(type)){
-                    placeTypeArray.add(type);
-                    placeNames.add(name);
-                }
-            }
+            name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
+            type = type.substring(1, type.length()-1);
+            placeTypeArray.add(type);
+            placeNames.add(name);
             if (!singlePlaceTypes.contains(type)) {
                 System.out.println(type);
                 singlePlaceTypes.add(type);

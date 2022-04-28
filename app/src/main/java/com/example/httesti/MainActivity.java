@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    private Menu menu;
 
     placesClass lp = placesClass.getInstance();
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
-
+        menu = nvDrawer.getMenu();
 
         mDrawer.addDrawerListener(drawerToggle);
 
@@ -174,13 +175,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadFragment(Fragment fragment, User currentUser){
         this.currentUser = currentUser;
-        Menu menu = nvDrawer.getMenu();
         if(this.currentUser != null){
             menu.findItem(R.id.nav_logout).setVisible(true);
             menu.findItem(R.id.nav_register).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(true);
+            menu.findItem(R.id.nav_favorites).setVisible(true);
         }else {
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_register).setVisible(true);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+            menu.findItem(R.id.nav_favorites).setVisible(false);
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         Bundle bundle = new Bundle();
