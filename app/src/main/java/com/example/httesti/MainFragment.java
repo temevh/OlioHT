@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 public class MainFragment extends Fragment{
@@ -122,6 +123,8 @@ public class MainFragment extends Fragment{
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
                 typeChoice = adapterView.getItemAtPosition(i).toString();
 
+                dataList.setAdapter(adapter);
+
             }
 
             @Override
@@ -148,7 +151,7 @@ public class MainFragment extends Fragment{
                 w.loadData();
 
                 titles = new ArrayList<>();
-                adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
+                adapter = new Adapter(requireActivity().getApplicationContext(), places, placeTypes);
 
             }
 
