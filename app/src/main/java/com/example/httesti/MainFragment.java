@@ -1,6 +1,8 @@
 package com.example.httesti;
 
 
+
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -95,19 +97,14 @@ public class MainFragment extends Fragment{
 
         placesClass pC = placesClass.getInstance();
         pC.addCitiesToArray();
-
         cities = pC.getCitiesArray();
+
         places = pC.getPlaceNamesArray();
 
         pC.addPlaceNamesToArray(typeChoice);
 
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
-
-
-        System.out.println(placeTypes);
-        System.out.println(typesSingles);
-
 
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
@@ -150,9 +147,7 @@ public class MainFragment extends Fragment{
 
                 w.loadData();
 
-
                 titles = new ArrayList<>();
-
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
 
             }
