@@ -75,6 +75,7 @@ public class placesClass {
     public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
+        cities.clear();
         addCitiesToArray();
         addPlaceNamesToArray(typeChoice);
     }
