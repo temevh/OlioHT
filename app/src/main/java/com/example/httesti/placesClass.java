@@ -66,10 +66,10 @@ public class placesClass {
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    public void runPlacesClass(String cityChoice){       //wannabe MainClass for this class, used to call the methods/functions
+    public void runPlacesClass(String cityChoice,String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
-        addPlaceNamesToArray();
+        addPlaceNamesToArray(typeChoice);
     }
 
     public ArrayList selection(String selection){       //Used to add the information on a selected place to the info array
@@ -126,7 +126,7 @@ public class placesClass {
 
     }
 
-    public void addPlaceNamesToArray(){   //Adds the sports places of a selected city to an array
+    public void addPlaceNamesToArray(String typeChoice){   //Adds the sports places of a selected city to an array
         String url = null;
         String response = null;
         String name = null;
@@ -146,14 +146,20 @@ public class placesClass {
             type = getPlaceType(jObject);
             name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
             type = type.substring(1, type.length()-1);
-            placeTypeArray.add(type);
-            placeNames.add(name);
+            System.out.println("TYPECHOICE ON " +typeChoice);
+            System.out.println("TYPE ON " + type);
+            if(typeChoice.equals("All places")){
+                placeTypeArray.add(type);
+                placeNames.add(name);
+            }else if(typeChoice.equals(type)){
+                placeTypeArray.add(type);
+                placeNames.add(name);
+            }
             if (!singlePlaceTypes.contains(type)) {
                 System.out.println(type);
                 singlePlaceTypes.add(type);
             }
         }
-        //singlePlaceTypes.add(0," ");
     }
 
 
