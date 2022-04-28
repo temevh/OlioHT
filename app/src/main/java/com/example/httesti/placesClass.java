@@ -111,8 +111,11 @@ public class placesClass {
         String placeType = "N/A";
         String name = "N/A";
 
+
         try {
             JSONObject jObject = new JSONObject(json);
+            JSONObject prop = new JSONObject();
+
             if(jObject.has("admin")){
                 admin = jObject.getString("admin");
             }
@@ -124,6 +127,10 @@ public class placesClass {
             }
             if(jObject.has("location")){
                 address = jObject.getJSONObject("location").getString("address");
+            }
+            prop = jObject.getJSONObject("properties");
+            if(prop.has("infoFi")){
+                addInfo = prop.getString("infoFi");
             }
             /*if(jObject.has("properties")){
                 addInfo = jObject.getJSONObject("properties").getString("infoFi");
