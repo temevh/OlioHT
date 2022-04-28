@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_register).setVisible(true);
-            menu.findItem(R.id.nav_profile).setVisible(false);
+            //menu.findItem(R.id.nav_profile).setVisible(false);
             menu.findItem(R.id.nav_favorites).setVisible(false);
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
