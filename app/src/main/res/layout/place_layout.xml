@@ -183,7 +183,6 @@
         android:background="@drawable/ic_star_empty"
         android:checked="false"
         android:clickable="true"
-        android:onClick="favoriteClicked"
         android:textSize="0dp"
         android:scaleX="1.5"
         android:scaleY="1.5"

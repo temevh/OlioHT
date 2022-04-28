@@ -25,6 +25,7 @@ public class PlaceFragment extends Fragment {
     ImageButton backButton;
     ToggleButton star;
     User currentUser;
+    DBManager DB;
 
     activityPlace placeInfo = null;
 
@@ -50,6 +51,8 @@ public class PlaceFragment extends Fragment {
         placeAddinfoView.setMovementMethod(new ScrollingMovementMethod());
         TextView placeTypeView = view.findViewById(R.id.placeTypeView);
 
+        DB = new DBManager(getContext().getApplicationContext());
+
         backButton = (ImageButton) view.findViewById(R.id.buttonBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,12 +62,39 @@ public class PlaceFragment extends Fragment {
         });
 
         star  = (ToggleButton) view.findViewById(R.id.favoriteButton);
-        star.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                favoriteClicked(view);
+
+
+
+
+        if(currentUser == null){
+            star.setVisibility(View.INVISIBLE);
+        }
+        Boolean exists = false;
+        for (activityPlace ap : currentUser.getFavourites()){
+            if (ap.getName().equals(placeInfo.getName())){
+                exists = true;
             }
-        });
+        }
+
+        if(exists){
+            star.setBackgroundResource(R.drawable.ic_star_full);
+            star.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    removeFromFavourites(view);
+                }
+            });
+        }else{
+            star.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    favoriteClicked(view);
+                }
+            });
+        }
+
+
+
 
 
         if (placeInfo != null){
@@ -88,16 +118,16 @@ public class PlaceFragment extends Fragment {
     public void favoriteClicked(View view){
         System.out.println("ADDED TO FAVORITES");
         Toast.makeText(getActivity(), "Added to favorites", Toast.LENGTH_SHORT).show();
-        if(star.isChecked()){
-            star.setBackgroundResource(R.drawable.ic_star_full);
-        }else{
-            star.setBackgroundResource(R.drawable.ic_star_empty);
-        }
+        star.setBackgroundResource(R.drawable.ic_star_full);
+        currentUser.addToFavourites(placeInfo);
+        DB.updateUser(currentUser);
+    }
 
-
-
-
-
+    public void removeFromFavourites(View view){
+        Toast.makeText(getActivity(), "Removed from favorites", Toast.LENGTH_SHORT).show();
+        star.setBackgroundResource(R.drawable.ic_star_empty);
+        currentUser.removeFromFavourites(placeInfo);
+        DB.updateUser(currentUser);
     }
 
 
