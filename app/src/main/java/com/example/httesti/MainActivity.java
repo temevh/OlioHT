@@ -156,14 +156,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     // this method is used when a placeItem in the GridLayout is clicked
-    public void onItemClicked(View v, String placeName, String placeType){
+    public void onItemClicked(View v, String placeName){
 
         // set relevant info to the bundle
         activityPlace placeInfo = lp.selection(placeName);
         Bundle bundle = new Bundle();
         bundle.putSerializable("placeinfo", placeInfo);
-        bundle.putString("placename", placeName);
-        bundle.putString("placeType", placeType);
 
         bundle.putSerializable("user", currentUser);
         placeFrag = new PlaceFragment();
