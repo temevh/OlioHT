@@ -7,11 +7,32 @@
     tools:context=".SplashActivity"
     android:background="@drawable/wemovarjolla">
 
-    <ProgressBar
+    <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="107dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="188dp"></ProgressBar>
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="383dp"
+        android:layout_marginEnd="158dp"
+        android:layout_marginBottom="241dp"
+        app:srcCompat="@drawable/stickmanrun1" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="76dp"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="321dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="357dp"
+        app:srcCompat="@drawable/ic_baseline_cloud_24" />
 
 </RelativeLayout>
