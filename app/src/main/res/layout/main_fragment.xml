@@ -106,12 +106,12 @@
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="195dp"
-        android:layout_height="76dp"
+        android:layout_height="80dp"
         android:background="@drawable/all_round_corners"
         app:layout_constraintBottom_toTopOf="@+id/spinnerDates"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wemologo2" />
+        app:srcCompat="@drawable/wemopng" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
