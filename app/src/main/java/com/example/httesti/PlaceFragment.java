@@ -33,9 +33,10 @@ public class PlaceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.place_layout, container,false);
-        placeInfo = (activityPlace) getArguments().getSerializable("placeinfo");  //Get the arraylist with the info of the place
-        currentUser = (User) getArguments().getSerializable("user");      //Get user(if logged in)
-
+        if(getArguments() != null){
+            placeInfo = (activityPlace) getArguments().getSerializable("placeinfo");  //Get the arraylist with the info of the place
+            currentUser = (User) getArguments().getSerializable("user");//Get user(if logged in)
+        }
         return view;
     }
 
@@ -57,7 +58,7 @@ public class PlaceFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                backToMainMenu();
+                backToPrevious();
             }
         });
 
@@ -66,29 +67,33 @@ public class PlaceFragment extends Fragment {
         if(currentUser == null){
             star.setVisibility(View.INVISIBLE);
         }
-        Boolean exists = false;
-        for (activityPlace ap : currentUser.getFavourites()){
-            if (ap.getName().equals(placeInfo.getName())){
-                exists = true;
+        if(currentUser != null){
+            Boolean exists = false;
+
+            for (activityPlace ap : currentUser.getFavourites()){
+                if (ap.getName().equals(placeInfo.getName())){
+                    exists = true;
+                }
+            }
+
+            if(exists){
+                star.setBackgroundResource(R.drawable.ic_star_full);
+                star.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        removeFromFavourites(view);
+                    }
+                });
+            }else{
+                star.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        favoriteClicked(view);
+                    }
+                });
             }
         }
 
-        if(exists){
-            star.setBackgroundResource(R.drawable.ic_star_full);
-            star.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    removeFromFavourites(view);
-                }
-            });
-        }else{
-            star.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    favoriteClicked(view);
-                }
-            });
-        }
 
         if (placeInfo != null){
             placeNameView.setText(placeInfo.getName());
@@ -102,8 +107,13 @@ public class PlaceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void backToMainMenu(){     //Method for going back to home/main menu when the back button in the app is clicked
-        MainActivity.getInstance().loadFragment(MainActivity.getInstance().mainFragment, currentUser);
+    public void backToPrevious(){     //Method for going back to home/main menu when the back button in the app is clicked
+        if(MainActivity.getInstance().getTitle().equals("Home")){
+            MainActivity.getInstance().loadFragment(MainActivity.getInstance().mainFragment, currentUser);
+        }
+        if(MainActivity.getInstance().getTitle().equals("Favourites")){
+            MainActivity.getInstance().loadFragment(new FavouritesFragment(), currentUser);
+        }
     }
 
     public void favoriteClicked(View view){            //Adding the current place to favorites

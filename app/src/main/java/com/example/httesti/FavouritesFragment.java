@@ -68,6 +68,7 @@ public class FavouritesFragment extends Fragment{
         adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
         dataList = (RecyclerView) view.findViewById(R.id.dataList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
+
         dataList.setLayoutManager(gridLayoutManager);
         dataList.setAdapter(adapter);
     }

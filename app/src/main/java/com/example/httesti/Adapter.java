@@ -67,7 +67,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                     //onClick gets the tittle on the card and send it to the mainActivity.java and opens a fragment
                     placeName = title.getText().toString();
                     placeType = sport.getText().toString();
-                    MA.onItemClicked(v, placeName, placeType);
+                    MA.onItemClicked(v, placeName);
                 }
             });
         }
