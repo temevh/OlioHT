@@ -45,7 +45,7 @@ public class placesClass {
 
     private static placesClass new_instance = null;
 
-    public static placesClass getInstance(){
+    public static placesClass getInstance(){        //Singleton for the class
         if (new_instance == null){
             new_instance = new placesClass();
         }
@@ -70,9 +70,8 @@ public class placesClass {
 
     public ArrayList getSingleTypes(){return singlePlaceTypes;}
 
-    //public ArrayList getPlacesToShow(){return placesToShow;}
 
-    public void runPlacesClass(String cityChoice, String typeChoice){       //wannabe MainClass for this class, used to call the methods/functions
+    public void runPlacesClass(String cityChoice, String typeChoice){       //method used to run the "core" functions/methods of the class
         json = getCitySportsPlaceIDs(cityChoice);
         addSportsPlaceIDtoArray(json);
         cities.clear();
@@ -102,7 +101,7 @@ public class placesClass {
         placeInfo.clear();
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
         String json = getJSON(url);
-        String admin = "N/A";
+        String admin = "N/A";               //Set N/A as the default value for each field
         String email = "N/A";
         String phoneNumber = "N/A";
         String address = "N/A";
@@ -127,7 +126,7 @@ public class placesClass {
                 address = jObject.getJSONObject("location").getString("address");
             }
             if(jObject.has("properties")){
-                prop = jObject.getJSONObject("properties");
+                prop = jObject.getJSONObject("properties");        //Get the infoFi value from this JSONobject
             }
             if(prop.has("infoFi")){
                 addInfo = prop.getString("infoFi");
@@ -172,18 +171,17 @@ public class placesClass {
             name = getPlaceName(jObject);
             type = getPlaceType(jObject);
             name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
-            type = type.substring(1, type.length()-1);
-            if(typeChoice.equals("All places")){
+            type = type.substring(1, type.length()-1);   //Removes the " " marks from the type name
+            if(typeChoice.equals("All places")){         //If selection is "All places" add all places to list
                 placeTypeArray.add(type);
                 placeNames.add(name);
                 places.add(a);
-
-            }else if(!typeChoice.equals("All places") && typeChoice.equals(type)){
+            }else if(!typeChoice.equals("All places") && typeChoice.equals(type)){   //If some specific place type selected, add only those types to list
                 placeTypeArray.add(type);
                 placeNames.add(name);
                 places.add(a);
             }
-            if (!singlePlaceTypes.contains(type)) {
+            if (!singlePlaceTypes.contains(type)) {    //Get a list of place types without duplicates, used for the placetype selection
                 singlePlaceTypes.add(type);
                 places.add(a);
             }

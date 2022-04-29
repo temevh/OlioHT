@@ -33,8 +33,8 @@ public class PlaceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.place_layout, container,false);
-        placeInfo = (activityPlace) getArguments().getSerializable("placeinfo");
-        currentUser = (User) getArguments().getSerializable("user");
+        placeInfo = (activityPlace) getArguments().getSerializable("placeinfo");  //Get the arraylist with the info of the place
+        currentUser = (User) getArguments().getSerializable("user");      //Get user(if logged in)
 
         return view;
     }
@@ -63,9 +63,6 @@ public class PlaceFragment extends Fragment {
 
         star  = (ToggleButton) view.findViewById(R.id.favoriteButton);
 
-
-
-
         if(currentUser == null){
             star.setVisibility(View.INVISIBLE);
         }
@@ -93,10 +90,6 @@ public class PlaceFragment extends Fragment {
             });
         }
 
-
-
-
-
         if (placeInfo != null){
             placeNameView.setText(placeInfo.getName());
             placeOwnerView.setText(placeInfo.getAdmin());
@@ -106,16 +99,14 @@ public class PlaceFragment extends Fragment {
             placeAddinfoView.setText(placeInfo.getAddInfo());
             placeTypeView.setText(placeInfo.getPlaceType());
         }
-
-
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void backToMainMenu(){
+    public void backToMainMenu(){     //Method for going back to home/main menu when the back button in the app is clicked
         MainActivity.getInstance().loadFragment(MainActivity.getInstance().mainFragment, currentUser);
     }
 
-    public void favoriteClicked(View view){
+    public void favoriteClicked(View view){            //Adding the current place to favorites
         System.out.println("ADDED TO FAVORITES");
         Toast.makeText(getActivity(), "Added to favorites", Toast.LENGTH_SHORT).show();
         star.setBackgroundResource(R.drawable.ic_star_full);
@@ -123,7 +114,7 @@ public class PlaceFragment extends Fragment {
         DB.updateUser(currentUser);
     }
 
-    public void removeFromFavourites(View view){
+    public void removeFromFavourites(View view){        //Removing the current place from favorites
         Toast.makeText(getActivity(), "Removed from favorites", Toast.LENGTH_SHORT).show();
         star.setBackgroundResource(R.drawable.ic_star_empty);
         currentUser.removeFromFavourites(placeInfo);

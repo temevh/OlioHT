@@ -1,14 +1,10 @@
 <resources>
-    <string name="app_name">HtTesti</string>
+    <string name="app_name">We-Mo</string>
     <string name="drawer_open" translatable="false">Open navigation drawer</string>
     <string name="drawer_close" translatable="false">Close navigation drawer</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <color name="backround_gray">#e8e8e8</color>
-    <color name="LutGreen">#95C21F</color>
-    <color name="LutOrange">#EF7D00</color>
-    <color name="LutPink">#E70060</color>
-    <color name="backround_gray2">#f2f2f2</color>
+
 
     <string name="pwreqs"> Password requirements:\n\n
          • Must include upper and lower case letters\n

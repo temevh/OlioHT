@@ -10,4 +10,9 @@
     <color name="blue1">#FF8ecae6</color>
     <color name="blue2">#FF126782</color>
     <color name="blue3">#FFa9d6e5</color>
+    <color name="backround_gray">#e8e8e8</color>
+    <color name="LutGreen">#95C21F</color>
+    <color name="LutOrange">#EF7D00</color>
+    <color name="LutPink">#E70060</color>
+    <color name="backround_gray2">#f2f2f2</color>
 </resources>
