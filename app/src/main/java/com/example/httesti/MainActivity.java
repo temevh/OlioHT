@@ -135,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
                 fragment = mainFragment;
                 currentUser = null;
                 break;
+            case R.id.nav_favorites:
+                fragment = new FavouritesFragment();
+                break;
             default:
                 fragment = mainFragment;
         }

@@ -59,13 +59,17 @@ public class MainFragment extends Fragment{
     TextView Temp;
     ImageView wImage;
 
-
+    User currentUser;
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getArguments() != null){
+            currentUser = (User) getArguments().getSerializable("user");
+            System.out.println("User loaded!");
+        }
         setHasOptionsMenu(true);
     }
 
