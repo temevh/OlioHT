@@ -20,6 +20,8 @@ public class SplashActivity extends AppCompatActivity {
 
         imageView2 = (ImageView) findViewById(R.id.imageView8);
 
+        //this is for making the animation in the downloadscreen
+        //we made the animation by just swappng two diffrent imageviews images
 
 
         imageView.postDelayed(swapImage, i);
@@ -136,10 +138,13 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        },3200);
+        },4200);
 
 
     }
+
+    //Methods for swappng the images
+
     ImageView imageView;
     ImageView imageView2;
     int i = 0;
@@ -149,7 +154,6 @@ public class SplashActivity extends AppCompatActivity {
             imageView.setImageResource(R.drawable.stickmanrun6);
         }
     };
-
 
     Runnable swapImage2 = new Runnable() {
         @Override

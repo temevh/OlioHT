@@ -25,7 +25,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     LayoutInflater inflater;
     MainActivity MA = MainActivity.getInstance();
 
-
+    //Creating the adapter for the lists
     public Adapter(Context ctx, List<String> titles, List<String> sports){
         this.titles = titles;
         this.sports = sports;
@@ -39,6 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    //setting the text for the cardView
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(titles.get(position));
