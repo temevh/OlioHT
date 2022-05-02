@@ -66,7 +66,7 @@ public class PlaceFragment extends Fragment {
 
         star  = (ToggleButton) view.findViewById(R.id.favoriteButton);
         // If we are at Favourites window, don't show the star (it's unnecessary)
-        if (currentUser != null && MainActivity.getInstance().getTitle().equals("Favourites")){
+        if (currentUser != null && MainActivity.getInstance().getTitle().equals("Suosikit")){
             star.setVisibility(View.INVISIBLE);
         }
 
@@ -74,7 +74,7 @@ public class PlaceFragment extends Fragment {
         if(currentUser == null){
             star.setVisibility(View.INVISIBLE);
         }
-        if(currentUser != null && MainActivity.getInstance().getTitle().equals("Home")){
+        if(currentUser != null && MainActivity.getInstance().getTitle().equals("Koti")){
 
             Boolean exists = false;
             // Check if the place exists already in users favourites
@@ -121,24 +121,24 @@ public class PlaceFragment extends Fragment {
     }
 
     public void backToPrevious(){     //Method for going back to home/main menu when the back button in the app is clicked
-        if(MainActivity.getInstance().getTitle().equals("Home")){
+        if(MainActivity.getInstance().getTitle().equals("Koti")){
             MainActivity.getInstance().loadFragment(MainActivity.getInstance().mainFragment, currentUser);
         }
-        if(MainActivity.getInstance().getTitle().equals("Favourites")){
+        if(MainActivity.getInstance().getTitle().equals("Suosikit")){
             MainActivity.getInstance().loadFragment(new FavouritesFragment(), currentUser);
         }
     }
 
     public void favoriteClicked(View view){            //Adding the current place to favorites
-        System.out.println("ADDED TO FAVORITES");
-        Toast.makeText(getActivity(), "Added to favorites", Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getActivity(), "Lisätty suosikeihin", Toast.LENGTH_SHORT).show();
         star.setBackgroundResource(R.drawable.ic_star_full);
         currentUser.addToFavourites(placeInfo);
         DB.updateUser(currentUser);
     }
 
     public void removeFromFavourites(View view){        //Removing the current place from favorites
-        Toast.makeText(getActivity(), "Removed from favorites", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Poistettu suosikeista", Toast.LENGTH_SHORT).show();
         star.setBackgroundResource(R.drawable.ic_star_empty);
         currentUser.removeFromFavourites(placeInfo);
         DB.updateUser(currentUser);

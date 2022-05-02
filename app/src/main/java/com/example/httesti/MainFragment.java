@@ -39,8 +39,8 @@ public class MainFragment extends Fragment{
     ArrayList placeTypes = new ArrayList();
     ArrayList typesSingles = new ArrayList();
     ArrayList<String> dates = new ArrayList<String>();
-    String today = "Today";
-    String tomorrow = "Tomorrow";
+    String today = "Tänään";
+    String tomorrow = "Huomenna";
     Adapter adapter;
     String typeChoice = "All places";
     String cityChoice = "Helsinki";
@@ -48,7 +48,7 @@ public class MainFragment extends Fragment{
     //images and titles for the recyclerView in Home
     RecyclerView dataList;
     List<String> titles;
-    String date = "Today"; // default value (gives the weather data for the on going hour)
+    String date = "Tänään"; // default value (gives the weather data for the on going hour)
                         // "tomorrow" value gives weather data from 24 hours forward.
 
     TextView weatherType;
@@ -74,7 +74,7 @@ public class MainFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
-        MainActivity.getInstance().setTitle("Home");
+        MainActivity.getInstance().setTitle("Koti");
 
         Temp = (TextView) view.findViewById(R.id.temperature);
         weatherType = (TextView) view.findViewById(R.id.weatherType);
@@ -134,10 +134,10 @@ public class MainFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityChoice = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), "Selected: " + cityChoice,Toast.LENGTH_SHORT).show();
+                Toast.makeText(adapterView.getContext(), "Valittu kaupunki: " + cityChoice,Toast.LENGTH_SHORT).show();
                 w.setPlace(cityChoice);
 
-                if(date.equals("Today")){
+                if(date.equals("Tänään")){
                     w.setURL(w.getParams(), w.getPlace(), 1);
                 }else{
                     w.setURL(w.getParams(), w.getPlace(), 24);
@@ -165,9 +165,9 @@ public class MainFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 date = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), "Selected: " + date,Toast.LENGTH_SHORT).show();
+                Toast.makeText(adapterView.getContext(), "Valittu ajankohta: " + date,Toast.LENGTH_SHORT).show();
 
-                if(date.equals("Today")){
+                if(date.equals("Tänään")){
                     w.setURL(w.getParams(), w.getPlace(), 1);
                 }else{
                     w.setURL(w.getParams(), w.getPlace(), 24);
@@ -195,7 +195,6 @@ public class MainFragment extends Fragment{
     }
 
     public void refreshButtonClicked(View v){
-        System.out.println("REFRESHED");
 
         // show all fetched data and relevant info
         Temp.setText(Integer.toString(w.getTemperature().intValue())+ "°C");

@@ -81,7 +81,7 @@ public class WeatherFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityChoice = adapterView.getItemAtPosition(i).toString();
-                locText.setText("Valittu: "+cityChoice);
+                locText.setText("Valittu kaupunki: "+cityChoice);
 
                 wData.setPlace(cityChoice);
                 wData.setURL(wData.getParams(), wData.getPlace(), 24);
