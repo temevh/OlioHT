@@ -13,16 +13,16 @@
 
 
     <RelativeLayout
-        android:layout_width="377dp"
-        android:layout_height="155dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backround_gray">
 
         <TextView
             android:id="@+id/placeName"
             android:layout_width="match_parent"
-            android:layout_height="79dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
-            android:background="@drawable/round_corners"
-            android:backgroundTint="@color/backround_gray"
+            android:background="@color/backround_gray"
             android:text="Helsinki sport arena"
             android:textAlignment="center"
             android:textColor="@color/blue2"
@@ -31,14 +31,11 @@
         <TextView
             android:id="@+id/placeType"
             android:layout_width="match_parent"
-            android:layout_height="77dp"
+            android:layout_height="70dp"
             android:layout_below="@+id/placeName"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginTop="-2dp"
-            android:layout_marginBottom="0dp"
-            android:background="@drawable/round_corners_bottom"
-            android:backgroundTint="@color/backround_gray"
+            android:background="@color/backround_gray"
             android:text="Kuntosali"
             android:textAlignment="center"
             android:textColor="@color/blue3"

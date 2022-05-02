@@ -1,11 +1,15 @@
 package com.example.httesti;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,8 +23,22 @@ public class RegisterFragment extends Fragment {
 
     EditText username, password, repassword;
     Button signup, signin;
+    TextView upperLower, numeric, special, length;
 
     DBManager Users;
+
+    // Regular expression patterns for checking if the password fulfills the requirements
+    String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=()!])(?=\\S+$)$";
+    Pattern pattern = Pattern.compile(regex);
+
+    String regexForCases = "^(?=.*[a-z])(?=.*[A-Z]).+$";
+    Pattern casePattern = Pattern.compile(regexForCases);
+
+    String regexNum= "^(?=.*\\d).+$";
+    Pattern numPattern = Pattern.compile(regexNum);
+
+    String regexSpec = "^(?=.*[@#$%^&+=()!]).+$";
+    Pattern specPattern = Pattern.compile(regexSpec);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,8 +60,54 @@ public class RegisterFragment extends Fragment {
         signup = (Button) view.findViewById(R.id.btnsignup);
         signin = (Button) view.findViewById(R.id.btnsave);
 
+        upperLower = (TextView) view.findViewById(R.id.upperAndLower);
+        numeric = (TextView) view.findViewById(R.id.numeric);
+        special = (TextView) view.findViewById(R.id.special);
+        length = (TextView) view.findViewById(R.id.length);
+
         //DBManager for storing the users (uses SQLite)
         Users = new DBManager(getContext().getApplicationContext());
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence pass, int i, int i1, int i2) {
+
+                if(pass.length()>=12){
+                    length.setTextColor(Color.GREEN);
+                }
+                else{
+                    length.setTextColor(Color.BLACK);
+                }
+                if(casePattern.matcher(pass).matches()){
+                    upperLower.setTextColor(Color.GREEN);
+                }
+                else{
+                    upperLower.setTextColor(Color.BLACK);
+                }
+                if(numPattern.matcher(pass).matches()){
+                    numeric.setTextColor(Color.GREEN);
+                }
+                else{
+                    numeric.setTextColor(Color.BLACK);
+                }
+                if(specPattern.matcher(pass).matches()){
+                    special.setTextColor(Color.GREEN);
+                }else{
+                    special.setTextColor(Color.BLACK);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -52,14 +116,11 @@ public class RegisterFragment extends Fragment {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String repass = repassword.getText().toString();
-                // Regular expression pattern for checking if the password fulfills the requirements
-                String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=()!])(?=\\S+$).{12,30}$";
-                Pattern pattern = Pattern.compile(regex);
 
                 if(user.equals("")||pass.equals("")||repass.equals(""))
                     Toast.makeText(getContext().getApplicationContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else{
-                    if(pattern.matcher(pass).matches()){
+                    if(pattern.matcher(pass).matches() && pass.length()>=12){
                         if(pass.equals(repass)){
                             Boolean checkuser = Users.checkusername(user, "users");
                             if(!checkuser){

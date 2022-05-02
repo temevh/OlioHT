@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class weatherAdapter extends RecyclerView.Adapter<weatherAdapter.ViewHolder> {
-
+    // Declaring needed lists
     List<String> wtypes;
     List<String> temps;
     List<String> rains;
@@ -42,11 +42,15 @@ public class weatherAdapter extends RecyclerView.Adapter<weatherAdapter.ViewHold
     //setting the text for the cardView
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        // Set weather texts to their respected containers
         holder.wtype.setText(wtypes.get(position).toUpperCase(Locale.ROOT));
         holder.temperature.setText(temps.get(position));
         holder.rain.setText(rains.get(position));
         holder.wind.setText(winds.get(position));
         holder.time.setText(times.get(position));
+
+        // Set the weather image based on what kind of weather is forecasted
         if(wtypes.get(position).equals("selkeää")){
             holder.wIMG.setImageResource(R.drawable.ic_sun);
         }
@@ -95,7 +99,7 @@ public class weatherAdapter extends RecyclerView.Adapter<weatherAdapter.ViewHold
     public int getItemCount() {
         return wtypes.size();
     }
-
+    // Creating the view holder
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView wtype;
         TextView rain;

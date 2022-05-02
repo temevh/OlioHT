@@ -41,7 +41,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.585"
         tools:ignore="SpeakableTextPresentCheck"
-        android:background="@color/backround_gray"/>
+        android:background="@drawable/all_round_corners"
+        android:backgroundTint="@color/backround_gray2"/>
 
     <TextView
         android:id="@+id/locationText"

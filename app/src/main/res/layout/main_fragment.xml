@@ -11,7 +11,8 @@
         android:id="@+id/spinnerPlaces"
         android:layout_width="325dp"
         android:layout_height="61dp"
-        android:background="@color/backround_gray2"
+        android:background="@drawable/all_round_corners"
+        android:backgroundTint="@color/backround_gray2"
         app:layout_constraintBottom_toTopOf="@+id/bSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,8 @@
         android:id="@+id/spinnerCities"
         android:layout_width="155sp"
         android:layout_height="50dp"
-        android:background="@color/backround_gray2"
+        android:background="@drawable/all_round_corners"
+        android:backgroundTint="@color/backround_gray2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/spinnerDates"
         app:layout_constraintHorizontal_bias="0.785"
@@ -47,7 +49,8 @@
         android:id="@+id/spinnerDates"
         android:layout_width="155sp"
         android:layout_height="50dp"
-        android:background="@color/backround_gray2"
+        android:background="@drawable/all_round_corners"
+        android:backgroundTint="@color/backround_gray2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.832"
@@ -83,11 +86,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dataList"
-        android:layout_width="412dp"
-        android:layout_height="340dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperature" />
 
     <ImageView
         android:id="@+id/weatherImage"
@@ -103,7 +108,6 @@
         android:id="@+id/imageView7"
         android:layout_width="195dp"
         android:layout_height="80dp"
-        android:background="@drawable/all_round_corners"
         app:layout_constraintBottom_toTopOf="@+id/spinnerDates"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
