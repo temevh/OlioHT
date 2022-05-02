@@ -49,11 +49,17 @@ public class weatherAdapter extends RecyclerView.Adapter<weatherAdapter.ViewHold
         holder.rain.setText(rains.get(position));
         holder.wind.setText(winds.get(position));
         holder.time.setText(times.get(position));
-
+        Integer timeAsInt = Integer.parseInt(times.get(position).substring(0,1));
         // Set the weather image based on what kind of weather is forecasted
         if(wtypes.get(position).equals("selkeää")){
-            holder.wIMG.setImageResource(R.drawable.ic_sun);
+            if(timeAsInt<22 && timeAsInt>9){
+                holder.wIMG.setImageResource(R.drawable.ic_sun);
+            }else {
+                holder.wIMG.setImageResource(R.drawable.ic_moon);
+            }
+
         }
+
         if(wtypes.get(position).equals("puolipilvistä") || wtypes.get(position).equals("pilvistä")){
             holder.wIMG.setImageResource(R.drawable.ic_cloudy);
         }
