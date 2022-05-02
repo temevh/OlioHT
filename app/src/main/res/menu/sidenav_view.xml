@@ -15,13 +15,12 @@
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
             android:title="Logout"
-            android:visible="false"
-            />
+            android:visible="false" />
 
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_owner"
-            android:title="Profile"/>
+            android:title="Profile" />
         <!-- android:visible="false" -->
 
 
@@ -29,7 +28,7 @@
             android:id="@+id/nav_favorites"
             android:icon="@drawable/ic_star"
             android:title="Favorites"
-            android:visible="false"/>
+            android:visible="false" />
         <item
             android:id="@+id/nav_weather"
             android:icon="@drawable/ic_cloudy"
