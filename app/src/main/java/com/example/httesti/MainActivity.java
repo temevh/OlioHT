@@ -140,6 +140,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_favorites:
                 fragment = new FavouritesFragment();
                 break;
+            case R.id.nav_weather:
+                fragment = new WeatherFragment();
+                break;
             default:
                 fragment = mainFragment;
         }

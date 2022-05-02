@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+
+    <RelativeLayout
+        android:layout_width="377dp"
+        android:layout_height="155dp">
+
+
+        <TextView
+            android:id="@+id/rain"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeofWeather"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="59dp"
+            android:layout_toEndOf="@id/weatherIMG"
+            android:drawablePadding="2dp"
+            android:text="Rain" />
+
+        <TextView
+            android:id="@+id/wind"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeofWeather"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="86dp"
+            android:layout_toEndOf="@id/weatherIMG"
+            android:drawablePadding="2dp"
+            android:text="Wind" />
+
+        <!--Text View to display Course Name-->
+
+        <ImageView
+            android:id="@+id/weatherIMG"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="27dp"
+            android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/typeofWeather"
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/weatherIMG"
+            android:text="Weather"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeofWeather"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="30dp"
+            android:layout_toEndOf="@id/weatherIMG"
+            android:drawablePadding="2dp"
+            android:text="Temperature" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/typeofWeather"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@id/weatherIMG"
+            android:drawablePadding="2dp"
+            android:text="Time" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

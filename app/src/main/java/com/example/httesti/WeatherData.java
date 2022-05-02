@@ -19,9 +19,13 @@ import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -42,6 +46,12 @@ public class WeatherData {
     private Double precipitationAmnt = null;
     private Double weatherSymbol = null;
 
+    private ArrayList<String> wtypes = new ArrayList<>();
+    private ArrayList<String> temps = new ArrayList<>();
+    private ArrayList<String> precips = new ArrayList<>();
+    private ArrayList<String> winds = new ArrayList<>();
+    private ArrayList<String> times = new ArrayList<>();
+
     //For weathertypes indicated by the WeatherSymbol3 returned from the datasource
     private HashMap<Double,String> weather_types = new HashMap<>();
 
@@ -51,10 +61,10 @@ public class WeatherData {
         // List of weather types linked with WeatherSymbol3 as the key for each of them
         weather_types.put(1.0, "selkeää");
         weather_types.put(2.0, "puolipilvistä");
+        weather_types.put(3.0, "pilvistä");
         weather_types.put(21.0, "heikkoja sadekuuroja");
         weather_types.put(22.0, "sadekuuroja");
         weather_types.put(23.0, "voimakkaita sadekuuroja");
-        weather_types.put(3.0, "pilvistä");
         weather_types.put(31.0, "heikkoa vesisadetta");
         weather_types.put(32.0, "vesisadetta");
         weather_types.put(33.0, "voimakasta vesisadetta");
@@ -90,6 +100,13 @@ public class WeatherData {
 
     // method that the AsyncTask runs
     public void getWeatherData(String url) throws ParserConfigurationException, IOException, SAXException {
+            // Clear all data before fetching new data
+            wtypes.clear();
+            precips.clear();
+            winds.clear();
+            temps.clear();
+            times.clear();
+            // start fetching data
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(url);
@@ -100,25 +117,40 @@ public class WeatherData {
                 Node measure = nodeList.item(i);
                 if(measure.getNodeType() == measure.ELEMENT_NODE) {
                     Element m = (Element) measure;
-
+                    // get time instances and append them to the times list
+                    String timeISO = m.getElementsByTagName("BsWfs:Time").item(0).getTextContent();
+                    DateFormat df = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+                    Date date = Date.from(Instant.parse(timeISO));
+                    String time = df.format(date);
+                    if(!times.contains(time)){
+                        times.add(time);
+                    }
+                    // get all the weather data
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("Temperature")) {
                         Double temp = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
                         setTemperature(temp);
+                        // add the rounded integer value of fetched temperature to the list
+                        temps.add(temp.intValue() + " °C");
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("WindSpeedMs")) {
                         Double ws = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
+
+                        // add the rounded integer value of fetched windspeed to the list
+                        winds.add(ws.toString() + " m/s");
                         setWindSpeed(ws);
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("WeatherSymbol3")) {
                         weatherSymbol = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
 
                         setWeatherType(weather_types.get(weatherSymbol));
-
-
+                        // add the weather type to the list
+                        wtypes.add(weather_types.get(weatherSymbol));
                     }
                     if (m.getElementsByTagName("BsWfs:ParameterName").item(0).getTextContent().equals("PrecipitationAmount")) {
                         Double rain = Double.valueOf(m.getElementsByTagName("BsWfs:ParameterValue").item(0).getTextContent());
                         setPrecipitationAmnt(rain);
+                        // add the value of fetched precipitation amount to the list
+                        precips.add(rain.toString() + " mm");
                     }
 
                 }
@@ -168,9 +200,6 @@ public class WeatherData {
         this.place = place;
     }
 
-    public void setParams(String params) {
-        this.params = params;
-    }
 
     public void setPrecipitationAmnt(Double p) {
         this.precipitationAmnt = p;
@@ -188,22 +217,15 @@ public class WeatherData {
         this.windSpeed = windSpeed;
     }
 
-    public Double getPrecipitationAmnt() {
-        return this.precipitationAmnt;
-    }
-
     public Double getTemperature() {
         return this.temperature;
-    }
-
-    public Double getWindSpeed() {
-        return this.windSpeed;
     }
 
     public String getWeatherType() {
             return this.weatherType;
     }
 
+    // URL changer
     public void setURL(String params, String place, Integer flag) {
         // Getting time now
         TimeZone tz = TimeZone.getTimeZone("EET");
@@ -217,8 +239,6 @@ public class WeatherData {
         calendar.add(Calendar.HOUR_OF_DAY, flag);
         String endtimeAsISO = df.format(calendar.getTime());
 
-        // replace ä with a and ö with o
-        //place = Normalizer.normalize(place, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 
         // Setting up the url with the params
         this.URL = "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::forecast::hirlam::surface::point::simple&place="+place+"&parameters="+params+
@@ -232,5 +252,25 @@ public class WeatherData {
 
     public Double getWeatherSymbol() {
         return this.weatherSymbol;
+    }
+
+    public ArrayList<String> getPrecips() {
+        return precips;
+    }
+
+    public ArrayList<String> getTemps() {
+        return temps;
+    }
+
+    public ArrayList<String> getWinds() {
+        return winds;
+    }
+
+    public ArrayList<String> getWtypes() {
+        return wtypes;
+    }
+
+    public ArrayList<String> getTimes() {
+        return times;
     }
 }

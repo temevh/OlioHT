@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,12 +24,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 public class MainFragment extends Fragment{
 
@@ -214,7 +210,7 @@ public class MainFragment extends Fragment{
         if(w.getWeatherSymbol() >= 20 && w.getWeatherSymbol() < 34){
             wImage.setImageResource(R.drawable.ic_rain);
         }
-        if(w.getWeatherSymbol() >= 40 && w.getWeatherSymbol() < 54){
+        if(w.getWeatherSymbol() >= 40 && w.getWeatherSymbol() < 54 || w.getWeatherSymbol() >= 70 && w.getWeatherSymbol() < 82){
             wImage.setImageResource(R.drawable.ic_snow);
 
         }
