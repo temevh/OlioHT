@@ -34,7 +34,7 @@ public class PlaceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.place_layout, container,false);
         if(getArguments() != null){
-            placeInfo = (activityPlace) getArguments().getSerializable("placeinfo");  //Get the arraylist with the info of the place
+            placeInfo = (activityPlace) getArguments().getSerializable("placeinfo");  //one place object which contains all relevant info
             currentUser = (User) getArguments().getSerializable("user");//Get user(if logged in)
         }
         return view;
@@ -64,16 +64,23 @@ public class PlaceFragment extends Fragment {
 
         star  = (ToggleButton) view.findViewById(R.id.favoriteButton);
 
+        if (currentUser != null && MainActivity.getInstance().getTitle().equals("Favourites")){
+            star.setVisibility(View.INVISIBLE);
+        }
+
         if(currentUser == null){
             star.setVisibility(View.INVISIBLE);
         }
-        if(currentUser != null){
+        if(currentUser != null && MainActivity.getInstance().getTitle().equals("Home")){
             Boolean exists = false;
 
             for (activityPlace ap : currentUser.getFavourites()){
-                if (ap.getName().equals(placeInfo.getName())){
-                    exists = true;
+                if(placeInfo != null){
+                    if (ap.getName().equals(placeInfo.getName())){
+                        exists = true;
+                    }
                 }
+
             }
 
             if(exists){

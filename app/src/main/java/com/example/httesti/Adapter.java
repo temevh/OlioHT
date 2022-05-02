@@ -52,7 +52,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         TextView title;
         TextView sport;
         String placeName;
-        String placeType;
+
 
         public ViewHolder(@NonNull View cardView){
             super(cardView);
@@ -64,7 +64,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 public void onClick(View v) {
                     //onClick gets the tittle on the card and send it to the mainActivity.java and opens a fragment
                     placeName = title.getText().toString();
-                    placeType = sport.getText().toString();
                     MA.onItemClicked(v, placeName);
                 }
             });
