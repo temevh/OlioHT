@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:hint="Username"
+        android:hint="Käyttäjänimi"
         android:inputType="text"
         android:minHeight="48dp" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/username1"
         android:layout_marginTop="50dp"
-        android:hint="Password"
+        android:hint="Salasana"
         android:inputType="textPassword"
         android:minHeight="48dp" />
 
@@ -30,7 +30,7 @@
         android:id="@+id/btnsignin1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in"
+        android:text="Kirjaudu sisään"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/password1"/>
 </RelativeLayout>

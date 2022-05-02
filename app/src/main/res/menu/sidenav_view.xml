@@ -5,34 +5,34 @@
         <item
             android:id="@+id/nav_first_fragment"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="Koti" />
 
         <item
             android:id="@+id/nav_register"
             android:icon="@drawable/ic_login"
-            android:title="Register" />
+            android:title="Kirjaudu" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
-            android:title="Logout"
+            android:title="Kirjaudu ulos"
             android:visible="false" />
 
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_owner"
-            android:title="Profile" />
+            android:title="Profiili" />
         <!-- android:visible="false" -->
 
 
         <item
             android:id="@+id/nav_favorites"
             android:icon="@drawable/ic_star"
-            android:title="Favorites"
+            android:title="Suosikit"
             android:visible="false" />
         <item
             android:id="@+id/nav_weather"
             android:icon="@drawable/ic_cloudy"
-            android:title="Weather" />
+            android:title="Sää" />
 
 
     </group>

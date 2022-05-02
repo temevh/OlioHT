@@ -40,7 +40,7 @@
         android:layout_marginTop="276dp"
         android:autoSizeTextType="uniform"
         android:background="@color/blue1"
-        android:text="Weather"
+        android:text="Sää   "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,7 @@
         android:layout_height="49dp"
         android:layout_marginTop="216dp"
         android:drawableLeft="@android:drawable/ic_menu_search"
-        android:text="Search"
+        android:text="Hae"
         android:textAlignment="textStart"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="• Must be at least 12 characters long"
+        android:text="• Vähintään 12 merkkiä pitkä."
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/special" />
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="• Must include at least one (1) special character"
+        android:text="• Vähintään yksi (1) erikoismerkki(¤, $, #, !, @...)"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numeric" />
@@ -33,7 +33,7 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:hint="Käyttäjänimi"
         android:inputType="text"
         android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/password"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="168dp"
-        android:hint="Password"
+        android:hint="Salasana"
         android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/repass"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28sp"
-        android:hint="Retype Password"
+        android:hint="Kirjoita salasana uudestaan"
         android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/btnsignup"
         tools:layout_editor_absoluteX="10dp" />
@@ -69,7 +69,7 @@
         android:id="@+id/btnsignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Rekisteröi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
@@ -81,7 +81,7 @@
         android:id="@+id/btnsave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Sign in page"
+        android:text="Kirjautumis-sivulle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnsignup"
         app:layout_constraintVertical_bias="0.29"
@@ -91,7 +91,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an account?"
+        android:text="Onko sinulla jo käyttäjä?"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/btnsave"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +104,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:text="Password requirements:"
+        android:text="Salasana vaatimukset:"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
@@ -115,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@color/black"
-        android:text="• Must include upper and lower case letters"
+        android:text="• Isoja ja pieniä kirjaimia."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@color/black"
-        android:text="• Must include at least one (1) numeric"
+        android:text="• Vähintään yksi (1) numero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upperAndLower" />
 
