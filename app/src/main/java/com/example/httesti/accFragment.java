@@ -47,7 +47,6 @@ public class accFragment extends Fragment {
             userHeight.setText(user.getHeight().toString()+"cm");
             userWeight.setText(user.getWeight().toString()+"kg");
 
-            System.out.println("Fetched users name is: "+user.getName());
         }
 
 

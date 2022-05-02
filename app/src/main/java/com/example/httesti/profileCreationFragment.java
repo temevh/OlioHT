@@ -42,7 +42,7 @@ public class profileCreationFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_creation_fragment, container,false);
-        MainActivity.getInstance().setTitle("Profile Creation");
+        MainActivity.getInstance().setTitle("Profiilin luonti");
 
         return view;
     }
@@ -82,7 +82,7 @@ public class profileCreationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(user == null || home.equals("") || age.getText().toString().equals("") || height.getText().toString().equals("") || weight.getText().toString().equals("") || name.getText().toString().equals("")){
-                    Toast.makeText(getContext().getApplicationContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext().getApplicationContext(), "Täytä kaikki kentät ensin", Toast.LENGTH_SHORT).show();
                 }else{
 
                     // set the inputted data and insert the user object into the database
@@ -93,7 +93,7 @@ public class profileCreationFragment extends Fragment {
                     user.setWeight(Double.parseDouble(weight.getText().toString()));
                     user.setBMI();
                     Profiles.insertProfile(user);
-                    Toast.makeText(getContext().getApplicationContext(), "Profile creation successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext().getApplicationContext(), "Profiilin luonti onnistui", Toast.LENGTH_SHORT).show();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("user", user);
                     FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
