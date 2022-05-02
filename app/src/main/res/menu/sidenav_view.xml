@@ -20,8 +20,10 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_owner"
-            android:title="Profiili" />
-        <!-- android:visible="false" -->
+            android:title="Profiili"
+            android:visible="false"
+            />
+
 
 
         <item
