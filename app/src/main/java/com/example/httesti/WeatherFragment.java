@@ -55,7 +55,7 @@ public class WeatherFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.weather_fragment, container, false);
-        MainActivity.getInstance().setTitle("Weather");
+        MainActivity.getInstance().setTitle("Sää");
 
         return view;
     }
@@ -81,7 +81,7 @@ public class WeatherFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityChoice = adapterView.getItemAtPosition(i).toString();
-                locText.setText("Selected: "+cityChoice);
+                locText.setText("Valittu: "+cityChoice);
 
                 wData.setPlace(cityChoice);
                 wData.setURL(wData.getParams(), wData.getPlace(), 24);

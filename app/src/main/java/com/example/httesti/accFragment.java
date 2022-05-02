@@ -27,7 +27,7 @@ public class accFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.acc_layout, container,false);
-        MainActivity.getInstance().setTitle("Profile");
+        MainActivity.getInstance().setTitle("Profiili");
 
         return view;
     }
