@@ -51,7 +51,7 @@ public class FavouritesFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favourite_layout, container, false);
-        MainActivity.getInstance().setTitle("Favourites");
+        MainActivity.getInstance().setTitle("Suosikit");
 
         return view;
     }

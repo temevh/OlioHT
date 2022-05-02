@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         // Start on the "Home" screen
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, mainFragment).commit();
-        setTitle("Home");
+        setTitle("Koti");
 
 
         // Setup the sliding drawer

@@ -22,7 +22,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container,false);
-        MainActivity.getInstance().setTitle("Login");
+        MainActivity.getInstance().setTitle("Kirjaudu");
         return view;
     }
     @Override
@@ -39,29 +39,27 @@ public class LoginFragment extends Fragment {
                 String pass = password.getText().toString();
 
                 if(user.equals("")||pass.equals(""))
-                    Toast.makeText(getContext().getApplicationContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext().getApplicationContext(), "Täytä kaikki kentät ensin", Toast.LENGTH_SHORT).show();
                 else{
                     Boolean checkuserpass = Users.checkpassword(user, pass);
                     if(checkuserpass==true){
-                        Toast.makeText(getContext().getApplicationContext(), "Sign in successfull", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext().getApplicationContext(), "Kirjautuminen onnistui", Toast.LENGTH_SHORT).show();
                         Boolean profile = Users.checkusername(user, "profiles");
                         if(profile){
-                            System.out.println("Profiili löytyi");
                             User currentUser = Users.fetchUser(user);
                             if(currentUser != null){
                                 MainActivity.getInstance().loadFragment(new accFragment(), currentUser);
                             }else{
-                                Toast.makeText(getContext().getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext().getApplicationContext(), "Jokin meni vikaan!", Toast.LENGTH_SHORT).show();
                             }
                         }else{
-                            System.out.println("Profiilia ei löytynyt");
                             User newUser = new User(user);
                             MainActivity.getInstance().loadFragment(new profileCreationFragment(), newUser);
                         }
 
 
                     }else{
-                        Toast.makeText(getContext().getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext().getApplicationContext(), "Väärät kirjautumistiedot", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
