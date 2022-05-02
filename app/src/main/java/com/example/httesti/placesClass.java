@@ -160,7 +160,7 @@ public class placesClass {
         singlePlaceTypes.clear();
         placeNames.clear();
         placeTypeArray.clear();
-        singlePlaceTypes.add("All places");
+        singlePlaceTypes.add("Kaikki paikat");
 
         for (int i = 0; i< placeIdArray.size(); i++){
 
@@ -172,11 +172,11 @@ public class placesClass {
             type = getPlaceType(jObject);
             name = name.substring(1, name.length()-1);   //Removes the " " marks from the place name
             type = type.substring(1, type.length()-1);   //Removes the " " marks from the type name
-            if(typeChoice.equals("All places")){         //If selection is "All places" add all places to list
+            if(typeChoice.equals("Kaikki paikat")){         //If selection is "All places" add all places to list
                 placeTypeArray.add(type);
                 placeNames.add(name);
                 places.add(a);
-            }else if(!typeChoice.equals("All places") && typeChoice.equals(type)){   //If some specific place type selected, add only those types to list
+            }else if(!typeChoice.equals("Kaikki paikat") && typeChoice.equals(type)){   //If some specific place type selected, add only those types to list
                 placeTypeArray.add(type);
                 placeNames.add(name);
                 places.add(a);
