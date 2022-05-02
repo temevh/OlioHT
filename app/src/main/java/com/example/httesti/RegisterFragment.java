@@ -28,7 +28,7 @@ public class RegisterFragment extends Fragment {
     DBManager Users;
 
     // Regular expression patterns for checking if the password fulfills the requirements
-    String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=()!])(?=\\S+$)$";
+    String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=()!])(?=\\S+$).+$";
     Pattern pattern = Pattern.compile(regex);
 
     String regexForCases = "^(?=.*[a-z])(?=.*[A-Z]).+$";
