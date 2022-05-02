@@ -54,6 +54,8 @@ public class PlaceFragment extends Fragment {
 
         DB = new DBManager(getContext().getApplicationContext());
 
+
+        //Set up the back button
         backButton = (ImageButton) view.findViewById(R.id.buttonBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,17 +65,19 @@ public class PlaceFragment extends Fragment {
         });
 
         star  = (ToggleButton) view.findViewById(R.id.favoriteButton);
-
+        // If we are at Favourites window, don't show the star (it's unnecessary)
         if (currentUser != null && MainActivity.getInstance().getTitle().equals("Favourites")){
             star.setVisibility(View.INVISIBLE);
         }
 
+        // If no user has been logged in, don't show the favourite star
         if(currentUser == null){
             star.setVisibility(View.INVISIBLE);
         }
         if(currentUser != null && MainActivity.getInstance().getTitle().equals("Home")){
-            Boolean exists = false;
 
+            Boolean exists = false;
+            // Check if the place exists already in users favourites
             for (activityPlace ap : currentUser.getFavourites()){
                 if(placeInfo != null){
                     if (ap.getName().equals(placeInfo.getName())){
@@ -82,12 +86,13 @@ public class PlaceFragment extends Fragment {
                 }
 
             }
-
+            // Show the star filled if it exists and set the onClick method accordingly
             if(exists){
                 star.setBackgroundResource(R.drawable.ic_star_full);
                 star.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        // If place exists in users favourites, reclicking the button removes it from favourites
                         removeFromFavourites(view);
                     }
                 });
@@ -95,13 +100,14 @@ public class PlaceFragment extends Fragment {
                 star.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        // If place doesn't exist in users favourites, clicking the button adds it to favourites
                         favoriteClicked(view);
                     }
                 });
             }
         }
 
-
+        // If info is available, show it on the screen
         if (placeInfo != null){
             placeNameView.setText(placeInfo.getName());
             placeOwnerView.setText(placeInfo.getAdmin());

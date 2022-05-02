@@ -38,6 +38,7 @@ public class FavouritesFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Load current user
         if(getArguments() != null){
             user = (User) getArguments().getSerializable("user");
             System.out.println("User loaded!");
@@ -57,6 +58,8 @@ public class FavouritesFragment extends Fragment{
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Add the relevant info to arrays for the cards
         ArrayList<String> places = new ArrayList<>();
         ArrayList<String> placeTypes = new ArrayList<>();
         for (activityPlace ap: user.getFavourites()) {

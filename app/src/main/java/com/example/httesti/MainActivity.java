@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private Menu menu;
 
-    placesClass lp = placesClass.getInstance();
 
-    //ArrayList placeInfo = new ArrayList<>();
+
+    placesClass lp = placesClass.getInstance();
     Fragment mainFragment = new MainFragment();
     Fragment accFragment = new accFragment();
     Fragment placeFrag;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        // Start on the "Home" screen
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, mainFragment).commit();
         setTitle("Home");
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectDrawerItem(MenuItem menuItem) {
         Fragment fragment;
-
+        // switch the fragment based on which menu item is clicked/selected
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
                 fragment = mainFragment;
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 fragment = mainFragment;
         }
+        //Load the selected fragment
         loadFragment(fragment, currentUser);
         // Highlight the selected item
         menuItem.setChecked(true);
@@ -200,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_register).setVisible(true);
-            //menu.findItem(R.id.nav_profile).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(false);
             menu.findItem(R.id.nav_favorites).setVisible(false);
         }
 
