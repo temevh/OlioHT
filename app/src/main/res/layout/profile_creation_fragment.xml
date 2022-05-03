@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:hint="Paino"
+        android:inputType="number"
         android:minHeight="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
@@ -25,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pituus"
+        android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/btnsave"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ikä"
+        android:inputType="number"
         android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerHome"
         app:layout_constraintTop_toBottomOf="@+id/name"
@@ -73,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="Save"
+        android:text="Tallenna"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="3dp" />
 
