@@ -80,7 +80,7 @@ public class profileCreationFragment extends Fragment {
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { // check that each input field has been filled
                 if(user == null || home.equals("") || age.getText().toString().equals("") || height.getText().toString().equals("") || weight.getText().toString().equals("") || name.getText().toString().equals("")){
                     Toast.makeText(getContext().getApplicationContext(), "Täytä kaikki kentät ensin", Toast.LENGTH_SHORT).show();
                 }else{
@@ -92,6 +92,7 @@ public class profileCreationFragment extends Fragment {
                     user.setHeight(Double.parseDouble(height.getText().toString()));
                     user.setWeight(Double.parseDouble(weight.getText().toString()));
                     user.setBMI();
+                    // insert the users profile into the DB
                     Profiles.insertProfile(user);
                     Toast.makeText(getContext().getApplicationContext(), "Profiilin luonti onnistui", Toast.LENGTH_SHORT).show();
                     Bundle bundle = new Bundle();

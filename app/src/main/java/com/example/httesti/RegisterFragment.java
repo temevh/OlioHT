@@ -68,7 +68,7 @@ public class RegisterFragment extends Fragment {
         //DBManager for storing the users (uses SQLite)
         Users = new DBManager(getContext().getApplicationContext());
 
-        password.addTextChangedListener(new TextWatcher() {
+        password.addTextChangedListener(new TextWatcher() { // a TextWatched for the password
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -76,7 +76,7 @@ public class RegisterFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence pass, int i, int i1, int i2) {
-
+                // change the requirement texts to green if the password matches that requirement
                 if(pass.length()>=12){
                     length.setTextColor(Color.GREEN);
                 }
@@ -117,21 +117,20 @@ public class RegisterFragment extends Fragment {
                 String pass = password.getText().toString();
                 String repass = repassword.getText().toString();
 
-                if(user.equals("")||pass.equals("")||repass.equals(""))
-                    Toast.makeText(getContext().getApplicationContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                if(user.equals("")||pass.equals("")||repass.equals("")) // check that the fields have been filled
+                    Toast.makeText(getContext().getApplicationContext(), "Täytä kaikki kentät ensin", Toast.LENGTH_SHORT).show();
                 else{
-                    if(pattern.matcher(pass).matches() && pass.length()>=12){
+                    if(pattern.matcher(pass).matches() && pass.length()>=12){ // if the password matches the requirements and the retyped password, continue forward
                         if(pass.equals(repass)){
-                            Boolean checkuser = Users.checkusername(user, "users");
-                            if(!checkuser){
-                                Boolean insert = Users.insertUser(user, pass);
-                                if(insert==true){
-                                    Toast.makeText(getContext().getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                            Boolean checkuser = Users.checkusername(user, "users"); // check the usernames existence in the login info table
+                            if(!checkuser){ // if it's a new username, continue the registration
+                                Boolean insert = Users.insertUser(user, pass); //insert login info into the DB
+                                if(insert==true){ // if the login insertion is successful, continue into the login screen
+                                    Toast.makeText(getContext().getApplicationContext(), "Rekisteröinti onnistui", Toast.LENGTH_SHORT).show();
                                     FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
                                     fragmentManager.beginTransaction().replace(R.id.flContent, new LoginFragment()).commit();
-                                    MainActivity.getInstance().setTitle("Login");
                                 }else{
-                                    Toast.makeText(getContext().getApplicationContext(), "Registration failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext().getApplicationContext(), "Rekisteröinti epäonnistui", Toast.LENGTH_SHORT).show();
                                 }
                             }
                             else{
@@ -149,12 +148,11 @@ public class RegisterFragment extends Fragment {
 
                 } }
         });
-        signin.setOnClickListener(new View.OnClickListener() {
+        signin.setOnClickListener(new View.OnClickListener() { // signin button redirects the user into the login screen
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = MainActivity.getInstance().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.flContent, new LoginFragment()).commit();
-                MainActivity.getInstance().setTitle("Login");
             }
         });
     }

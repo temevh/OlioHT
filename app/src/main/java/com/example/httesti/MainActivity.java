@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // methods for the navigation menu functionalities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -119,9 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void selectDrawerItem(MenuItem menuItem) {
+    public void selectDrawerItem(MenuItem menuItem) { //method for switching the fragment based on which menu item is clicked/selected
         Fragment fragment;
-        // switch the fragment based on which menu item is clicked/selected
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
                 fragment = mainFragment;

@@ -19,18 +19,22 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class DBManager extends SQLiteOpenHelper {
+    // name of the DB that gets created
     public static final String DBNAME = "Users.db";
 
+    // constructor for the class
     public DBManager(Context context) {
         super(context, DBNAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        // not the most secure way to store things in a DB but works for this project.
+        // Table for users login info
+        // (not the most secure way to store things in a DB but works for this project.)
         MyDB.execSQL("create Table users(username TEXT primary key, " +
                                         "hash TEXT, " +
                                         "salt TEXT);");
+        // Creating the profile table
         MyDB.execSQL("create Table profiles(" +
                         "username TEXT, " +
                         "user BLOB," +
@@ -39,23 +43,24 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     @Override
+    // needed if the table needs to be recreated
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
         MyDB.execSQL("drop Table if exists users");
         MyDB.execSQL("drop Table if exists profiles");
     }
 
-    public Boolean insertProfile(User user){
+    public Boolean insertProfile(User user){ // method for inserting users profiles
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("username", user.getUsername());
         try {
-
+            //open baos and oos so that the user-object can be turned into a byte array
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
 
             oos.writeObject(user);
-
+            // turn the user into a byte array for storing into the database as a BLOB
             byte[] userAsBytes = baos.toByteArray();
 
             contentValues.put("user", userAsBytes);
@@ -86,10 +91,11 @@ public class DBManager extends SQLiteOpenHelper {
 
 
 
-    public Boolean insertUser(String username, String password) {
+    public Boolean insertUser(String username, String password) { // method for inserting users login data
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
         try{
+            // hash the users password and store the hash and the salt with the username into the DB-table
             byte[] salt = generateSalt();
             String hash = generateHashedPW(password,salt);
             contentValues.put("username", username);
@@ -116,12 +122,14 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    public User fetchUser(String username){
+    public User fetchUser(String username){ // method for fetching a spesific user-object from the DB
         User user = null;
         SQLiteDatabase MyDB = this.getReadableDatabase();
+        // find the user-object of the user that has logged in
         Cursor cursor = MyDB.rawQuery("Select user from profiles where username = ?", new String[]{username});
         if(cursor != null && cursor.moveToFirst()) {
             try {
+                //turn the byte array into a user-object
                 byte[] userAsBytes = cursor.getBlob(0);
                 ByteArrayInputStream bais = new ByteArrayInputStream(userAsBytes);
                 ObjectInputStream ois = null;
@@ -141,12 +149,12 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    public void updateUser(User user){
+    public void updateUser(User user){ // method for updating users info (for example favourites array)
         SQLiteDatabase MyDB = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         String username = user.getUsername();
         try {
-
+            // update the users data in the profiles-table
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
 
@@ -175,8 +183,8 @@ public class DBManager extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean checkusername(String username, String table) {
-        if(table.equals("users")){
+    public Boolean checkusername(String username, String table) { // method for checking if a username already exists in the DB
+        if(table.equals("users")){ // checking if the username is already taken in the users-table
             SQLiteDatabase MyDB = this.getReadableDatabase();
             Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
             if (cursor.getCount() > 0){
@@ -191,7 +199,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
         }
-        if(table.equals("profiles")){
+        if(table.equals("profiles")){// checking if the username is already taken in the profiles-table
             SQLiteDatabase MyDB = this.getReadableDatabase();
             Cursor cursor = MyDB.rawQuery("Select * from profiles where username = ?", new String[]{username});
             System.out.println(cursor.getCount());
@@ -208,7 +216,7 @@ public class DBManager extends SQLiteOpenHelper {
         return false;
     }
 
-    public Boolean checkpassword(String username, String password){
+    public Boolean checkpassword(String username, String password){ // method for checking if the password matches
 
         SQLiteDatabase MyDB = this.getReadableDatabase();
         Cursor cursor = MyDB.rawQuery("Select hash, salt from users where username = ?", new String[] {username});
@@ -253,7 +261,7 @@ public class DBManager extends SQLiteOpenHelper {
         return generatedPassword;
     }
 
-    // generateSalt()-method generates salt, in this case it's 16 bytes of salt
+    // generateSalt()-method generates salt, in this case it's 16 bytes of salt for hashing the passwords
     private byte[] generateSalt() throws NoSuchAlgorithmException {
         SecureRandom rand = new SecureRandom();
         byte[] salt = new byte[16];

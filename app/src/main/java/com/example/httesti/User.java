@@ -86,9 +86,9 @@ public class User implements Serializable {
         return this.homeCity;
     }
 
-    public void addToFavourites(activityPlace ap){
+    public void addToFavourites(activityPlace ap){ // method for adding a activity place into the favourites
         boolean exists = false;
-        for (activityPlace place: getFavourites()) {
+        for (activityPlace place: getFavourites()) { // check if the place already exists in the favourites list
             if(place.getName().equals(ap.getName())){
                 exists = true;
             }
@@ -99,7 +99,7 @@ public class User implements Serializable {
         }
     }
 
-    public void removeFromFavourites(activityPlace ap){
+    public void removeFromFavourites(activityPlace ap){ // remove a place from favourites
         getFavourites().removeIf(place -> place.getName().equals(ap.getName()));
     }
 }
