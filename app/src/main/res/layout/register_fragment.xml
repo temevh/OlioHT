@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="168dp"
         android:hint="Salasana"
+        android:inputType="textPassword"
         android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/repass"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="28sp"
         android:hint="Kirjoita salasana uudestaan"
+        android:inputType="textPassword"
         android:minHeight="48sp"
         app:layout_constraintBottom_toTopOf="@+id/btnsignup"
         tools:layout_editor_absoluteX="10dp" />
