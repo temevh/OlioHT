@@ -1,10 +1,7 @@
 package com.example.httesti;
 
 
-
-
 import android.os.AsyncTask;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,20 +9,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.text.DateFormat;
-import java.text.Normalizer;
 import java.text.SimpleDateFormat;
-
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
