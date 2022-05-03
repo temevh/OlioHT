@@ -12,7 +12,7 @@
         android:layout_width="294dp"
         android:layout_height="83dp"
         android:scrollbars="vertical"
-        android:textColor="@color/LutPink"
+        android:textColor="@color/blue2"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         android:id="@+id/placeLocationView"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/LutOrange"
+        android:textColor="@color/blue2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
         android:id="@+id/placeEmailView"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/LutOrange"
+        android:textColor="@color/blue2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
         android:id="@+id/placePhoneView"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/LutOrange"
+        android:textColor="@color/blue2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         android:id="@+id/placeOwnerView"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/LutOrange"
+        android:textColor="@color/blue2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Paikan tyyppi"
-        android:textColor="@color/LutOrange"
+        android:textColor="@color/blue2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,8 +137,8 @@
 
     <TextView
         android:id="@+id/placeAddinfoView"
-        android:layout_width="339dp"
-        android:layout_height="207dp"
+        android:layout_width="341dp"
+        android:layout_height="186dp"
         android:layout_marginBottom="4dp"
         android:scrollbars="vertical"
         android:textSize="20sp"
@@ -148,8 +148,8 @@
 
     <ImageButton
         android:id="@+id/buttonBack"
-        android:layout_width="50dp"
-        android:layout_height="53dp"
+        android:layout_width="39dp"
+        android:layout_height="35dp"
         android:adjustViewBounds="false"
         android:background="?android:selectableItemBackground"
         android:onClick="backToMainMenu"
@@ -172,9 +172,9 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.054"
+        app:layout_constraintVertical_bias="0.042"
         app:srcCompat="@drawable/ic_info"
-        app:tint="@color/LutPink" />
+        app:tint="@color/LutOrange" />
 
     <ToggleButton
         android:id="@+id/favoriteButton"
