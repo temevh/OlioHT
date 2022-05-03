@@ -120,7 +120,7 @@ public class PlaceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void backToPrevious(){     //Method for going back to home/main menu when the back button in the app is clicked
+    public void backToPrevious(){     //Method for going back to the previous screen when the back button in the app is clicked
         if(MainActivity.getInstance().getTitle().equals("Koti")){
             MainActivity.getInstance().loadFragment(MainActivity.getInstance().mainFragment, currentUser);
         }

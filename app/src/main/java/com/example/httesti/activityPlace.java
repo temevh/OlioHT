@@ -3,7 +3,7 @@ package com.example.httesti;
 import java.io.Serializable;
 
 public class activityPlace implements Serializable {
-
+    // relevant info of a spesific sport/activity location
     private Integer ID;
     private String admin = "N/A";
     private String email = "N/A";
@@ -14,6 +14,8 @@ public class activityPlace implements Serializable {
     private String name = "N/A";
     private String url = "";
 
+
+    // getters and setters for each variable
     public String getUrl() {
         return url;
     }

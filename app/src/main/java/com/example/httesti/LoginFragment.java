@@ -34,25 +34,25 @@ public class LoginFragment extends Fragment {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // get the inputted infor
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
-                if(user.equals("")||pass.equals(""))
+                if(user.equals("")||pass.equals("")) // check if user has filled both of the required fields
                     Toast.makeText(getContext().getApplicationContext(), "Täytä kaikki kentät ensin", Toast.LENGTH_SHORT).show();
                 else{
-                    Boolean checkuserpass = Users.checkpassword(user, pass);
-                    if(checkuserpass==true){
+                    Boolean checkuserpass = Users.checkpassword(user, pass); //check if the password matches
+                    if(checkuserpass){
                         Toast.makeText(getContext().getApplicationContext(), "Kirjautuminen onnistui", Toast.LENGTH_SHORT).show();
-                        Boolean profile = Users.checkusername(user, "profiles");
-                        if(profile){
+                        Boolean profile = Users.checkusername(user, "profiles"); //check if a profile already exists for the logged user
+                        if(profile){ //if exists, fetch that user-profile and load their profile
                             User currentUser = Users.fetchUser(user);
                             if(currentUser != null){
                                 MainActivity.getInstance().loadFragment(new accFragment(), currentUser);
                             }else{
                                 Toast.makeText(getContext().getApplicationContext(), "Jokin meni vikaan!", Toast.LENGTH_SHORT).show();
                             }
-                        }else{
+                        }else{ // if not, redirect them to the profile creation screen
                             User newUser = new User(user);
                             MainActivity.getInstance().loadFragment(new profileCreationFragment(), newUser);
                         }

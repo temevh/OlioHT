@@ -43,10 +43,11 @@ public class WeatherFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if(getArguments() != null){
+        // get the current user just in case
+        if(getArguments() != null){
             user = (User) getArguments().getSerializable("user");
             System.out.println("User loaded!");
-        }*/
+        }
         setHasOptionsMenu(true);
     }
 
@@ -56,6 +57,7 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.weather_fragment, container, false);
         MainActivity.getInstance().setTitle("Sää");
+
 
         return view;
     }
@@ -68,6 +70,8 @@ public class WeatherFragment extends Fragment {
         locText = (TextView) view.findViewById(R.id.locationText);
         searchButton = (Button) view.findViewById(R.id.searchButton);
 
+
+        // get the cities
         locations = PC.getCitiesArray();
 
 
@@ -76,8 +80,7 @@ public class WeatherFragment extends Fragment {
         locationAA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         location.setAdapter(locationAA);
 
-
-        location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { // fetch the data from the users city choice
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityChoice = adapterView.getItemAtPosition(i).toString();
@@ -93,11 +96,10 @@ public class WeatherFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() { // show the fetched weatherdata when search button is clicked
             @Override
             public void onClick(View view) {
 

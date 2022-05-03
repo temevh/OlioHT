@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class MainFragment extends Fragment{
 
-    WeatherData w = new WeatherData();
+    WeatherData wData = new WeatherData();
     placesClass pC = placesClass.getInstance();
 
     ArrayList cities = new ArrayList<>();
@@ -100,23 +100,28 @@ public class MainFragment extends Fragment{
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL , false);
         dataList.setLayoutManager(gridLayoutManager);
 
-        pC.runPlacesClass(cityChoice,typeChoice);
 
+        // run the sports activities fetching class
+        pC.runPlacesClass(cityChoice,typeChoice);
+        // get the relevant arrays
         cities = pC.getCitiesArray();
         places = pC.getPlaceNamesArray();
         placeTypes = pC.getPlaceTypeArray();
         typesSingles = pC.getSingleTypes();
 
+
+        // set arrays to their spinners
         Spinner spin = view.findViewById(R.id.spinnerCities);
         Spinner place = view.findViewById(R.id.spinnerPlaces);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cities);
         ArrayAdapter<String> placeAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, typesSingles);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spin.setAdapter(arrayAdapter);
         place.setAdapter(placeAdapter);
 
+
+        // ItemSelected listener for the activity type selection
         place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -129,21 +134,21 @@ public class MainFragment extends Fragment{
 
             }
         });
-
+        // ItemSelected listener for the city selection
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityChoice = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(adapterView.getContext(), "Valittu kaupunki: " + cityChoice,Toast.LENGTH_SHORT).show();
-                w.setPlace(cityChoice);
+                wData.setPlace(cityChoice);
 
                 if(date.equals("Tänään")){
-                    w.setURL(w.getParams(), w.getPlace(), 1);
+                    wData.setURL(wData.getParams(), wData.getPlace(), 1);
                 }else{
-                    w.setURL(w.getParams(), w.getPlace(), 24);
+                    wData.setURL(wData.getParams(), wData.getPlace(), 24);
                 }
 
-                w.loadData();
+                wData.loadData();
 
                 titles = new ArrayList<>();
                 adapter = new Adapter(getActivity().getApplicationContext(), places, placeTypes);
@@ -155,12 +160,13 @@ public class MainFragment extends Fragment{
 
             }
         });
-
+        // spinner for showing either todays or tommorrows weather data
         Spinner spinning = view.findViewById(R.id.spinnerDates);
         ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, dates);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinning.setAdapter(arrayAdapter2);
+
+        // ItemSelected listener for the time selection
         spinning.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -168,11 +174,11 @@ public class MainFragment extends Fragment{
                 Toast.makeText(adapterView.getContext(), "Valittu ajankohta: " + date,Toast.LENGTH_SHORT).show();
 
                 if(date.equals("Tänään")){
-                    w.setURL(w.getParams(), w.getPlace(), 1);
+                    wData.setURL(wData.getParams(), wData.getPlace(), 1);
                 }else{
-                    w.setURL(w.getParams(), w.getPlace(), 24);
+                    wData.setURL(wData.getParams(), wData.getPlace(), 24);
                 }
-                w.loadData();
+                wData.loadData();
 
             }
 
@@ -181,6 +187,9 @@ public class MainFragment extends Fragment{
 
             }
         });
+
+
+        // button for showing the fetched data according to the user inputs
 
         Button refreshButton = (Button) view.findViewById(R.id.bSearch);
 
@@ -193,30 +202,30 @@ public class MainFragment extends Fragment{
 
 
     }
-
+    // button action method for when the button is clicked
     public void refreshButtonClicked(View v){
 
         // show all fetched data and relevant info
-        Temp.setText(Integer.toString(w.getTemperature().intValue())+ "°C");
-        weatherType.setText(w.getWeatherType().toUpperCase(Locale.ROOT));
+        Temp.setText(Integer.toString(wData.getTemperature().intValue())+ "°C");
+        weatherType.setText(wData.getWeatherType().toUpperCase(Locale.ROOT));
 
-        if(w.getWeatherSymbol() < 2){
+        if(wData.getWeatherSymbol() < 2){
             wImage.setImageResource(R.drawable.ic_sun);
         }
-        if(w.getWeatherSymbol() >= 2 && w.getWeatherSymbol() < 4){
+        if(wData.getWeatherSymbol() >= 2 && wData.getWeatherSymbol() < 4){
             wImage.setImageResource(R.drawable.ic_cloudy);
         }
-        if(w.getWeatherSymbol() >= 20 && w.getWeatherSymbol() < 34){
+        if(wData.getWeatherSymbol() >= 20 && wData.getWeatherSymbol() < 34){
             wImage.setImageResource(R.drawable.ic_rain);
         }
-        if(w.getWeatherSymbol() >= 40 && w.getWeatherSymbol() < 54 || w.getWeatherSymbol() >= 70 && w.getWeatherSymbol() < 82){
+        if(wData.getWeatherSymbol() >= 40 && wData.getWeatherSymbol() < 54 || wData.getWeatherSymbol() >= 70 && wData.getWeatherSymbol() < 82){
             wImage.setImageResource(R.drawable.ic_snow);
 
         }
-        if(w.getWeatherSymbol()>60 && w.getWeatherSymbol()<= 65){
+        if(wData.getWeatherSymbol()>60 && wData.getWeatherSymbol()<= 65){
             wImage.setImageResource(R.drawable.ic_thunder);
         }
-        if(w.getWeatherSymbol()>90){
+        if(wData.getWeatherSymbol()>90){
             wImage.setImageResource(R.drawable.ic_fog);
         }
         pC.runPlacesClass(cityChoice, typeChoice);

@@ -19,6 +19,7 @@ public class accFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        // get the current user
         if(getArguments() != null){
             user = (User) getArguments().getSerializable("user");
             System.out.println("User loaded!");
@@ -39,7 +40,7 @@ public class accFragment extends Fragment {
         TextView userHeight = (TextView) view.findViewById(R.id.userHeight);
         TextView userWeight = (TextView) view.findViewById(R.id.userWeight);
         TextView userAge = (TextView) view.findViewById(R.id.userAge);
-        DBManager DB = new DBManager(getContext().getApplicationContext());
+        // show users info
         if(user != null){
             userName.setText(user.getName().toUpperCase(Locale.ROOT));
             homeTown.setText(user.getHomeCity().toUpperCase(Locale.ROOT));
