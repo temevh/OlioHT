@@ -22,16 +22,7 @@ public class placesClass {
     ArrayList<String> cities = new ArrayList<String>();    //List of cities
     ArrayList<String> placeNames = new ArrayList<String>();    //List of place names
     ArrayList<Integer> placeIdArray = new ArrayList<Integer>(); //List of IDs for places
-    ArrayList<String> placeInfo = new ArrayList<String>();    //Information for the place
-    /*Array for storing the information of a chosen sports place
-   Stored based on index
-   0 = admin/owner
-   1 = email (if exists)
-   2 = phone number (if exists)
-   3 = address
-   4 = additional info (if exists)
-   5 = sports place type
-    */
+
     ArrayList<String> placeTypeArray = new ArrayList<>(); //All placetypes
     ArrayList<String> singlePlaceTypes = new ArrayList<>(); //Placetypes without duplicates
     ArrayList<activityPlace> places = new ArrayList<>();
@@ -72,7 +63,7 @@ public class placesClass {
         addSportsPlaceIDtoArray(json);
         cities.clear();
         addCitiesToArray();
-        addPlaceNamesToArray(typeChoice);
+        addPlacesToArray(typeChoice);
     }
 
 
@@ -90,11 +81,11 @@ public class placesClass {
         return selected;
     }
 
-    public activityPlace addPlaceInfoToArray(int index){       //Adds the information of a selected place to an array using a JSON
+    public activityPlace addPlaceInfoToAP(int index){       //Adds the information of a selected place to an array using a JSON
         activityPlace place = new activityPlace();
         int id = placeIdArray.get(index);
 
-        placeInfo.clear();
+
         String url = "http://lipas.cc.jyu.fi/api/sports-places/" + id;
         String json = getJSON(url);
         String admin = "N/A";               //Set N/A as the default value for each field
@@ -146,7 +137,7 @@ public class placesClass {
 
     }
 
-    public void addPlaceNamesToArray(String typeChoice){   //Adds the sports places of a selected city to an array
+    public void addPlacesToArray(String typeChoice){   //Adds the sports places of a selected city to an array
         String url = null;
         String response = null;
         String name = null;
@@ -162,7 +153,7 @@ public class placesClass {
 
             url = "http://lipas.cc.jyu.fi/api/sports-places/" + placeIdArray.get(i);
             response = getJSON(url);
-            activityPlace a = addPlaceInfoToArray(i);
+            activityPlace ap = addPlaceInfoToAP(i);
             jObject = convertJson(response);
             name = getPlaceName(jObject);
             type = getPlaceType(jObject);
@@ -171,15 +162,15 @@ public class placesClass {
             if(typeChoice.equals("Kaikki paikat")){         //If selection is "All places" add all places to list
                 placeTypeArray.add(type);
                 placeNames.add(name);
-                places.add(a);
+                places.add(ap);
             }else if(!typeChoice.equals("Kaikki paikat") && typeChoice.equals(type)){   //If some specific place type selected, add only those types to list
                 placeTypeArray.add(type);
                 placeNames.add(name);
-                places.add(a);
+                places.add(ap);
             }
             if (!singlePlaceTypes.contains(type)) {    //Get a list of place types without duplicates, used for the placetype selection
                 singlePlaceTypes.add(type);
-                places.add(a);
+                places.add(ap);
             }
         }
     }
